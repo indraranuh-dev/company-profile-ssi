@@ -145,7 +145,7 @@
 <link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2-bootstrap.min.css')}}">
 <style>
     table {
-        width: 1186px !important;
+        width: 1187px !important;
     }
 </style>
 @endpush
