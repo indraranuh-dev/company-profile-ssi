@@ -31,6 +31,9 @@ Route::group([
     // 'middleware' => ['auth:sanctum']
 ], function () {
 
+    Route::get('/', 'Api\ProductApiController@index');
+    Route::get('/{id}/edit', 'Api\ProductApiController@edit');
+
     Route::group([
         'prefix' => 'kategori',
         'as' => 'category.'

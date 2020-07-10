@@ -20,12 +20,13 @@
                 </li>
 
                 <li class="sidebar-item {{request()->is('_admin/produk*') ? 'selected' : ''}}">
-                    <a class="sidebar-link has-arrow waves-effect waves-dark {{request()->is('_admin/produk*') ? 'active' : ''}}"
+                    <a class="sidebar-link has-arrow waves-effect waves-dark {{request()->routeIs('_admin/produk*') ? 'active' : ''}}"
                         href="javascript:void(0)" aria-expanded="false">
                         <i class="mdi mdi-leaf"></i>
                         <span class="hide-menu">Produk </span>
                     </a>
-                    <ul aria-expanded="false" class="collapse  first-level">
+                    <ul aria-expanded="false"
+                        class="collapse first-level {{request()->is('_admin/produk*') ? 'in' : ''}}">
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.product.index')}}"

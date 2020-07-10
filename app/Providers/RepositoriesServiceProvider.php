@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Admin\Repositories\Model\ProductModel;
 use Modules\Admin\Repositories\Model\ProductCategoryModel;
 use Modules\Admin\Repositories\Model\ProductSubCategoryModel;
 use Modules\Admin\Repositories\Model\SupplierModel;
 use Modules\Admin\Repositories\ProdCatRepositoryInterface;
 use Modules\Admin\Repositories\ProdSubCategoryRepositoryInterface;
+use Modules\Admin\Repositories\ProductRepositoryInterface;
 use Modules\Admin\Repositories\SupplierRepositoryInterface;
 
 class RepositoriesServiceProvider extends ServiceProvider
@@ -32,5 +34,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(SupplierRepositoryInterface::class, SupplierModel::class);
         $this->app->bind(ProdCatRepositoryInterface::class, ProductCategoryModel::class);
         $this->app->bind(ProdSubCategoryRepositoryInterface::class, ProductSubCategoryModel::class);
+        $this->app->bind(ProductRepositoryInterface::class, ProductModel::class);
     }
 }

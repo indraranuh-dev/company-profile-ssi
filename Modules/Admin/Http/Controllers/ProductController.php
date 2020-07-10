@@ -5,25 +5,34 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Repositories\ProdCatRepositoryInterface as Category;
+use Modules\Admin\Repositories\ProdSubCategoryRepositoryInterface as SubCategory;
 
 class ProductController extends Controller
 {
+    private $category;
+
+    private $subCategory;
+
+    /**
+     * Class constructor.
+     */
+    public function __construct(
+        Category $prodCatRepositoryInterface,
+        SubCategory $prodSubCategoryRepositoryInterface
+    ) {
+        $this->category = $prodCatRepositoryInterface;
+        $this->subCategory = $prodSubCategoryRepositoryInterface;
+    }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('admin::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('admin::create');
+        $categories = $this->category->getAll();
+        $subCategories = $this->subCategory->getAll();
+        return view('admin::produk.index', compact('categories', 'subCategories'));
     }
 
     /**
@@ -34,26 +43,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('admin::edit');
     }
 
     /**

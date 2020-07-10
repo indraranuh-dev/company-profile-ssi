@@ -42,10 +42,7 @@ Route::group([
         'as' => 'product.'
     ], function () {
         Route::get('/', 'ProductController@index')->name('index');
-        Route::get('/tambah', 'ProductController@create')->name('create');
         Route::post('/', 'ProductController@store')->name('store');
-        Route::get('/{id}/detail', 'ProductController@show')->name('show');
-        Route::get('/{id}/ubah', 'ProductController@edit')->name('edit');
         Route::put('/{id}', 'ProductController@update')->name('update');
         Route::delete('/{id}', 'ProductController@destroy')->name('destroy');
     });
