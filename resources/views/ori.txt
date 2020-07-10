@@ -1,0 +1,6 @@
+muted = #88888859
+
+Daikin => #44c8f5 (blue), black
+Mitsubishi => #c23c40 (red), black
+Gree => #33348e (blue), #cc2229 (red)
+mc quay => bw
