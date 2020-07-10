@@ -62,6 +62,7 @@ const table = $("#table").DataTable({
     ],
     columnDefs: [{
             targets: [0],
+            width: '30%'
         },
         {
             targets: [2],
