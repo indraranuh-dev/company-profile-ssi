@@ -23,7 +23,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Basic Datatable </h5>
+                    <h5 class="card-title">Basic Datatable</h5>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#main-modal">
                         <i class="mdi mdi-plus mr-2"></i>Kategori
                     </button>
@@ -34,7 +34,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Nama</th>
-                                    <th>kategori</th>
+                                    <th>Kategori</th>
                                     <th>Dibuat pada</th>
                                     <th>Diubah pada</th>
                                     <th>Aksi</th>
