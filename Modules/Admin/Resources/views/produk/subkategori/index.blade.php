@@ -144,24 +144,14 @@
 <link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2.min.css')}}">
 <link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2-bootstrap.min.css')}}">
 <style>
-    th,
-    td {
-        white-space: nowrap;
-    }
-
-    div.dataTables_wrapper {
-        margin: 0 auto;
-    }
-
-    div.container {
-        width: 80%;
+    table {
+        width: 1187px !important;
     }
 </style>
 @endpush
 
 @push('scripts')
 <script src="{{asset('libs/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('libs/datatables/media/js/dataTables.fixedColumns.min.js')}}"></script>
 <script src="{{asset('libs/datatables.net-bs4/js/dataTables.bootstrap4.js')}}"></script>
 <script src="{{asset('libs/toastr/toastr.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/dataTables.buttons.min.js')}}"></script>

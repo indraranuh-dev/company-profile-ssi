@@ -82,12 +82,7 @@ const table = $("#table").DataTable({
     ],
     order: [
         [2, "desc"]
-    ],
-    scrollY: "300px",
-    scrollX: true,
-    scrollCollapse: true,
-    paging: false,
-    fixedColumns: true
+    ]
 });
 
 $('.table-responsive').css('display', 'block');
