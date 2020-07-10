@@ -1,6 +1,6 @@
 ## Control Project SSI
 
-Setiap perkembagnan dan perubahan file akan ditampilkan disini.
+Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
 <h3><b>Jumat 10/07/2020</b></h3>
 
