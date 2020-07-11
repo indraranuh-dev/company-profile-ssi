@@ -89,6 +89,18 @@ const table = $("#table").DataTable({
 $('.table-responsive').css('display', 'block');
 table.columns.adjust().draw();
 
+async function readURL(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview').attr('src', e.target.result);
+            $('#preview').addClass('img-fluid');
+            $('#add-pic').css('opacity', 0);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 async function showDeleteModal(id) {
     $('#delete').find(`input[name="_id"]`).val(id);
     $('#delete-modal').modal('show');
@@ -206,8 +218,17 @@ $('#save-c').click(function (e) {
     ajaxProcess(
         'http://127.0.0.1:8000/_admin/produk',
         'POST', {
-            name: formData.get('name'),
-            category: formData.getAll('category'),
+            name: formData.get('name-c'),
+            description: formData.get('description-c'),
+            spesification: formData.get('spesification-c'),
+            subCategory: formData.getAll('subCategory-c'),
+        },
+        form
+    );
+    ajaxImage(
+        'http://127.0.0.1:8000/_admin/produk',
+        'POST', {
+            iamge: formData.get('image-c'),
         },
         form
     );
@@ -255,4 +276,8 @@ $('.modal').on('hidden.bs.modal', function () {
 
 $('select').select2({
     theme: "bootstrap"
+});
+
+$("#image").change(function () {
+    readURL(this);
 });

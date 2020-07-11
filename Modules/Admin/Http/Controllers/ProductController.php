@@ -5,6 +5,7 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Requests\ProductRequest;
 use Modules\Admin\Repositories\ProdCatRepositoryInterface as Category;
 use Modules\Admin\Repositories\ProdSubCategoryRepositoryInterface as SubCategory;
 
@@ -35,14 +36,25 @@ class ProductController extends Controller
         return view('admin::produk.index', compact('categories', 'subCategories'));
     }
 
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function create()
+    {
+        $subCategories = $this->subCategory->getAll();
+        return view('admin::produk.create', compact('subCategories'));
+    }
+
     /**
      * Store a newly created resource in storage.
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**

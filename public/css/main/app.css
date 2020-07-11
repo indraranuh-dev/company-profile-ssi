@@ -12556,6 +12556,61 @@ svg:not(:root) {
 
 table {
   border-collapse: collapse;
+  width: 1187px !important;
+}
+
+.select2-container--bootstrap {
+  width: 100% !important;
+}
+
+.pic-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  border: 5px solid whitesmoke;
+  border-radius: 3px;
+}
+
+.pic-wrapper input {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+}
+
+.pic-wrapper span {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #7460EE;
+  color: white;
+  position: absolute;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.pic-wrapper span i {
+  transform: translate(0px, 5px);
+  display: block;
+}
+
+.pic-wrapper picture {
+  max-width: 200px;
+  max-height: 200px;
+  overflow: hidden;
+  margin: auto;
+  display: block;
+}
+
+textarea {
+  height: 100px;
+  resize: none;
 }
 
 caption {

@@ -24,16 +24,16 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Daftar produk</h4>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#main-modal">
+                    <a href="{{route('admin.product.create')}}" class="btn btn-primary">
                         <i class="mdi mdi-plus mr-2"></i>Kategori
-                    </button>
+                    </a>
                 </div>
                 <div class="card-body">
                     <x-filter title="Filter produk">
                         <div class="row justify-content-end">
                             <div class="col-lg-3 col-md-12 col-sm-12">
                                 <fieldset class="form-group">
-                                    <select name="kategori" id="" class="form-control">
+                                    <select name="kategori" class="form-control">
                                         <option value="all" selected>Semua kategori</option>
                                         @foreach ($categories as $category)
                                         <option value="{{$category->slug_name}}">{{$category->name}}</option>
@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-lg-3 col-md-12 col-sm-12">
                                 <fieldset class="form-group">
-                                    <select name="sub-kategori" id="" class="form-control">
+                                    <select name="sub-kategori" class="form-control">
                                         <option value="all" selected>Semua sub kategori</option>
                                         @foreach ($subCategories as $category)
                                         <option value="{{$category->slug_name}}">{{$category->name}}</option>
@@ -82,26 +82,53 @@
 
 {{-- Modal tambah kategori --}}
 <x-modal headerBg="secondary" modalId="main-modal" title="Tambah kategori">
-    <form id="post">
+    <form id="post" enctype="multipart/form-data">
         <div class="modal-body">
             <input type="hidden" name="_id">
-            <x-input-group icon="filter">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Nama kategori">
+
+            <div class="pic-wrapper rounded mb-3">
+                <input type="file" name="image-c" id="image-c" accept="image/*" title="Pilih gambar">
+                <span id="add-pic"><i class="mdi mdi-plus"></i></span>
+                ​<picture>
+                    <img src="" id="preview-c">
+                </picture>
+            </div>
+
+            <x-input-group icon="leaf">
+                <input type="text" class="form-control" name="name-c" id="name" placeholder="Nama produk">
                 @slot('error')
                 <small id="error-name-c" class="text-danger"></small>
                 @endslot
             </x-input-group>
+
+            <fieldset class="form-group row">
+                <div class="col-12">
+                    <textarea class="form-control" name="description-c" id="description"
+                        placeholder="Deskripsi produk"></textarea>
+                    <small id="error-description-c" class="text-danger"></small>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-group row">
+                <div class="col-12">
+                    <textarea class="form-control" name="spesification-c" id="spesification"
+                        placeholder="Spesifikasi produk"></textarea>
+                    <small id="error-spesification-c" class="text-danger"></small>
+                </div>
+            </fieldset>
+
             <fieldset class="form-group row">
                 <div class="col-12">
                     <label for="" class="col-form-label">Pilih sub kategori</label>
-                    <select class="custom-select" name="category" multiple>
-                        @foreach ($categories as $category)
+                    <select class="custom-select" name="subCategory-c" multiple>
+                        @foreach ($subCategories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
                     </select>
-                    <small id="error-category-c" class="text-danger"></small>
+                    <small id="error-subCategory-c" class="text-danger"></small>
                 </div>
             </fieldset>
+
         </div>
         <div class="modal-footer b-0">
             <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">
@@ -115,7 +142,7 @@
 </x-modal>
 
 {{-- Modal ubah kategori --}}
-<x-modal headerBg="secondary" modalId="edit-modal" title="Ubah kategori">
+{{-- <x-modal headerBg="secondary" modalId="edit-modal" title="Ubah kategori">
     <form id="put">
         <div class="modal-body">
             <input type="hidden" name="_id">
@@ -142,10 +169,10 @@
             </button>
         </div>
     </form>
-</x-modal>
+</x-modal> --}}
 
 {{-- Modal hapus kategori --}}
-<x-modal headerBg="danger" modalId="delete-modal" title="Hapus supplier">
+{{-- <x-modal headerBg="danger" modalId="delete-modal" title="Hapus supplier">
     <div class="card-body">
         Anda yakin akan menghapus data ini ?
     </div>
@@ -160,7 +187,7 @@
             </button>
         </form>
     </div>
-</x-modal>
+</x-modal> --}}
 
 <x-footer />
 
@@ -172,15 +199,6 @@
 <link rel="stylesheet" href="{{asset('libs/toastr/build/toastr.min.css')}}">
 <link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2.min.css')}}">
 <link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2-bootstrap.min.css')}}">
-<style>
-    table {
-        width: 1187px !important;
-    }
-
-    .select2-container--bootstrap {
-        width: 100% !important;
-    }
-</style>
 @endpush
 
 @push('scripts')
