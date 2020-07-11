@@ -19,3 +19,17 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
         </ul>
     </li>
 </ul>
+
+<h3><b>Sabtu 11/07/2020</b></h3>
+
+<ul> 
+    <li>Fitur produk (menambah halaman tambah produk)</li>
+    <li>Bug fix - select2 saat error</li>
+    <li>Migrasi fitur tambah dari ajax menjadi tambah secara PHP based</li>
+    <li>
+        Pembuatan halaman admin/produk/tambah
+        <ul>
+            <li>Tampilan halaman tambah produk</li>
+        </ul>
+    </li>
+</ul>
