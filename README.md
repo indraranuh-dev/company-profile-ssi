@@ -38,4 +38,5 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
 <ul> 
     <li>Menambahkan modul dokumentasi</li>
+    <li>Membuat tabel jenis produk pada database dan membuat model pendukungnya.</li>
 </ul>
