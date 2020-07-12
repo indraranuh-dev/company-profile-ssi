@@ -5,16 +5,28 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Repositories\ProdSubTypeRepositoryInterface as SubType;
 
 class ProductSubTypeController extends Controller
 {
+    private $model;
+
+    /**
+     * Class constructor.
+     */
+    public function __construct(SubType $prodSubTypeRepositoryInterface)
+    {
+        $this->model = $prodSubTypeRepositoryInterface;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('admin::index');
+        return $this->model->getAll();
+        // return view('admin::index');
     }
 
     /**
