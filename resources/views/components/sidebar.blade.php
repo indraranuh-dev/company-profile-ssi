@@ -64,6 +64,15 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item">
+                            <a href="{{route('admin.prod.subtype.index')}}"
+                                class="sidebar-link {{request()->routeIs('admin.prod.subtype.index') ? 'active' : ''}}">
+                                <span class="hide-menu">
+                                    Sub jenis produk
+                                </span>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
