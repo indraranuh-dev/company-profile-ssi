@@ -6,7 +6,7 @@ use Modules\Admin\Repositories\Model\Entities\ProductType;
 use Modules\Admin\Repositories\ProdTypeRepositoryInterface;
 use Illuminate\Support\Str;
 
-class ProductTypesModel implements ProdTypeRepositoryInterface
+class ProductTypeModel implements ProdTypeRepositoryInterface
 {
     public function getAll()
     {
