@@ -45,7 +45,7 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
         <ul>
             <li>Repositories, Model, Entities, RepositoriesServiceProvider</li>
             <li>Tampilan halaman produk</li>
-            <li>ProductType controller routing web</li>
+            <li>ProductType controller, routing web</li>
         </ul>
     </li>
 </ul>
