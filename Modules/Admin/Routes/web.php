@@ -70,7 +70,7 @@ Route::group([
         Route::delete('/{id}', 'ProductSubCategoryController@destroy')->name('destroy');
     });
 
-    # Route sub kategori produk
+    # Route jenis produk
     Route::group([
         'prefix' => 'produk/jenis-produk',
         'as' => 'prod.type.'
@@ -81,6 +81,19 @@ Route::group([
         Route::get('/{id}/ubah', 'ProductTypeController@edit')->name('edit');
         Route::put('/{id}', 'ProductTypeController@update')->name('update');
         Route::delete('/{id}', 'ProductTypeController@destroy')->name('destroy');
+    });
+
+    # Route sub jenis produk
+    Route::group([
+        'prefix' => 'produk/sub-jenis-produk',
+        'as' => 'prod.subtype.'
+    ], function () {
+        Route::get('/', 'ProductSubTypeController@index')->name('index');
+        Route::get('/tambah', 'ProductSubTypeController@create')->name('create');
+        Route::post('/', 'ProductSubTypeController@store')->name('store');
+        Route::get('/{id}/ubah', 'ProductSubTypeController@edit')->name('edit');
+        Route::put('/{id}', 'ProductSubTypeController@update')->name('update');
+        Route::delete('/{id}', 'ProductSubTypeController@destroy')->name('destroy');
     });
 });
 
