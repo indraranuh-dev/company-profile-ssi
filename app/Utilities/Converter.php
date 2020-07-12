@@ -18,7 +18,7 @@ class Converter
     {
         $newDate = Carbon::parse($date);
         if (strlen($date) <= 10) return $newDate->format('d, M Y');
-        elseif (strlen($date) > 10) return $newDate->format('d, M Y H.m');
+        elseif (strlen($date) > 10) return $newDate->format('d M Y H:m');
         return '-';
     }
 
