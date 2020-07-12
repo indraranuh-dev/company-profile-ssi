@@ -40,6 +40,8 @@
 
         </div>
 
+        <x-footer />
+
         <script src="{{mix('js/main/app.js')}}"></script>
         <script src="{{asset('libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
         <script src="{{mix('js/main/main.js')}}"></script>

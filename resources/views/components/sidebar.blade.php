@@ -55,6 +55,15 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item">
+                            <a href="{{route('admin.prod.type.index')}}"
+                                class="sidebar-link {{request()->routeIs('admin.prod.type.index') ? 'active' : ''}}">
+                                <span class="hide-menu">
+                                    Jenis produk
+                                </span>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
