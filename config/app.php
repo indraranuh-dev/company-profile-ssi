@@ -167,7 +167,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
+        // RenatoMarinho\LaravelPageSpeed\ServiceProvider::class,
 
         /*
          * Application Service Providers...
