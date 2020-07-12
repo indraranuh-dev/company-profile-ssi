@@ -33,3 +33,9 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
         </ul>
     </li>
 </ul>
+
+<h3><b>Minggu 12/07/2020</b></h3>
+
+<ul> 
+    <li>Menambahkan modul dokumentasi</li>
+</ul>
