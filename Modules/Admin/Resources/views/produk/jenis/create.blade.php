@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Tambah jenis produk</h4>
-                    <a href="{{route('admin.product.create')}}" class="btn btn-primary">
+                    <a href="{{route('admin.prod.type.index')}}" class="btn btn-primary">
                         <i class="mdi mdi-arrow-left mr-2"></i>Kembali
                     </a>
                 </div>

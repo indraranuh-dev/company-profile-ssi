@@ -64,7 +64,8 @@ class ProductTypeController extends Controller
      */
     public function edit($id)
     {
-        return view('admin::edit');
+        $type = $this->model->findById($id);
+        return view('admin::produk.jenis.edit', compact('type'));
     }
 
     /**
@@ -75,7 +76,8 @@ class ProductTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->model->update($request, $id);
+        return redirect()->route('admin.prod.type.index')->with('success', 'Jenis produk berhasil diubah');
     }
 
     /**
@@ -85,6 +87,7 @@ class ProductTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return redirect()->route('admin.prod.type.index')->with('success', 'Jenis produk berhasil dihapus');
     }
 }

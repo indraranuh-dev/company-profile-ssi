@@ -26,7 +26,7 @@ use App\Utilities\Generator;
             <span aria-hidden="true">&times;</span>
             <span class="sr-only">Close</span>
         </button>
-        <strong>Sukses !</strong>{{session()->get('success')}}
+        <strong>Sukses !</strong> {{session()->get('success')}}
     </div>
     @endif
 

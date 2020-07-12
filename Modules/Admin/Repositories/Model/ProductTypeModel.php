@@ -2,9 +2,11 @@
 
 namespace Modules\Admin\Repositories\Model;
 
+use Illuminate\Support\Str;
+use App\Utilities\Generator;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Modules\Admin\Repositories\Model\Entities\ProductType;
 use Modules\Admin\Repositories\ProdTypeRepositoryInterface;
-use Illuminate\Support\Str;
 
 class ProductTypeModel implements ProdTypeRepositoryInterface
 {
@@ -16,8 +18,13 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
 
     public function findById($id)
     {
-        $types = ProductType::findOrFail($id);
-        return $types;
+        try {
+            $realID = Generator::crypt($id, 'decrypt');
+            $types = ProductType::findOrFail($realID);
+            return $types;
+        } catch (DecryptException $e) {
+            return abort(404);
+        }
     }
 
     public function findBySlug($slug)
@@ -36,15 +43,25 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
 
     public function update($request, $id)
     {
-        $types = ProductType::findOrFail($id);
-        $types->name = $request->name;
-        $types->slug_name = Str::slug($request->name);
-        return $types->save();
+        try {
+            $realID = Generator::crypt($id, 'decrypt');
+            $types = ProductType::findOrFail($realID);
+            $types->name = $request->name;
+            $types->slug_name = Str::slug($request->name);
+            return $types->save();
+        } catch (DecryptException $e) {
+            return abort(404);
+        }
     }
 
     public function delete($id)
     {
-        $types = ProductType::findOrFail($id);
-        return $types->delete();
+        try {
+            $realID = Generator::crypt($id, 'decrypt');
+            $types = ProductType::findOrFail($realID);
+            return $types->delete();
+        } catch (DecryptException $e) {
+            return abort(404);
+        }
     }
 }
