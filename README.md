@@ -40,4 +40,12 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
     <li>Menambahkan modul dokumentasi</li>
     <li>Membuat tabel jenis produk pada database dan membuat model pendukungnya</li>
     <li>Menambahkan route jenis produk</li>
+    <li>
+        Pembuatan halaman admin/jenis-produk
+        <ul>
+            <li>Repositories, Model, Entities, RepositoriesServiceProvider</li>
+            <li>Tampilan halaman produk</li>
+            <li>ProductType controller routing web</li>
+        </ul>
+    </li>
 </ul>
