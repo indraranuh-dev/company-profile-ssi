@@ -5,16 +5,26 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Requests\ProductTypeRequest;
+use Modules\Admin\Repositories\ProdTypeRepositoryInterface as Type;
 
 class ProductTypeController extends Controller
 {
+
+    private $model;
+
+    public function __construct(Type $prodTypeRepositoryInterface)
+    {
+        $this->model = $prodTypeRepositoryInterface;
+    }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('admin::index');
+        $types = $this->model->getAll();
+        return view('admin::produk.jenis.index', compact('types'));
     }
 
     /**
@@ -23,7 +33,7 @@ class ProductTypeController extends Controller
      */
     public function create()
     {
-        return view('admin::create');
+        return view('admin::produk.jenis.create');
     }
 
     /**
@@ -31,9 +41,10 @@ class ProductTypeController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(ProductTypeRequest $request)
     {
-        //
+        $this->model->create($request);
+        return redirect()->route('admin.prod.type.index')->with('success', 'Jenis produk berhasil ditambahkan');
     }
 
     /**

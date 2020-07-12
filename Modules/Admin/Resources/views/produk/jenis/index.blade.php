@@ -1,75 +1,77 @@
+@php
+use App\Utilities\Converter;
+use App\Utilities\Generator;
+@endphp
+
 @extends('layouts/master')
 
 @section('content')
-<div class="page-breadcrumb">
-    <div class="row">
-        <div class="col-12 d-flex no-block align-items-center">
-            <h4 class="page-title">Tables</h4>
-            <div class="ml-auto text-right">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Library</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
+<x-breadcrumb>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{route('admin.product.index')}}">{{__('Produk')}}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Jenis Produk</li>
+    </ol>
+</x-breadcrumb>
 
 <div class="container-fluid">
+
+    @if (session()->has('success'))
+    <div class="alert bg-success text-white alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <strong>Sukses !</strong>{{session()->get('success')}}
+    </div>
+    @endif
 
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Daftar produk</h4>
-                    <a href="{{route('admin.product.create')}}" class="btn btn-primary">
-                        <i class="mdi mdi-plus mr-2"></i>Kategori
+                    <h4 class="card-title">Daftar jenis produk</h4>
+                    <a href="{{route('admin.prod.type.create')}}" class="btn btn-primary">
+                        <i class="mdi mdi-plus mr-2"></i>Jenis produk
                     </a>
                 </div>
                 <div class="card-body">
-                    <x-filter title="Filter produk">
-                        <div class="row justify-content-end">
-                            <div class="col-lg-3 col-md-12 col-sm-12">
-                                <fieldset class="form-group">
-                                    <select name="kategori" class="form-control">
-                                        <option value="all" selected>Semua kategori</option>
-                                        @foreach ($categories as $category)
-                                        <option value="{{$category->slug_name}}">{{$category->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-3 col-md-12 col-sm-12">
-                                <fieldset class="form-group">
-                                    <select name="sub-kategori" class="form-control">
-                                        <option value="all" selected>Semua sub kategori</option>
-                                        @foreach ($subCategories as $category)
-                                        <option value="{{$category->slug_name}}">{{$category->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </fieldset>
-                            </div>
-                            <div class="col-lg-1 col-md-12 col-sm-12">
-                                <button class="btn btn-outline-info w-100">
-                                    <i class="mdi mdi-magnify mr-1"></i> Cari
-                                </button>
-                            </div>
-                        </div>
-                    </x-filter>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover" id="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Image</th>
+                                    <th>#</th>
                                     <th>Nama</th>
-                                    <th>Sub kategori</th>
-                                    <th>Kategori</th>
+                                    <th>Dibuat pada</th>
+                                    <th>Diubah pada</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                @foreach ($types as $type)
+                                <tr>
+                                    <td class="text-center">{{$loop->iteration}}</td>
+                                    <td>{{$type->name}}</td>
+                                    <td>{{Converter::convertDate($type->created_at)}}</td>
+                                    <td>{{Converter::convertDate($type->updated_at)}}</td>
+                                    <td class="d-flex justify-content-center">
+                                        <a href="{{route('admin.prod.type.edit', Generator::crypt($type->id, 'encrypt'))}}"
+                                            class="btn btn-outline-light text-secondary btn-sm" title="Ubah data">
+                                            <i class="fa fa-fw fa-edit"></i>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-outline-light text-secondary btn-sm"
+                                            title="Ubah data"
+                                            onclick="deleteConfirmation('{{Generator::crypt($type->id, 'encrypt')}}')">
+                                            <i class="fa fa-fw fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -79,100 +81,7 @@
     </div>
 </div>
 
-
-{{-- Modal tambah kategori --}}
-<x-modal headerBg="secondary" modalId="main-modal" title="Tambah kategori">
-    <form id="post" enctype="multipart/form-data">
-        <div class="modal-body">
-            <input type="hidden" name="_id">
-
-            <div class="pic-wrapper rounded mb-3">
-                <input type="file" name="image-c" id="image-c" accept="image/*" title="Pilih gambar">
-                <span id="add-pic"><i class="mdi mdi-plus"></i></span>
-                ​<picture>
-                    <img src="" id="preview-c">
-                </picture>
-            </div>
-
-            <x-input-group icon="leaf">
-                <input type="text" class="form-control" name="name-c" id="name" placeholder="Nama produk">
-                @slot('error')
-                <small id="error-name-c" class="text-danger"></small>
-                @endslot
-            </x-input-group>
-
-            <fieldset class="form-group row">
-                <div class="col-12">
-                    <textarea class="form-control" name="description-c" id="description"
-                        placeholder="Deskripsi produk"></textarea>
-                    <small id="error-description-c" class="text-danger"></small>
-                </div>
-            </fieldset>
-
-            <fieldset class="form-group row">
-                <div class="col-12">
-                    <textarea class="form-control" name="spesification-c" id="spesification"
-                        placeholder="Spesifikasi produk"></textarea>
-                    <small id="error-spesification-c" class="text-danger"></small>
-                </div>
-            </fieldset>
-
-            <fieldset class="form-group row">
-                <div class="col-12">
-                    <label for="" class="col-form-label">Pilih sub kategori</label>
-                    <select class="custom-select" name="subCategory-c" multiple>
-                        @foreach ($subCategories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                    </select>
-                    <small id="error-subCategory-c" class="text-danger"></small>
-                </div>
-            </fieldset>
-
-        </div>
-        <div class="modal-footer b-0">
-            <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">
-                <i style="font-size: 10px;" class="ti-close mr-2"></i>Batal
-            </button>
-            <button type="button" id="save-c" class="btn btn-success">
-                <i class="fa fa-save fa-fw mr-2"></i>Simpan
-            </button>
-        </div>
-    </form>
-</x-modal>
-
-{{-- Modal ubah kategori --}}
-{{-- <x-modal headerBg="secondary" modalId="edit-modal" title="Ubah kategori">
-    <form id="put">
-        <div class="modal-body">
-            <input type="hidden" name="_id">
-            <x-input-group icon="filter">
-                <input type="text" class="form-control" name="name" id="name" placeholder="Nama kategori">
-                @slot('error')
-                <small id="error-name-u" class="text-danger"></small>
-                @endslot
-            </x-input-group>
-            <fieldset class="form-group row">
-                <div class="col-12">
-                    <label for="" class="col-form-label">Pilih kategori</label>
-                    <select class="form-control" name="category" id="category-u" multiple></select>
-                    <small id="error-category-u" class="text-danger"></small>
-                </div>
-            </fieldset>
-        </div>
-        <div class="modal-footer b-0">
-            <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">
-                <i style="font-size: 10px;" class="ti-close mr-2"></i>Batal
-            </button>
-            <button type="button" id="save-u" class="btn btn-success">
-                <i class="fa fa-save fa-fw mr-2"></i>Simpan
-            </button>
-        </div>
-    </form>
-</x-modal> --}}
-
-{{-- Modal hapus kategori --}}
-{{-- <x-modal headerBg="danger" modalId="delete-modal" title="Hapus supplier">
+<x-modal headerBg="danger" modalId="confirm-modal" title="Hapus supplier">
     <div class="card-body">
         Anda yakin akan menghapus data ini ?
     </div>
@@ -180,16 +89,15 @@
         <button type="button" class="btn btn-secondary mr-3" data-dismiss="modal">
             <i style="font-size: 10px;" class="ti-close mr-2"></i>Batal
         </button>
-        <form id="delete">
-            <input type="hidden" name="_id">
-            <button class="btn btn-danger" id="save-d">
+        <form action="" method="POST" id="delete">
+            @csrf
+            @method('delete')
+            <button class="btn btn-danger">
                 <i class="ti-trash mr-2"></i>Delete
             </button>
         </form>
     </div>
-</x-modal> --}}
-
-<x-footer />
+</x-modal>
 
 </div>
 @endsection
@@ -197,8 +105,6 @@
 @push('styles')
 <link rel="stylesheet" href="{{asset('libs/datatables.net-bs4/css/dataTables.bootstrap4.css')}}">
 <link rel="stylesheet" href="{{asset('libs/toastr/build/toastr.min.css')}}">
-<link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2.min.css')}}">
-<link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2-bootstrap.min.css')}}">
 @endpush
 
 @push('scripts')
@@ -212,6 +118,12 @@
 <script src="{{asset('libs/datatables/buttons/jszip.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.html5.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.print.js')}}"></script>
-<script src="{{asset('libs/select2/dist/js/select2.full.min.js')}}"></script>
-<script src="{{Module::asset('admin:js/produk/app.js')}}"></script>
+{{-- <script src="{{Module::asset('admin:js/produk/app.js')}}"></script> --}}
+<script>
+    $('table').DataTable();
+    async function deleteConfirmation(id){
+        $('#confirm-modal').modal('show');
+        $('#delete').attr('action', `http://127.0.0.1:8000/_admin/produk/jenis-produk/${id}`)
+    }
+</script>
 @endpush

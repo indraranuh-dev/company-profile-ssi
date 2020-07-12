@@ -2,6 +2,8 @@
 
 namespace Modules\Admin\Http\Requests;
 
+use App\Utilities\Generator;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductTypeRequest extends FormRequest
@@ -14,7 +16,8 @@ class ProductTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|' . Rule::unique('product_types', 'name')
+                ->ignore(Generator::crypt($this->id, 'decrypt')),
         ];
     }
 
