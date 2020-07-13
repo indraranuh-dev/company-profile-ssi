@@ -25,7 +25,17 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        return view('admin::produk.kategori.index');
+        $categories = $this->model->getAll();
+        return view('admin::produk.kategori.index', compact('categories'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+    public function create()
+    {
+        return view('admin::produk.kategori.create');
     }
 
     /**
@@ -36,9 +46,18 @@ class ProductCategoryController extends Controller
     public function store(ProductCategoryRequest $request)
     {
         $this->model->create($request);
-        return [
-            'message' => 'Kategori berhasil ditambahkan'
-        ];
+        return redirect()->route('admin.prod.category.index')->with('success', 'Kategori berhasil ditambahkan.');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * @param int $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $category = $this->model->findById($id);
+        return view('admin::produk.kategori.edit', compact('category'));
     }
 
     /**
@@ -50,9 +69,7 @@ class ProductCategoryController extends Controller
     public function update(ProductCategoryRequest $request, $id)
     {
         $this->model->update($request, $id);
-        return [
-            'message' => 'Kategori berhasil diubah'
-        ];
+        return redirect()->route('admin.prod.category.index')->with('success', 'Kategori berhasil diubah.');
     }
 
     /**
@@ -63,8 +80,6 @@ class ProductCategoryController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return [
-            'message' => 'Kategori berhasil dihapus'
-        ];
+        return redirect()->route('admin.prod.category.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }

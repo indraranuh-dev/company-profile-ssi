@@ -54,7 +54,9 @@ Route::group([
         'as' => 'prod.category.'
     ], function () {
         Route::get('/', 'ProductCategoryController@index')->name('index');
+        Route::get('/tambah', 'ProductCategoryController@create')->name('create');
         Route::post('/', 'ProductCategoryController@store')->name('store');
+        Route::get('/{id}/ubah', 'ProductCategoryController@edit')->name('edit');
         Route::put('/{id}', 'ProductCategoryController@update')->name('update');
         Route::delete('/{id}', 'ProductCategoryController@destroy')->name('destroy');
     });
@@ -72,7 +74,7 @@ Route::group([
 
     # Route jenis produk
     Route::group([
-        'prefix' => 'produk/jenis-produk',
+        'prefix' => 'produk/jenis',
         'as' => 'prod.type.'
     ], function () {
         Route::get('/', 'ProductTypeController@index')->name('index');
@@ -85,7 +87,7 @@ Route::group([
 
     # Route sub jenis produk
     Route::group([
-        'prefix' => 'produk/sub-jenis-produk',
+        'prefix' => 'produk/sub-jenis',
         'as' => 'prod.subtype.'
     ], function () {
         Route::get('/', 'ProductSubTypeController@index')->name('index');

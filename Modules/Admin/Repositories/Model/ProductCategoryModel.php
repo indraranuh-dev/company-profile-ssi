@@ -18,13 +18,8 @@ class ProductCategoryModel implements ProdCatRepositoryInterface
 
     public function findById($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $category = ProductCategory::findOrfail($realID);
-            return $category;
-        } catch (DecryptException $e) {
-            return abort(404);
-        }
+        $category = ProductCategory::findOrfail($this->decrypt(false, $id));
+        return $category;
     }
 
     public function findBySlug($slug)
@@ -43,25 +38,34 @@ class ProductCategoryModel implements ProdCatRepositoryInterface
 
     public function update($request, $id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $category = ProductCategory::findOrFail($realID);
-            $category->name = $request->name;
-            $category->slug_name = Str::slug($request->name);
-            return $category->save();
-        } catch (DecryptException $e) {
-            return abort(404);
-        }
+        $category = ProductCategory::findOrFail($this->decrypt(false, $id));
+        $category->name = $request->name;
+        $category->slug_name = Str::slug($request->name);
+        return $category->save();
     }
 
     public function delete($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $category = ProductCategory::findOrFail($realID);
-            return $category->delete();
-        } catch (DecryptException $e) {
-            return abort(404);
+        $category = ProductCategory::findOrFail($this->decrypt(false, $id));
+        return $category->delete();
+    }
+
+    protected function decrypt($isArray = false, $id = '', $arr = [])
+    {
+        if ($isArray === false) {
+            return Generator::crypt($id, 'decrypt');
+        } else {
+            $newArr = [];
+            foreach ($arr as $a) {
+                array_push($newArr, Generator::crypt($a, 'decrypt'));
+            }
+            return $newArr;
         }
+    }
+
+    protected function sync($request)
+    {
+        $findSub = ProductCategory::where('name', $request->name)->first();
+        return $findSub->types()->sync($this->decrypt(true, '', $request->type));
     }
 }

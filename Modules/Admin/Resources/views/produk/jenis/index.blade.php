@@ -160,7 +160,7 @@ use App\Utilities\Generator;
     });
     async function deleteConfirmation(id){
         $('#confirm-modal').modal('show');
-        $('#delete').attr('action', `http://127.0.0.1:8000/_admin/produk/jenis-produk/${id}`)
+        $('#delete').attr('action', `http://127.0.0.1:8000/_admin/produk/jenis/${id}`)
     }
     $('button').tooltip();
     $('a').tooltip();
