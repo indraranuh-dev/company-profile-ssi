@@ -6,7 +6,7 @@ use App\Utilities\Generator;
 @extends('layouts/master')
 
 @section('content')
-<x-breadcrumb>
+<x-breadcrumb title="Jenis Produk">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
@@ -118,12 +118,51 @@ use App\Utilities\Generator;
 <script src="{{asset('libs/datatables/buttons/jszip.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.html5.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.print.js')}}"></script>
-{{-- <script src="{{Module::asset('admin:js/produk/app.js')}}"></script> --}}
 <script>
-    $('table').DataTable();
+    const table = $("#table").DataTable({
+        dom:    `<'row mb-3'
+                    <'col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0 text-right text-sm-left'B>
+                    <'col-lg-6 col-md-6 col-sm-12 text-right text-sm-left'f>
+                >
+                <'row mb-2'
+                    <'col-12'<'table-responsive' t>>
+                >
+                <'row'
+                    <'col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0' i>
+                    <'col-lg-6 col-md-6 col-sm-12' p>
+                >`,
+        buttons: [{
+                extend: 'copy',
+                text: '<i class="fa fa-fw fa-copy"></i>',
+                className: 'btn btn-light btn-sm',
+                titleAttr: 'Copy',
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fa fa-fw fa-file-excel"></i>',
+                className: 'btn btn-light btn-sm',
+                titleAttr: 'Export as Excell',
+            },
+            {
+                extend: 'pdfHtml5',
+                download: 'open',
+                text: '<i class="fa fa-fw fa-file-pdf"></i>',
+                className: 'btn btn-light btn-sm',
+                titleAttr: 'Export as PDF',
+            },
+            {
+                extend: 'print',
+                text: '<i class="fa fa-fw fa-print"></i>',
+                className: 'btn btn-light btn-sm',
+                titleAttr: 'Print',
+            },
+        ]
+    });
     async function deleteConfirmation(id){
         $('#confirm-modal').modal('show');
         $('#delete').attr('action', `http://127.0.0.1:8000/_admin/produk/jenis-produk/${id}`)
     }
+    $('button').tooltip();
+    $('a').tooltip();
 </script>
 @endpush

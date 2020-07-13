@@ -74,7 +74,7 @@ class ProductTypeController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductTypeRequest $request, $id)
     {
         $this->model->update($request, $id);
         return redirect()->route('admin.prod.type.index')->with('success', 'Jenis produk berhasil diubah');

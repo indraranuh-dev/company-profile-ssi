@@ -5,7 +5,7 @@ use App\Utilities\Generator;
 @extends('layouts/master')
 
 @section('content')
-<x-breadcrumb>
+<x-breadcrumb title="Jenis Produk">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
@@ -43,8 +43,7 @@ use App\Utilities\Generator;
                                     <div class="col-12">
                                         <label for="name">{{__('Jenis produk')}}</label>
                                         <input type="text" class="form-control @error('name'){{'is-invalid'}}@enderror"
-                                            name="name" id="name" placeholder="Nama jenis produk"
-                                            value="{{$type->name}}">
+                                            name="name" id="name" value="{{$type->name}}">
                                         @error('name')<small class="text-danger">{{$message}}</small>@enderror
                                     </div>
                                 </fieldset>
