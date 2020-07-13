@@ -12556,6 +12556,7 @@ svg:not(:root) {
 
 table {
   border-collapse: collapse;
+  min-width: 1000px;
 }
 
 .select2-container--bootstrap {

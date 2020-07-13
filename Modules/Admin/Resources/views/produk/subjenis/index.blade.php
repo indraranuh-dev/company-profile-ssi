@@ -40,46 +40,46 @@ use App\Utilities\Generator;
                     </a>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover" id="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nama</th>
-                                    <th>Jenis Produk</th>
-                                    <th>Dibuat pada</th>
-                                    <th>Diubah pada</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($subTypes as $subType)
-                                <tr>
-                                    <td class="text-center">{{$loop->iteration}}</td>
-                                    <td>{{$subType->name}}</td>
-                                    <td>
-                                        @foreach ($subType->types as $types)
-                                        <span class="badge badge-info">{{$types->name}}</span><br>
-                                        @endforeach
-                                    </td>
-                                    <td>{{Converter::convertDate($subType->created_at)}}</td>
-                                    <td>{{Converter::convertDate($subType->updated_at)}}</td>
-                                    <td class="text-center">
-                                        <a href="{{route('admin.prod.subtype.edit', Generator::crypt($subType->id, 'encrypt'))}}"
-                                            class="btn btn-outline-light text-secondary btn-sm" title="Ubah data">
-                                            <i class="fa fa-fw fa-edit"></i>
-                                        </a>
-                                        <a href="javascript:void(0)" class="btn btn-outline-light text-secondary btn-sm"
-                                            title="Hapus data"
-                                            onclick="deleteConfirmation('{{Generator::crypt($subType->id, 'encrypt')}}')">
-                                            <i class="fa fa-fw fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                    {{-- <div class="table-responsive"> --}}
+                    <table class="table table-bordered table-hover" id="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Jenis Produk</th>
+                                <th>Dibuat pada</th>
+                                <th>Diubah pada</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($subTypes as $subType)
+                            <tr>
+                                <td class="text-center">{{$loop->iteration}}</td>
+                                <td>{{$subType->name}}</td>
+                                <td>
+                                    @foreach ($subType->types as $types)
+                                    <span class="badge badge-info">{{$types->name}}</span><br>
+                                    @endforeach
+                                </td>
+                                <td>{{Converter::convertDate($subType->created_at)}}</td>
+                                <td>{{Converter::convertDate($subType->updated_at)}}</td>
+                                <td class="text-center">
+                                    <a href="{{route('admin.prod.subtype.edit', Generator::crypt($subType->id, 'encrypt'))}}"
+                                        class="btn btn-outline-light text-secondary btn-sm" title="Ubah data">
+                                        <i class="fa fa-fw fa-edit"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn btn-outline-light text-secondary btn-sm"
+                                        title="Hapus data"
+                                        onclick="deleteConfirmation('{{Generator::crypt($subType->id, 'encrypt')}}')">
+                                        <i class="fa fa-fw fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{-- </div> --}}
                 </div>
 
             </div>
@@ -127,9 +127,17 @@ use App\Utilities\Generator;
 <script src="{{asset('libs/datatables/buttons/buttons.print.js')}}"></script>
 <script>
     const table = $("#table").DataTable({
-        dom: `<'row'<'col-sm-6 mb-3'B>
-                    <'col-sm-6'f>><'row'<'col-12' t>><'row'<'d-flex justify-content-start w-50' i>
-                    <'d-flex justify-content-end w-50'p>>`,
+        dom:    `<'row mb-3'
+                    <'col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0 text-right text-sm-left'B>
+                    <'col-lg-6 col-md-6 col-sm-12 text-right text-sm-left'f>
+                >
+                <'row'
+                    <'col-12'<'table-responsive' t>>
+                >
+                <'row'
+                    <'col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0' i>
+                    <'col-lg-6 col-md-6 col-sm-12' p>
+                >`,
         buttons: [{
                 extend: 'copy',
                 text: '<i class="fa fa-fw fa-copy"></i>',
