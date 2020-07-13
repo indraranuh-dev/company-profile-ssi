@@ -67,7 +67,9 @@ Route::group([
         'as' => 'prod.subcategory.'
     ], function () {
         Route::get('/', 'ProductSubCategoryController@index')->name('index');
+        Route::get('/tambah', 'ProductSubCategoryController@create')->name('create');
         Route::post('/', 'ProductSubCategoryController@store')->name('store');
+        Route::get('/{id}/ubah', 'ProductSubCategoryController@edit')->name('edit');
         Route::put('/{id}', 'ProductSubCategoryController@update')->name('update');
         Route::delete('/{id}', 'ProductSubCategoryController@destroy')->name('destroy');
     });

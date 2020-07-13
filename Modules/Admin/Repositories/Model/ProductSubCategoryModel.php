@@ -44,32 +44,35 @@ class ProductSubCategoryModel implements ProdSubCategoryRepositoryInterface
 
     public function update($request, $id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $category = SubCategory::findOrFail($realID);
-            $category->name = $request->name;
-            $category->slug_name = Str::slug($request->name);
-            $category->save();
-            return $this->sync($request, $request->name);
-        } catch (DecryptException $e) {
-            return abort(404);
-        }
+        $category = SubCategory::findOrFail($this->decrypt(false, $id));
+        $category->name = $request->name;
+        $category->slug_name = Str::slug($request->name);
+        $category->save();
+        return $this->sync($request, $request->name);
     }
 
     public function delete($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $category = SubCategory::findOrFail($realID);
-            return $category->delete();
-        } catch (DecryptException $e) {
-            return abort(404);
+        $category = SubCategory::findOrFail($this->decrypt(false, $id));
+        return $category->delete();
+    }
+
+    protected function decrypt($isArray = false, $id = '', $arr = [])
+    {
+        if ($isArray === false) {
+            return Generator::crypt($id, 'decrypt');
+        } else {
+            $newArr = [];
+            foreach ($arr as $a) {
+                array_push($newArr, Generator::crypt($a, 'decrypt'));
+            }
+            return $newArr;
         }
     }
 
-    protected function sync($request, $name)
+    protected function sync($request)
     {
-        $category = SubCategory::where('name', $name)->first();
-        return $category->categories()->sync($request->category);
+        $findSub = SubCategory::where('name', $request->name)->first();
+        return $findSub->categories()->sync($this->decrypt(true, '', $request->category));
     }
 }
