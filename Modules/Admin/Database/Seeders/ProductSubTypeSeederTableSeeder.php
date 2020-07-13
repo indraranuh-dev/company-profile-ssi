@@ -5,7 +5,7 @@ namespace Modules\Admin\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminDatabaseSeeder extends Seeder
+class ProductSubTypeSeederTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +16,6 @@ class AdminDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(ProductCategorySeederTableSeeder::class);
-        $this->call(ProductTypeSeederTableSeeder::class);
+        // $this->call("OthersTableSeeder");
     }
 }
