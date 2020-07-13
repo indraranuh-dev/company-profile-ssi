@@ -2,21 +2,29 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Utilities\ArrayCheck;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Requests\ProductSubTypeRequest;
+use Modules\Admin\Repositories\ProdTypeRepositoryInterface as Type;
 use Modules\Admin\Repositories\ProdSubTypeRepositoryInterface as SubType;
 
 class ProductSubTypeController extends Controller
 {
     private $model;
 
+    private $type;
+
     /**
      * Class constructor.
      */
-    public function __construct(SubType $prodSubTypeRepositoryInterface)
-    {
+    public function __construct(
+        SubType $prodSubTypeRepositoryInterface,
+        Type $prodTypeRepositoryInterface
+    ) {
         $this->model = $prodSubTypeRepositoryInterface;
+        $this->type = $prodTypeRepositoryInterface;
     }
 
     /**
@@ -25,8 +33,8 @@ class ProductSubTypeController extends Controller
      */
     public function index()
     {
-        return $this->model->getAll();
-        // return view('admin::index');
+        $subTypes =  $this->model->getAll();
+        return view('admin::produk.subjenis.index', compact('subTypes'));
     }
 
     /**
@@ -35,7 +43,8 @@ class ProductSubTypeController extends Controller
      */
     public function create()
     {
-        return view('admin::create');
+        $types = $this->type->getAll();
+        return view('admin::produk.subjenis.create', compact('types'));
     }
 
     /**
@@ -43,19 +52,10 @@ class ProductSubTypeController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(ProductSubTypeRequest $request)
     {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('admin::show');
+        $this->model->create($request);
+        return redirect()->route('admin.prod.subtype.index')->with('success', 'Sub jenis berhasil ditambahkan.');
     }
 
     /**
@@ -65,7 +65,10 @@ class ProductSubTypeController extends Controller
      */
     public function edit($id)
     {
-        return view('admin::edit');
+        $subType = $this->model->findById($id);
+        $types = $this->type->getAll();
+        $selects = ArrayCheck::notSelected($types, $subType->types);
+        return view('admin::produk.subjenis.edit', compact('subType', 'selects'));
     }
 
     /**
@@ -74,9 +77,10 @@ class ProductSubTypeController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductSubTypeRequest $request, $id)
     {
-        //
+        $this->model->update($request, $id);
+        return redirect()->route('admin.prod.subtype.index')->with('success', 'Sub jenis berhasil diubah.');
     }
 
     /**
@@ -86,6 +90,7 @@ class ProductSubTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return redirect()->route('admin.prod.subtype.index')->with('success', 'Sub jenis berhasil dihapus.');
     }
 }

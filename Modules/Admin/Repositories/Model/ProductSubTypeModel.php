@@ -4,8 +4,10 @@ namespace Modules\Admin\Repositories\Model;
 
 use Illuminate\Support\Str;
 use App\Utilities\Generator;
+use Exception;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Modules\Admin\Repositories\Model\Entities\ProductSubType;
+use Modules\Admin\Repositories\Model\Entities\ProductType;
 use Modules\Admin\Repositories\ProdSubTypeRepositoryInterface;
 
 class ProductSubTypeModel implements ProdSubTypeRepositoryInterface
@@ -18,18 +20,13 @@ class ProductSubTypeModel implements ProdSubTypeRepositoryInterface
 
     public function findById($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $types = ProductSubType::findOrFail($realID);
-            return $types;
-        } catch (DecryptException $e) {
-            return abort(404);
-        }
+        $types = ProductSubType::where('id', $this->decrypt(false, $id))->with('types:id,name');
+        return $types->first();
     }
 
     public function findBySlug($slug)
     {
-        $types = ProductSubType::where('slug_name', $slug);
+        $types = ProductSubType::where('slug_name', $slug)->with('types:id,name');
         return $types->first();
     }
 
@@ -38,30 +35,40 @@ class ProductSubTypeModel implements ProdSubTypeRepositoryInterface
         $types = new ProductSubType();
         $types->name = $request->name;
         $types->slug_name = Str::slug($request->name);
-        return $types->save();
+        $types->save();
+        return $this->sync($request);
     }
 
     public function update($request, $id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $types = ProductSubType::findOrFail($realID);
-            $types->name = $request->name;
-            $types->slug_name = Str::slug($request->name);
-            return $types->save();
-        } catch (DecryptException $e) {
-            return abort(404);
-        }
+        $types = ProductSubType::findOrFail($this->decrypt(false, $id));
+        $types->name = $request->name;
+        $types->slug_name = Str::slug($request->name);
+        return $this->sync($request);
     }
 
     public function delete($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $types = ProductSubType::findOrFail($realID);
-            return $types->delete();
-        } catch (DecryptException $e) {
-            return abort(404);
+        $types = ProductSubType::findOrFail($this->decrypt(false, $id));
+        return $types->delete();
+    }
+
+    protected function decrypt($isArray = false, $id = '', $arr = [])
+    {
+        if ($isArray === false) {
+            return Generator::crypt($id, 'decrypt');
+        } else {
+            $newArr = [];
+            foreach ($arr as $a) {
+                array_push($newArr, Generator::crypt($a, 'decrypt'));
+            }
+            return $newArr;
         }
+    }
+
+    protected function sync($request)
+    {
+        $findSub = ProductSubType::where('name', $request->name)->first();
+        return $findSub->types()->sync($this->decrypt(true, '', $request->type));
     }
 }
