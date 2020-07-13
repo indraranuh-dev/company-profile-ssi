@@ -6,7 +6,7 @@ use App\Utilities\Generator;
 
 @section('content')
 <x-breadcrumb>
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" title="Sub Jenis Produk">
         <li class="breadcrumb-item">
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
         </li>

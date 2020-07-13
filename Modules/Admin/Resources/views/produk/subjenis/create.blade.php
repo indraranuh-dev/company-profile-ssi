@@ -5,7 +5,7 @@ use App\Utilities\Generator;
 @extends('layouts/master')
 
 @section('content')
-<x-breadcrumb>
+<x-breadcrumb title="Sub Jenis Produk">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>

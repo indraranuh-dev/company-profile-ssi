@@ -30,7 +30,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.product.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.product.index') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.product.*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Semua produk
                                 </span>
@@ -48,7 +48,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.prod.subcategory.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.prod.subcategory.index') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.prod.subcategory.*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Sub kategori
                                 </span>
@@ -57,7 +57,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.prod.type.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.prod.type.index') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.prod.type.*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Jenis produk
                                 </span>
@@ -66,7 +66,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.prod.subtype.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.prod.subtype.index') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.prod.subtype.*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Sub jenis produk
                                 </span>
