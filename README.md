@@ -49,3 +49,19 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
         </ul>
     </li>
 </ul>
+
+<h3><b>Senin 13/07/2020</b></h3>
+
+<ul> 
+    <li>Bug fix - tataletak footer dan ukuran tabel</li>
+    <li>Positioning ulang table untuk desktop dan mobile version</li>
+    <li>
+        Pembuatan halaman admin/sub-jenis-produk
+        <ul>
+            <li>Repositories, Model, Entities, RepositoriesServiceProvider</li>
+            <li>Tampilan halaman produk</li>
+            <li>ProductType controller, routing web</li>
+            <li>Sistem tambah, ubah dan hapus</li>
+        </ul>
+    </li>
+</ul>
