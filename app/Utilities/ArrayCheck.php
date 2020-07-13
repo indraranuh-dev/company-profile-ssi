@@ -15,7 +15,7 @@ class ArrayCheck
      * @return array
      */
 
-    public static function notSelected(object $fullArray, object $arraySelected)
+    public static function notSelected($fullArray, $arraySelected)
     {
         $all = [];
         $countValues = [];
