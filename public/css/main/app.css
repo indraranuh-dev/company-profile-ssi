@@ -22589,7 +22589,8 @@ ul.list-style-none li a:hover {
 }
 .card .card-title {
   position: relative;
-  font-weight: 600;
+  font-weight: 800;
+  text-transform: capitalize;
   margin-bottom: 10px;
 }
 .card .card-actions {
