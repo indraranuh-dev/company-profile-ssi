@@ -59,7 +59,7 @@
                             <a href="{{route('admin.prod.type.index')}}"
                                 class="sidebar-link {{request()->routeIs('admin.prod.type.*') ? 'active' : ''}}">
                                 <span class="hide-menu">
-                                    Jenis produk
+                                    Jenis
                                 </span>
                             </a>
                         </li>
@@ -68,7 +68,37 @@
                             <a href="{{route('admin.prod.subtype.index')}}"
                                 class="sidebar-link {{request()->routeIs('admin.prod.subtype.*') ? 'active' : ''}}">
                                 <span class="hide-menu">
-                                    Sub jenis produk
+                                    Sub jenis
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="sidebar-item {{request()->is('_admin/fitur*') ? 'selected' : ''}}">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark {{request()->routeIs('_admin/fitur*') ? 'active' : ''}}"
+                        href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-magnet-on"></i>
+                        <span class="hide-menu">Fitur </span>
+                    </a>
+                    <ul aria-expanded="false"
+                        class="collapse first-level {{request()->is('_admin/fitur*') ? 'in' : ''}}">
+
+                        <li class="sidebar-item">
+                            <a href="{{route('admin.features.index')}}"
+                                class="sidebar-link {{request()->routeIs('admin.features.*') ? 'active' : ''}}">
+                                <span class="hide-menu">
+                                    Semua fitur
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="{{route('admin.feat.category.index')}}"
+                                class="sidebar-link {{request()->routeIs('admin.feat.category.*') ? 'active' : ''}}">
+                                <span class="hide-menu">
+                                    Kategori
                                 </span>
                             </a>
                         </li>

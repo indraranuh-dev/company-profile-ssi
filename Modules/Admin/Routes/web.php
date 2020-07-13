@@ -125,6 +125,19 @@ Route::group([
         Route::put('/{id}', 'FeatureController@update')->name('update');
         Route::delete('/{id}', 'FeatureController@destroy')->name('destroy');
     });
+
+    # Route sub jenis produk
+    Route::group([
+        'prefix' => 'fitur/kategori',
+        'as' => 'feat.category.'
+    ], function () {
+        Route::get('/', 'FeatureCategoryController@index')->name('index');
+        Route::get('/tambah', 'FeatureCategoryController@create')->name('create');
+        Route::post('/', 'FeatureCategoryController@store')->name('store');
+        Route::get('/{id}/ubah', 'FeatureCategoryController@edit')->name('edit');
+        Route::put('/{id}', 'FeatureCategoryController@update')->name('update');
+        Route::delete('/{id}', 'FeatureCategoryController@destroy')->name('destroy');
+    });
 });
 
 Route::get('test', 'ProductSubCategoryController@test');
