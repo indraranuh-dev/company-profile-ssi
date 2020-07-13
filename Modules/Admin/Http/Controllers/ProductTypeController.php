@@ -48,16 +48,6 @@ class ProductTypeController extends Controller
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-    /**
      * Show the form for editing the specified resource.
      * @param int $id
      * @return Response
