@@ -68,4 +68,5 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
     <li>Perombakan halaman sub kategori produk</li>
     <li>Perapihan model</li>
     <li>Penyetaraan peniulisan kode</li>
+    <li>Perapihan asset</li>
 </ul>
