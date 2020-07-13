@@ -64,4 +64,8 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
             <li>Sistem tambah, ubah dan hapus</li>
         </ul>
     </li>
+    <li>Perombakan halaman kategori produk</li>
+    <li>Perombakan halaman sub kategori produk</li>
+    <li>Perapihan model</li>
+    <li>Penyetaraan peniulisan kode</li>
 </ul>
