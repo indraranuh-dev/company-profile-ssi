@@ -5,14 +5,14 @@ namespace Modules\Admin\Repositories;
 interface ProdSubTypeRepositoryInterface
 {
     /**
-     * Get all product_category from resource
+     * Get all product_subtype from resource
      *
      * @return void
      */
     public function getAll();
 
     /**
-     * Find product_catrgory by passing id
+     * Find product_subtype by passing id
      *
      * @param int $id
      * @return void
@@ -20,7 +20,7 @@ interface ProdSubTypeRepositoryInterface
     public function findById($id);
 
     /**
-     * Find product_category by passing slug
+     * Find product_subtype by passing slug
      *
      * @param string $slug
      * @return void
@@ -29,7 +29,7 @@ interface ProdSubTypeRepositoryInterface
 
 
     /**
-     *  Add product_category to resource
+     *  Add product_subtype to resource
      *
      * @param object $request
      * @return void
@@ -37,7 +37,7 @@ interface ProdSubTypeRepositoryInterface
     public function create($request);
 
     /**
-     * Update product_category to resource
+     * Update product_subtype to resource
      *
      * @param object $request
      * @param int $id
@@ -46,7 +46,7 @@ interface ProdSubTypeRepositoryInterface
     public function update($request, $id);
 
     /**
-     * delete product_category to resource
+     * delete product_subtype to resource
      *
      * @param int $id
      * @return void

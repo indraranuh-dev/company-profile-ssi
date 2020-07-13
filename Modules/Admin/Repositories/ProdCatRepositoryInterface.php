@@ -12,7 +12,7 @@ interface ProdCatRepositoryInterface
     public function getAll();
 
     /**
-     * Find product_catrgory by passing id
+     * Find product_category by passing id
      *
      * @param int $id
      * @return void

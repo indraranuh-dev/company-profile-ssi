@@ -62,10 +62,4 @@ class ProductCategoryModel implements ProdCatRepositoryInterface
             return $newArr;
         }
     }
-
-    protected function sync($request)
-    {
-        $findSub = ProductCategory::where('name', $request->name)->first();
-        return $findSub->types()->sync($this->decrypt(true, '', $request->type));
-    }
 }

@@ -63,10 +63,4 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
             return $newArr;
         }
     }
-
-    protected function sync($request)
-    {
-        $findSub = ProductType::where('name', $request->name)->first();
-        return $findSub->types()->sync($this->decrypt(true, '', $request->type));
-    }
 }
