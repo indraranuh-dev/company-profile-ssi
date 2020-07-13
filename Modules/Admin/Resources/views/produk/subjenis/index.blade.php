@@ -40,7 +40,6 @@ use App\Utilities\Generator;
                     </a>
                 </div>
                 <div class="card-body">
-                    {{-- <div class="table-responsive"> --}}
                     <table class="table table-bordered table-hover" id="table">
                         <thead class="thead-light">
                             <tr>
@@ -79,7 +78,6 @@ use App\Utilities\Generator;
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- </div> --}}
                 </div>
 
             </div>
