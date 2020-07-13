@@ -12556,7 +12556,6 @@ svg:not(:root) {
 
 table {
   border-collapse: collapse;
-  width: 1187px !important;
 }
 
 .select2-container--bootstrap {
@@ -12586,7 +12585,7 @@ table {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #7460EE;
+  background: #7460ee;
   color: white;
   position: absolute;
   cursor: pointer;
@@ -22255,6 +22254,7 @@ html[dir=ltr] body .p-l-0 {
 #main-wrapper {
   width: 100%;
   overflow: hidden;
+  margin-bottom: 60px;
 }
 #main-wrapper .topbar .top-navbar .navbar-header[data-logobg=skin5],
 #main-wrapper .topbar .navbar-collapse[data-navbarbg=skin5], #main-wrapper .topbar[data-navbarbg=skin5] {
@@ -22278,11 +22278,16 @@ html[dir=ltr] body .p-l-0 {
 }
 .page-wrapper > .container-fluid {
   padding: 20px;
-  min-height: calc(100vh - 180px);
+  min-height: calc(100vh - 194px);
 }
 
 .footer {
-  padding: 15px 20px;
+  padding: 0 20px 15px 20px;
+  position: absolute;
+  margin-left: 250px;
+  bottom: 0;
+  width: calc(100% - 250px);
+  text-align: center;
 }
 
 #main-wrapper[data-sidebartype=full] .page-wrapper {
@@ -22342,6 +22347,11 @@ html[dir=ltr] body .p-l-0 {
   #main-wrapper[data-layout=vertical][data-sidebar-position=fixed] .topbar .top-navbar .navbar-collapse, #main-wrapper[data-layout=vertical][data-header-position=fixed][data-sidebar-position=fixed] .topbar .top-navbar .navbar-collapse {
     position: relative;
     top: 64px;
+  }
+
+  .footer {
+    margin-left: 0;
+    width: 100%;
   }
 }
 * {
