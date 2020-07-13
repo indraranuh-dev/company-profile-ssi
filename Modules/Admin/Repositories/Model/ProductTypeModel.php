@@ -18,13 +18,8 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
 
     public function findById($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $types = ProductType::findOrFail($realID);
-            return $types;
-        } catch (DecryptException $e) {
-            return abort(404);
-        }
+        $types = ProductType::findOrFail($this->decrypt(false, $id));
+        return $types;
     }
 
     public function findBySlug($slug)
@@ -43,25 +38,35 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
 
     public function update($request, $id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $types = ProductType::findOrFail($realID);
-            $types->name = $request->name;
-            $types->slug_name = Str::slug($request->name);
-            return $types->save();
-        } catch (DecryptException $e) {
-            return abort(404);
-        }
+        $types = ProductType::findOrFail($this->decrypt(false, $id));
+        $types->name = $request->name;
+        $types->slug_name = Str::slug($request->name);
+        return $types->save();
     }
 
     public function delete($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $types = ProductType::findOrFail($realID);
-            return $types->delete();
-        } catch (DecryptException $e) {
-            return abort(404);
+        $types = ProductType::findOrFail($this->decrypt(false, $id));
+        return $types->delete();
+    }
+
+
+    protected function decrypt($isArray = false, $id = '', $arr = [])
+    {
+        if ($isArray === false) {
+            return Generator::crypt($id, 'decrypt');
+        } else {
+            $newArr = [];
+            foreach ($arr as $a) {
+                array_push($newArr, Generator::crypt($a, 'decrypt'));
+            }
+            return $newArr;
         }
+    }
+
+    protected function sync($request)
+    {
+        $findSub = ProductType::where('name', $request->name)->first();
+        return $findSub->types()->sync($this->decrypt(true, '', $request->type));
     }
 }
