@@ -46,9 +46,9 @@ mix.js([
     'resources/assets/admin/js/main/custom.js',
 ], 'public/js/main/main.js').version();
 
-mix.copyDirectory([
-    'resources/assets/admin/js/libs'
-], 'public/libs');
+// mix.copyDirectory([
+//     'resources/assets/admin/js/libs'
+// ], 'public/libs');
 
 // mix.minify([
 //     'public/css/app.css',

@@ -26,7 +26,7 @@ use App\Utilities\Generator;
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Tambah jenis produk</h4>
+                    <h4 class="card-title">Tambah sub jenis produk</h4>
                     <a href="{{route('admin.prod.subtype.index')}}" class="btn btn-primary">
                         <i class="mdi mdi-arrow-left mr-2"></i>Kembali
                     </a>
@@ -89,5 +89,8 @@ use App\Utilities\Generator;
     $('select').select2({
         theme: 'bootstrap'
     })
+    if($('select').hasClass('is-invalid')){
+        $('.select2-selection--multiple').addClass('is-invalid');
+    }
 </script>
 @endpush

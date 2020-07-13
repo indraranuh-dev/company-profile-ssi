@@ -129,7 +129,7 @@ use App\Utilities\Generator;
                     <'col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0 text-right text-sm-left'B>
                     <'col-lg-6 col-md-6 col-sm-12 text-right text-sm-left'f>
                 >
-                <'row'
+                <'row mb-2'
                     <'col-12'<'table-responsive' t>>
                 >
                 <'row'
