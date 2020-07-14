@@ -19,7 +19,7 @@ class CreateSuppliersTable extends Migration
             $table->string('slug_name');
             $table->string('address')->nullable();
             $table->string('email')->nullable();
-            $table->string('image')->default('no_file_choosen.svg');
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('phone')->nullable();
             $table->unsignedBigInteger('dealer_contact')->nullable();
             $table->timestamps();
