@@ -10,6 +10,8 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
     <li>Membuat repository, model, controller, view halaman fitur</li>
     <li>Membuat repository, model, controller, view halaman kategori fitur</li>
     <li>Membuat fitur upload pada halaman fitur (icon yang diterima hanya jpg/png)</li>
+    <li>Memperbaiki halaman supplier dari error sebelumnya.</li>
+    <li>Menambahkan halaman supplier, memperbaiki controller, model supplier</li>
 </ul>
 
 <h3><b>Senin 13/07/2020</b></h3>
