@@ -124,6 +124,7 @@ Route::group([
         Route::get('/{id}/ubah', 'FeatureController@edit')->name('edit');
         Route::put('/{id}', 'FeatureController@update')->name('update');
         Route::delete('/{id}', 'FeatureController@destroy')->name('destroy');
+        Route::get('/icon/{icon}', 'FeatureController@getFeatureIcon')->name('icon');
     });
 
     # Route sub jenis produk

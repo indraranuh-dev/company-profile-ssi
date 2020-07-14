@@ -5,16 +5,29 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Requests\FeatureCategoryRequest;
+use Modules\Admin\Repositories\FeatureCategoryRepositoryInterface as Category;
 
 class FeatureCategoryController extends Controller
 {
+    private $model;
+
+    /**
+     * Class constructor.
+     */
+    public function __construct(Category $featureCategoryRepositoryInterface)
+    {
+        $this->model = $featureCategoryRepositoryInterface;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('admin::index');
+        $categories = $this->model->getAll();
+        return view('admin::fitur.kategori.index', compact('categories'));
     }
 
     /**
@@ -23,7 +36,7 @@ class FeatureCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin::create');
+        return view('admin::fitur.kategori.create');
     }
 
     /**
@@ -31,19 +44,10 @@ class FeatureCategoryController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(FeatureCategoryRequest $request)
     {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('admin::show');
+        $this->model->create($request);
+        return redirect()->route('admin.feat.category.index')->with('success', 'Kategori fitur berhasil ditambahkan.');
     }
 
     /**
@@ -53,7 +57,8 @@ class FeatureCategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('admin::edit');
+        $category = $this->model->findById($id);
+        return view('admin::fitur.kategori.edit', compact('category'));
     }
 
     /**
@@ -64,7 +69,8 @@ class FeatureCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->model->update($request, $id);
+        return redirect()->route('admin.feat.category.index')->with('success', 'Kategori fitur berhasil diubah.');
     }
 
     /**
@@ -74,6 +80,7 @@ class FeatureCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return redirect()->route('admin.feat.category.index')->with('success', 'Kategori fitur berhasil dihapus.');
     }
 }

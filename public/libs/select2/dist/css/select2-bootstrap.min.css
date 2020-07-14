@@ -235,6 +235,7 @@
     height: auto
 }
 
+.select2-selection--single.is-invalid,
 .select2-selection--multiple.is-invalid {
     border-color: #da542e !important;
     box-shadow: none;

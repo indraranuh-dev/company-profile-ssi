@@ -1,20 +1,18 @@
 @php
 use App\Utilities\Converter;
 use App\Utilities\Generator;
+use Illuminate\Support\Facades\Storage;
 @endphp
 
 @extends('layouts/master')
 
 @section('content')
-<x-breadcrumb title="Sub Jenis Produk">
+<x-breadcrumb title="Semua Fitur">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
         </li>
-        <li class="breadcrumb-item">
-            <a href="{{route('admin.product.index')}}">{{__('Produk')}}</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">{{__('Sub Jenis Produk')}}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{__('Semua Fitur')}}</li>
     </ol>
 </x-breadcrumb>
 
@@ -34,9 +32,9 @@ use App\Utilities\Generator;
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Daftar Sub Jenis Produk</h4>
-                    <a href="{{route('admin.prod.subtype.create')}}" class="btn btn-primary">
-                        <i class="mdi mdi-plus mr-2"></i>Sub jenis produk
+                    <h4 class="card-title">Daftar fitur</h4>
+                    <a href="{{route('admin.features.create')}}" class="btn btn-primary">
+                        <i class="mdi mdi-plus mr-2"></i>Fitur
                     </a>
                 </div>
                 <div class="card-body">
@@ -44,33 +42,34 @@ use App\Utilities\Generator;
                         <thead class="thead-light">
                             <tr>
                                 <th>#</th>
+                                <th>Icon</th>
                                 <th>Nama</th>
-                                <th>Jenis Produk</th>
-                                <th>Dibuat pada</th>
-                                <th>Diubah pada</th>
+                                <th>Kategori</th>
+                                <th>Deskripsi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($subTypes as $subType)
+                            @foreach ($features as $feature)
                             <tr>
                                 <td class="text-center">{{$loop->iteration}}</td>
-                                <td>{{$subType->name}}</td>
-                                <td>
-                                    @foreach ($subType->types as $types)
-                                    <span class="badge badge-info">{{$types->name}}</span><br>
-                                    @endforeach
-                                </td>
-                                <td>{{Converter::convertDate($subType->created_at)}}</td>
-                                <td>{{Converter::convertDate($subType->updated_at)}}</td>
                                 <td class="text-center">
-                                    <a href="{{route('admin.prod.subtype.edit', Generator::crypt($subType->id, 'encrypt'))}}"
+                                    <img height="50px" width="50px"
+                                        src="{{route('admin.features.icon', $feature->icon)}}" alt="">
+                                </td>
+                                <td>{{$feature->name}}</td>
+                                <td>
+                                    <span class="badge badge-info">{{$feature->category->name}}</span>
+                                </td>
+                                <td>{{$feature->description}}</td>
+                                <td class="text-center">
+                                    <a href="{{route('admin.features.edit', Generator::crypt($feature->id, 'encrypt'))}}"
                                         class="btn btn-outline-light text-secondary btn-sm" title="Ubah data">
                                         <i class="fa fa-fw fa-edit"></i>
                                     </a>
                                     <a href="javascript:void(0)" class="btn btn-outline-light text-secondary btn-sm"
                                         title="Hapus data"
-                                        onclick="deleteConfirmation('{{Generator::crypt($subType->id, 'encrypt')}}')">
+                                        onclick="deleteConfirmation('{{Generator::crypt($feature->id, 'encrypt')}}')">
                                         <i class="fa fa-fw fa-trash"></i>
                                     </a>
                                 </td>
@@ -85,7 +84,7 @@ use App\Utilities\Generator;
     </div>
 </div>
 
-<x-modal headerBg="danger" modalId="confirm-modal" title="Hapus sub jenis produk">
+<x-modal headerBg="danger" modalId="confirm-modal" title="Hapus fitur">
     <div class="card-body">
         Anda yakin akan menghapus data ini ?
     </div>
@@ -123,5 +122,5 @@ use App\Utilities\Generator;
 <script src="{{asset('libs/datatables/buttons/jszip.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.html5.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.print.js')}}"></script>
-<script src="{{Module::asset('admin:ts/product/subtype/app.ts')}}"></script>
+<script src="{{Module::asset('admin:ts/feature/app.ts')}}"></script>
 @endpush
