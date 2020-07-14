@@ -12,20 +12,6 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
     <li>Membuat fitur upload pada halaman fitur (icon yang diterima hanya jpg/png)</li>
 </ul>
 
-<h3><b>Sabtu 11/07/2020</b></h3>
-
-<ul> 
-    <li>Fitur produk (menambah halaman tambah produk)</li>
-    <li>Bug fix - select2 saat error</li>
-    <li>Migrasi fitur tambah dari ajax menjadi tambah secara PHP based</li>
-    <li>
-        Pembuatan halaman admin/produk/tambah
-        <ul>
-            <li>Tampilan halaman tambah produk</li>
-        </ul>
-    </li>
-</ul>
-
 <h3><b>Senin 13/07/2020</b></h3>
 
 <ul> 
@@ -59,6 +45,20 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
             <li>Repositories, Model, Entities, RepositoriesServiceProvider</li>
             <li>Tampilan halaman produk</li>
             <li>ProductType controller, routing web</li>
+        </ul>
+    </li>
+</ul>
+
+<h3><b>Sabtu 11/07/2020</b></h3>
+
+<ul> 
+    <li>Fitur produk (menambah halaman tambah produk)</li>
+    <li>Bug fix - select2 saat error</li>
+    <li>Migrasi fitur tambah dari ajax menjadi tambah secara PHP based</li>
+    <li>
+        Pembuatan halaman admin/produk/tambah
+        <ul>
+            <li>Tampilan halaman tambah produk</li>
         </ul>
     </li>
 </ul>
