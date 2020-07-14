@@ -8,7 +8,11 @@ class Supplier extends Model
 {
     public $incrementing = false;
 
-    protected $fillable = ['id', 'name', 'slug_name', 'address', 'email', 'image', 'phone', 'dealer_contact'];
+    protected $fillable = ['id', 'name', 'slug_name'];
+
+    protected $hidden = [
+        'address', 'email', 'image', 'phone', 'dealer_contact'
+    ];
 
     public function products()
     {

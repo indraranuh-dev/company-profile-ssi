@@ -4,7 +4,6 @@ namespace Modules\Admin\Repositories\Model;
 
 use Illuminate\Support\Str;
 use App\Utilities\Generator;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Modules\Admin\Repositories\Model\Entities\Supplier;
 use Modules\Admin\Repositories\SupplierRepositoryInterface;
 
@@ -16,18 +15,13 @@ class SupplierModel implements SupplierRepositoryInterface
         return $supplier->get();
     }
 
-    public function findById(string $id)
+    public function findById($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $supplier = Supplier::findOrFail($realID);
-            return $supplier;
-        } catch (DecryptException $e) {
-            return abort(404);
-        }
+        $supplier = Supplier::findOrFail($this->decrypt(false, $id));
+        return $supplier;
     }
 
-    public function findBySlug(string $slug)
+    public function findBySlug($slug)
     {
         $supplier = Supplier::where('slug_name', $slug);
         return $supplier->first();
@@ -39,39 +33,34 @@ class SupplierModel implements SupplierRepositoryInterface
         $supplier->id = Generator::shortUUID();
         $supplier->name = $request->name;
         $supplier->slug_name = Str::slug($request->name);
-        $supplier->address = $request->address;
-        $supplier->email = $request->email;
-        ($request->image)
-            ? $supplier->image = $request->image
-            : false;
-        $supplier->phone = $request->phone;
-        $supplier->dealer_contact = $request->dealer_contact;
         return $supplier->save();
     }
 
-    public function update($request, string $id)
+    public function update($request, $id)
     {
-        $supplier = Supplier::findOrFail($id);
+        $supplier = Supplier::findOrFail($this->decrypt(false, $id));
         $supplier->name = $request->name;
         $supplier->slug_name = Str::slug($request->name);
-        $supplier->address = $request->address;
-        $supplier->email = $request->email;
-        ($request->image)
-            ? $supplier->image = $request->image
-            : false;
-        $supplier->phone = $request->phone;
-        $supplier->dealer_contact = $request->dealer_contact;
         return $supplier->save();
     }
 
-    public function delete(string $id)
+    public function delete($id)
     {
-        try {
-            $realID = Generator::crypt($id, 'decrypt');
-            $supplier = Supplier::findOrFail($realID);
-            return $supplier->delete();
-        } catch (DecryptException $e) {
-            return abort(404);
+        $supplier = Supplier::findOrFail($this->decrypt(false, $id));
+        return $supplier->delete();
+    }
+
+
+    protected function decrypt($isArray = false, $id = '', $arr = [])
+    {
+        if ($isArray === false) {
+            return Generator::crypt($id, 'decrypt');
+        } else {
+            $newArr = [];
+            foreach ($arr as $a) {
+                array_push($newArr, Generator::crypt($a, 'decrypt'));
+            }
+            return $newArr;
         }
     }
 }

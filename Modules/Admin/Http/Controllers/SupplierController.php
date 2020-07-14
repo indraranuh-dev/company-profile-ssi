@@ -2,12 +2,9 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\Utilities\Generator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\Admin\Datatables\SupplierDatatables;
-use Modules\Admin\Http\Requests\SupplierAjaxRequest;
 use Modules\Admin\Http\Requests\SupplierRequest;
 use Modules\Admin\Repositories\SupplierRepositoryInterface as Supplier;
 
@@ -32,7 +29,7 @@ class SupplierController extends Controller
     public function index(Request $request)
     {
         $suppliers = $this->model->getAll($request->all());
-        return view('admin::supplier.index');
+        return view('admin::supplier.index', compact('suppliers'));
     }
 
     /**
@@ -53,16 +50,6 @@ class SupplierController extends Controller
     {
         $this->model->create($request);
         return redirect()->route('admin.supplier.index')->with('success', 'Supplier berhasil ditambahkan !');
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('admin::show');
     }
 
     /**

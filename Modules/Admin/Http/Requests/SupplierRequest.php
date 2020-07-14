@@ -15,11 +15,6 @@ class SupplierRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|unique:suppliers,name,' . $this->name,
-            'address' => 'required|min:3',
-            'email' => 'required|email|unique:suppliers,email,' . $this->email,
-            'phone' => 'required|numeric|min:4',
-            'dealer_contact' => 'required|numeric|min:4',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048'
         ];
     }
 
