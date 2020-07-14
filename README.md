@@ -70,3 +70,13 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
     <li>Penyetaraan peniulisan kode</li>
     <li>Perapihan asset</li>
 </ul>
+
+<h3><b>Selasa 14/07/2020</b></h3>
+
+<ul> 
+    <li>Membuat halaman fitur</li>
+    <li>Membuat halaman kategori fitur</li>
+    <li>Membuat repository, model, controller, view halaman fitur</li>
+    <li>Membuat repository, model, controller, view halaman kategori fitur</li>
+    <li>Membuat fitur upload pada halaman fitur (icon yang diterima hanya jpg/png)</li>
+</ul>
