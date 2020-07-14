@@ -2,22 +2,14 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
-<h3><b>Jumat 10/07/2020</b></h3>
+<h3><b>Selasa 14/07/2020</b></h3>
 
 <ul> 
-    <li>Fitur Sub kategori (tambah sub kategori, edit sub kategori, hapus sub kategori)</li>
-    <li>Bug fix - table untuk mobile version</li>
-    <li>Perbaikan performa </li>
-    <li>
-        Pembuatan halaman admin/produk
-        <ul>
-            <li>Repositories, Model, Entities, RepositoriesServiceProvider</li>
-            <li>Tampilan halaman produk</li>
-            <li>Product controller, api controller, routing api, routing web</li>
-            <li>Menambah file js halaman admin/produk</li>
-            <li>Membuat resource datatables produk</li>
-        </ul>
-    </li>
+    <li>Membuat halaman fitur</li>
+    <li>Membuat halaman kategori fitur</li>
+    <li>Membuat repository, model, controller, view halaman fitur</li>
+    <li>Membuat repository, model, controller, view halaman kategori fitur</li>
+    <li>Membuat fitur upload pada halaman fitur (icon yang diterima hanya jpg/png)</li>
 </ul>
 
 <h3><b>Sabtu 11/07/2020</b></h3>
@@ -30,22 +22,6 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
         Pembuatan halaman admin/produk/tambah
         <ul>
             <li>Tampilan halaman tambah produk</li>
-        </ul>
-    </li>
-</ul>
-
-<h3><b>Minggu 12/07/2020</b></h3>
-
-<ul> 
-    <li>Menambahkan modul dokumentasi</li>
-    <li>Membuat tabel jenis produk pada database dan membuat model pendukungnya</li>
-    <li>Menambahkan route jenis produk</li>
-    <li>
-        Pembuatan halaman admin/jenis-produk
-        <ul>
-            <li>Repositories, Model, Entities, RepositoriesServiceProvider</li>
-            <li>Tampilan halaman produk</li>
-            <li>ProductType controller, routing web</li>
         </ul>
     </li>
 </ul>
@@ -71,12 +47,36 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
     <li>Perapihan asset</li>
 </ul>
 
-<h3><b>Selasa 14/07/2020</b></h3>
+<h3><b>Minggu 12/07/2020</b></h3>
 
 <ul> 
-    <li>Membuat halaman fitur</li>
-    <li>Membuat halaman kategori fitur</li>
-    <li>Membuat repository, model, controller, view halaman fitur</li>
-    <li>Membuat repository, model, controller, view halaman kategori fitur</li>
-    <li>Membuat fitur upload pada halaman fitur (icon yang diterima hanya jpg/png)</li>
+    <li>Menambahkan modul dokumentasi</li>
+    <li>Membuat tabel jenis produk pada database dan membuat model pendukungnya</li>
+    <li>Menambahkan route jenis produk</li>
+    <li>
+        Pembuatan halaman admin/jenis-produk
+        <ul>
+            <li>Repositories, Model, Entities, RepositoriesServiceProvider</li>
+            <li>Tampilan halaman produk</li>
+            <li>ProductType controller, routing web</li>
+        </ul>
+    </li>
+</ul>
+
+<h3><b>Jumat 10/07/2020</b></h3>
+
+<ul> 
+    <li>Fitur Sub kategori (tambah sub kategori, edit sub kategori, hapus sub kategori)</li>
+    <li>Bug fix - table untuk mobile version</li>
+    <li>Perbaikan performa </li>
+    <li>
+        Pembuatan halaman admin/produk
+        <ul>
+            <li>Repositories, Model, Entities, RepositoriesServiceProvider</li>
+            <li>Tampilan halaman produk</li>
+            <li>Product controller, api controller, routing api, routing web</li>
+            <li>Menambah file js halaman admin/produk</li>
+            <li>Membuat resource datatables produk</li>
+        </ul>
+    </li>
 </ul>
