@@ -2,6 +2,20 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Rabu 15/07/2020</b></h3>
+
+<ul> 
+    <li>Membuat halaman produk
+        <ul>
+            <li> membuat halaman daftar produk</li>
+            <li> membuat halaman tambah produk</li>
+            <li> membuat halaman edit produk</li>
+        </ul>
+    </li>
+    <li>Memperbaiki beberapa migaration</li>
+    <li>Memperbaiki styling pada select2</li>
+</ul>
+
 <h3><b>Selasa 14/07/2020</b></h3>
 
 <ul> 
