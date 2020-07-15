@@ -5,14 +5,26 @@ namespace Modules\Admin\Repositories\Model;
 use Illuminate\Support\Str;
 use App\Utilities\Generator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Admin\Repositories\Model\Entities\Feature;
 use Modules\Admin\Repositories\FeatureRepositoryInterface;
+use Modules\Admin\Repositories\Model\Entities\FeatureCategory;
 
 class FeatureModel implements FeatureRepositoryInterface
 {
     public function getAll($request)
     {
-        $feature = Feature::orderBy('created_at', 'desc')->with('category');
+        $feature = Feature::orderBy('created_at', 'desc')->with('category:id,name');
+        $category = $this->findCategory($request->kategori);
+
+        if (!empty($request->kategori) && $request->kategori !== 'all') {
+            if ($category->get()->isEmpty()) return [];
+
+            $feature->whereHas('category', function (Builder $query) use ($category) {
+                $query->where('feature_category_id', $category->first()->id);
+            });
+        }
+
         return $feature->get();
     }
 
@@ -70,6 +82,11 @@ class FeatureModel implements FeatureRepositoryInterface
             }
             return $newArr;
         }
+    }
+
+    protected function findCategory($category)
+    {
+        return FeatureCategory::where('slug_name', $category);
     }
 
     /**

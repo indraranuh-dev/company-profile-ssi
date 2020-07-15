@@ -18,7 +18,7 @@ class CreateFeaturesTable extends Migration
             $table->string('name')->unique();
             $table->string('slug_name');
             $table->string('icon');
-            $table->string('deskripsi');
+            $table->string('deskripsi', 1000)->nullable();
             $table->unsignedBigInteger('feature_category_id');
             $table->timestamps();
 

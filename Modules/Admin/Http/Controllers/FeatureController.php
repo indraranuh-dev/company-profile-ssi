@@ -37,7 +37,8 @@ class FeatureController extends Controller
     public function index(Request $request)
     {
         $features = $this->model->getAll($request);
-        return view('admin::fitur.index', compact('features'));
+        $categories = $this->category->getAll();
+        return view('admin::fitur.index', compact('features', 'categories'));
     }
 
     /**

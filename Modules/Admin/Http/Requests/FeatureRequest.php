@@ -20,7 +20,7 @@ class FeatureRequest extends FormRequest
                 ->ignore(Generator::crypt($this->id, 'decrypt')),
             'icon' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'category' => 'required',
-            'description' => 'required|min:10',
+            'description' => 'nullable|min:10',
         ];
     }
 
