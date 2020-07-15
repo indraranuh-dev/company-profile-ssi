@@ -14,16 +14,16 @@ class CreateSuppliersHasProductsTable extends Migration
     public function up()
     {
         Schema::create('suppliers_has_products', function (Blueprint $table) {
-            $table->char('suppliers_id', 36);
             $table->char('products_id', 36);
+            $table->char('suppliers_id', 36);
 
-            $table->foreign('suppliers_id')
-                ->references('id')
-                ->on('suppliers')
-                ->cascadeOnDelete();
             $table->foreign('products_id')
                 ->references('id')
                 ->on('products')
+                ->cascadeOnDelete();
+            $table->foreign('suppliers_id')
+                ->references('id')
+                ->on('suppliers')
                 ->cascadeOnDelete();
         });
     }
