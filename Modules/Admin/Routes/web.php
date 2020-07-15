@@ -44,8 +44,10 @@ Route::group([
         Route::get('/', 'ProductController@index')->name('index');
         Route::get('/tambah', 'ProductController@create')->name('create');
         Route::post('/', 'ProductController@store')->name('store');
+        Route::get('/{id}/edit', 'ProductController@edit')->name('edit');
         Route::put('/{id}', 'ProductController@update')->name('update');
         Route::delete('/{id}', 'ProductController@destroy')->name('destroy');
+        Route::get('/image/{image}', 'ProductController@getProductImage')->name('image');
     });
 
     # Route kategori produk

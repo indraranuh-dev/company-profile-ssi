@@ -11,11 +11,11 @@ class Supplier extends Model
     protected $fillable = ['id', 'name', 'slug_name'];
 
     protected $hidden = [
-        'address', 'email', 'image', 'phone', 'dealer_contact'
+        'address', 'email', 'image', 'phone', 'dealer_contact', 'pivot'
     ];
 
     public function products()
     {
-        // retur
+        return $this->belongsToMany(Product::class, 'suppliers_has_products', 'suppliers_id', 'products_id');
     }
 }

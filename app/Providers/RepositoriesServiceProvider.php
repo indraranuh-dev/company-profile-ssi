@@ -39,6 +39,7 @@ class RepositoriesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind(ProductRepositoryInterface::class, ProductModel::class);
         $this->app->bind(SupplierRepositoryInterface::class, SupplierModel::class);
         $this->app->bind(ProdCatRepositoryInterface::class, ProductCategoryModel::class);
         $this->app->bind(ProdSubCategoryRepositoryInterface::class, ProductSubCategoryModel::class);

@@ -38,6 +38,23 @@ use Illuminate\Support\Facades\Storage;
                     </a>
                 </div>
                 <div class="card-body">
+                    <form id="filter">
+                        <div class="row mb-3">
+                            <div class="col-lg-3 col-md-4 col-sm-12 ml-auto">
+                                <label for="kategori">Filter kategori</label>
+                                <select name="kategori" class="form-control form-control-sm"
+                                    onchange="$('#filter').submit()">
+                                    <option value="all">Semua kategori</option>
+                                    @foreach ($categories as $category)
+                                    @if (request()->kategori === $category->slug_name)
+                                    <option value="{{$category->slug_name}}" selected>{{$category->name}}</option>
+                                    @endif
+                                    <option value="{{$category->slug_name}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table table-bordered table-hover" id="table">
                         <thead class="thead-light">
                             <tr>
@@ -107,13 +124,11 @@ use Illuminate\Support\Facades\Storage;
 
 @push('styles')
 <link rel="stylesheet" href="{{asset('libs/datatables.net-bs4/css/dataTables.bootstrap4.css')}}">
-<link rel="stylesheet" href="{{asset('libs/toastr/build/toastr.min.css')}}">
 @endpush
 
 @push('scripts')
 <script src="{{asset('libs/datatables/media/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('libs/datatables.net-bs4/js/dataTables.bootstrap4.js')}}"></script>
-<script src="{{asset('libs/toastr/toastr.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/dataTables.buttons.min.js')}}"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.bootstrap4.min.js"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.flash.js')}}"></script>
