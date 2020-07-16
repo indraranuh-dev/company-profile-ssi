@@ -2,6 +2,18 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Kamis 16/07/2020</b></h3>
+
+<ul> 
+    <li>Melanjutkan pembuatan halaman produk
+        <ul>
+            <li> membuat halaman detail produk</li>
+            <li> membuat fitur hapus  produk</li>
+            <li> melakukan penataan untuk desktop dan moblile version pada halaman detail produk</li>
+        </ul>
+    </li>
+</ul>
+
 <h3><b>Rabu 15/07/2020</b></h3>
 
 <ul> 
