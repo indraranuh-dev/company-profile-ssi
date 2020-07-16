@@ -63,6 +63,22 @@ class FeatureController extends Controller
     }
 
     /**
+     * Show the specified resource.
+     * @param int $id
+     * @return Response
+     */
+    public function show($slug)
+    {
+        $feature = $this->model->findBySlug($slug);
+        $data = [
+            'name' => $feature->name,
+            'icon' => $feature->icon,
+            'description' => $feature->description,
+        ];
+        if (request()->ajax()) return response()->json($data, 200);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      * @param int $id
      * @return Response

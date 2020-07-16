@@ -36,7 +36,13 @@ class ProductModel implements ProductRepositoryInterface
 
     public function findBySlug($slug)
     {
-        $product = Product::where('slug_name', $slug);
+        $product = Product::where('slug_name', $slug)
+            ->with(
+                'subCategories:id,name',
+                'suppliers:id,name',
+                'features.category:id,name',
+                'type:id,name'
+            );
         return $product->first();
     }
 
@@ -77,7 +83,7 @@ class ProductModel implements ProductRepositoryInterface
 
     public function delete($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::findOrFail($this->decrypt(false, $id));
         return $product->delete();
     }
 

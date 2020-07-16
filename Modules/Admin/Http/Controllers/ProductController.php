@@ -3,8 +3,10 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Utilities\ArrayCheck;
+use Illuminate\Contracts\Pagination\Paginator as PaginationPaginator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Modules\Admin\Http\Requests\ProductRequest;
@@ -44,7 +46,6 @@ class ProductController extends Controller
         FeatureCategory $featureCategoryRepositoryInterface,
         Supplier $supplierRepositoryInterface,
         Type $prodTypeRepositoryInterface
-
     ) {
         $this->model = $productRepositoryInterface;
         $this->category = $prodCatRepositoryInterface;
@@ -87,6 +88,21 @@ class ProductController extends Controller
             'features',
             'types',
             'suppliers',
+            'featureCategories'
+        ));
+    }
+
+    /**
+     * Show the specified resource.
+     * @param int $id
+     * @return Response
+     */
+    public function show(Request $request, $slug)
+    {
+        $product = $this->model->findBySlug($slug);
+        $featureCategories = $this->featureCategory->getAll();
+        return view('admin::produk.show', compact(
+            'product',
             'featureCategories'
         ));
     }
@@ -148,7 +164,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return redirect()->route('admin.product.index')
+            ->with('success', 'Produk berhasil dihapus.');
     }
 
     public function getProductImage($image)

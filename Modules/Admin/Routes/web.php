@@ -44,6 +44,7 @@ Route::group([
         Route::get('/', 'ProductController@index')->name('index');
         Route::get('/tambah', 'ProductController@create')->name('create');
         Route::post('/', 'ProductController@store')->name('store');
+        Route::get('/{slug}/detail', 'ProductController@show')->name('show');
         Route::get('/{id}/edit', 'ProductController@edit')->name('edit');
         Route::put('/{id}', 'ProductController@update')->name('update');
         Route::delete('/{id}', 'ProductController@destroy')->name('destroy');
@@ -102,20 +103,7 @@ Route::group([
         Route::delete('/{id}', 'ProductSubTypeController@destroy')->name('destroy');
     });
 
-    # Route fitur produk
-    Route::group([
-        'prefix' => 'fitur',
-        'as' => 'features.'
-    ], function () {
-        Route::get('/', 'FeaturesController@index')->name('index');
-        Route::get('/tambah', 'FeaturesController@create')->name('create');
-        Route::post('/', 'FeaturesController@store')->name('store');
-        Route::get('/{id}/ubah', 'FeaturesController@edit')->name('edit');
-        Route::put('/{id}', 'FeaturesController@update')->name('update');
-        Route::delete('/{id}', 'FeaturesController@destroy')->name('destroy');
-    });
-
-    # Route sub jenis produk
+    # Route fitur
     Route::group([
         'prefix' => 'fitur',
         'as' => 'features.'
@@ -124,12 +112,13 @@ Route::group([
         Route::get('/tambah', 'FeatureController@create')->name('create');
         Route::post('/', 'FeatureController@store')->name('store');
         Route::get('/{id}/ubah', 'FeatureController@edit')->name('edit');
+        Route::get('/{slug}/detail', 'FeatureController@show')->name('show');
         Route::put('/{id}', 'FeatureController@update')->name('update');
         Route::delete('/{id}', 'FeatureController@destroy')->name('destroy');
         Route::get('/icon/{icon}', 'FeatureController@getFeatureIcon')->name('icon');
     });
 
-    # Route sub jenis produk
+    # Route kategori fitur
     Route::group([
         'prefix' => 'fitur/kategori',
         'as' => 'feat.category.'
