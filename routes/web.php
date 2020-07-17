@@ -14,16 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('VisitorCounter');
+Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter');
+Route::get('/produk', 'CompanyProfileController@index')->middleware('VisitorCounter');
 
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true, 'register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/product/{category}/{subCategory}/{product}', function (Request $request) {
     if (!$request->category && !$request->subCategory) return abort(404, 'Halaman tidak ditemukan');
 });
-
-Route::view('test-view', 'test');

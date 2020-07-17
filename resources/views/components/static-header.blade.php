@@ -32,39 +32,12 @@
                 <li class="active"><a href="#header">Beranda</a></li>
                 <li><a href="#about">Tentang Kami</a></li>
                 <li class="drop-down"><a href="">Produk</a>
-                    <ul>
-                        <li class="drop-down"><a href="#">HVAC</a>
-                            <ul>
-                                <li class="drop-down"><a href="#">Applied</a>
-                                    <ul>
-                                        <li><a href=""></a>Daikin</li>
-                                        <li><a href=""></a>Gree</li>
-                                    </ul>
-                                </li>
-                                <li class="drop-down"><a href="#">Unitary</a>
-                                    <ul>
-                                        <li><a href=""></a>Daikin</li>
-                                        <li><a href=""></a>Mc Quary</li>
-                                        <li><a href=""></a>Gree</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#">General Supplies</a></li>
-                        <li class="drop-down"><a href="#">Filtration</a>
-                            <ul>
-                                <li><a href="#">Pre</a></li>
-                                <li><a href="#">Secondary</a></li>
-                                <li><a href="#">Hepa</a></li>
-                                <li><a href="#">Special Product</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    {{$produk}}
                 </li>
                 <li><a href="#services">Servis</a></li>
                 <li><a href="#contact">Hubungi Kami</a></li>
             </ul>
-        </nav><!-- .nav-menu -->
+        </nav>
 
     </div>
 </header>

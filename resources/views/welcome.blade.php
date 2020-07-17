@@ -35,7 +35,26 @@
     </div>
 
     {{-- Header --}}
-    <x-static-header />
+    <x-static-header>
+        @slot('produk')
+        <ul>
+            @foreach ($productCategories as $category)
+            <li class="{{(! $category->subcategories->isEmpty()) ? 'drop-down' : ''}}">
+                <a href="#">{{$category->name}}</a>
+                @if (! $category->subcategories->isEmpty())
+                <ul>
+                    @foreach ($category->subCategories as $sub)
+                    <li class="drop-down">
+                        <a href="#">{{$sub->name}}</a>
+                    </li>
+                    @endforeach
+                </ul>
+                @endif
+            </li>
+            @endforeach
+        </ul>
+        @endslot
+    </x-static-header>
 
     {{-- Hero --}}
     <x-static-hero />
