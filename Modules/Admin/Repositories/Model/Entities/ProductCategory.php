@@ -10,16 +10,15 @@ class ProductCategory extends Model
 
     protected $fillable = ['name', 'slug_name'];
 
-    protected $hidden = ['pivot'];
+    // protected $hidden = ['pivot'];
 
-    public function subcategories()
+    public function subCategories()
     {
         return $this->belongsToMany(
             ProductSubCategory::class,
             'categories_has_subcategories',
-            'id',
             'categories_id',
-            'subcategories_id'
+            'subcategories_id',
         );
     }
 }
