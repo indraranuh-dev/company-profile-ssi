@@ -2,6 +2,17 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Jum'at 17/07/2020</b></h3>
+
+<ul> 
+    <li>Memperbaiki halaman dashboard dengan menambahkan counter visitor</li>
+    <li>Membuat controller untuk company profile</li>
+    <li>Membuat API controller untuk counter visitor</li>
+    <li>Membuat halaman login</li>
+    <li>Menghapus fitur register</li>
+    <li>Memperbaiki tampilan pada halaman admin dan halaman login</li>
+</ul>
+
 <h3><b>Kamis 16/07/2020</b></h3>
 
 <ul> 
