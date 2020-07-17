@@ -5,7 +5,7 @@
 
                 <li class="sidebar-item {{request()->is('_admin') ? 'selected' : ''}}">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link {{request()->is('_admin') ? 'active' : ''}}"
-                        href="index.html" aria-expanded="false">
+                        href="{{route('admin.index')}}" aria-expanded="false">
                         <i class="mdi mdi-chart-line"></i>
                         <span class="hide-menu">Dashboard</span>
                     </a>
@@ -30,7 +30,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.product.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.product.*') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.product*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Semua produk
                                 </span>
@@ -39,7 +39,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.prod.category.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.prod.category.*') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.prod.category*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Kategori
                                 </span>
@@ -48,7 +48,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.prod.subcategory.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.prod.subcategory.*') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.prod.subcategory*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Sub kategori
                                 </span>
@@ -57,7 +57,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.prod.type.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.prod.type.*') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.prod.type*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Jenis
                                 </span>
@@ -66,7 +66,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{route('admin.prod.subtype.index')}}"
-                                class="sidebar-link {{request()->routeIs('admin.prod.subtype.*') ? 'active' : ''}}">
+                                class="sidebar-link {{request()->routeIs('admin.prod.subtype*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Sub jenis
                                 </span>
@@ -108,7 +108,5 @@
 
             </ul>
         </nav>
-        <!-- End Sidebar navigation -->
     </div>
-    <!-- End Sidebar scroll-->
 </aside>
