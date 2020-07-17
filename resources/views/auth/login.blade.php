@@ -1,73 +1,187 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+
+        <div class="col-12 col-lg-5 col-md-5">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                    <div class="row mt-3 mb-5">
+                        <div class="col-3 align-self-center">
+                            <svg id="svglogo" width="65" height="65" viewBox="0 0 97 97" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0)">
+                                    <rect x="48.9939" y="-2.5858" width="72.3974" height="72.3974" rx="10"
+                                        transform="rotate(45.2456 48.9939 -2.5858)" fill="#2F308B" stroke="white"
+                                        stroke-width="2" />
+                                    <path
+                                        d="M15.96 40.34a9.76 9.76 0 011.44-4.44 9.1 9.1 0 012.9-2.84 11.8 11.8 0 013.86-1.5c1.42-.3 2.85-.45 4.3-.45 1.19 0 2.35.05 3.49.15a64.7 64.7 0 017.18 1.02c.2.05.3.14.3.27l-.06.3-.36 1.75c-.04.12-.09.19-.15.22a.46.46 0 01-.15.03c-.71 0-1.33.12-1.85.36-.52.25-.95.59-1.3 1.03-.34.44-.6.96-.78 1.56-.18.6-.3 1.25-.36 1.95L32.95 57.5c-.13 1.44-.5 2.79-1.1 4.06a10.2 10.2 0 01-2.51 3.32c-1.08.94-2.4 1.69-3.96 2.24-1.56.56-3.35.83-5.37.83a37.8 37.8 0 01-3.9-.2 50.1 50.1 0 01-7.67-1.36c-.2-.05-.3-.14-.3-.27l.06-.27L8.6 64c.03-.12.07-.18.12-.2a.4.4 0 01.17-.05c.72 0 1.38-.1 1.98-.31a3.9 3.9 0 001.61-1.05c.46-.5.83-1.13 1.13-1.9.3-.79.52-1.75.63-2.89l1.7-17.26zm7.54 25.3c1.24-.3 2.3-.73 3.2-1.3a8.98 8.98 0 004.2-6.84l1.47-17.75c.04-.65.14-1.27.29-1.85.16-.59.37-1.12.63-1.59a4.3 4.3 0 011.03-1.2c.42-.34.92-.57 1.49-.7a7.09 7.09 0 00-2.79.58c-.68.34-1.2.78-1.58 1.3-.38.5-.64 1.06-.78 1.68a14.8 14.8 0 00-.27 1.78l-1.5 17.75a9.73 9.73 0 01-1.61 4.52 10.59 10.59 0 01-3.78 3.61zm19.13-25.3a9.76 9.76 0 011.44-4.44 9.1 9.1 0 012.9-2.84 11.8 11.8 0 013.87-1.5c1.41-.3 2.84-.45 4.3-.45 1.18 0 2.34.05 3.48.15a64.69 64.69 0 017.18 1.02c.2.05.3.14.3.27l-.05.3-.37 1.75c-.03.12-.08.19-.15.22a.46.46 0 01-.14.03c-.72 0-1.34.12-1.86.36-.52.25-.95.59-1.3 1.03-.33.44-.6.96-.77 1.56-.18.6-.3 1.25-.37 1.95L59.62 57.5a11.9 11.9 0 01-1.1 4.06 10.2 10.2 0 01-2.5 3.32c-1.08.94-2.4 1.69-3.96 2.24-1.57.56-3.36.83-5.37.83a37.8 37.8 0 01-3.91-.2 50.1 50.1 0 01-7.67-1.36c-.2-.05-.29-.14-.29-.27l.05-.27.41-1.85c.04-.12.08-.18.13-.2a.4.4 0 01.17-.05c.71 0 1.37-.1 1.97-.31a3.9 3.9 0 001.62-1.05c.45-.5.83-1.13 1.12-1.9.3-.79.52-1.75.63-2.89l1.71-17.26zm7.55 25.3c1.23-.3 2.3-.73 3.2-1.3a8.98 8.98 0 004.2-6.84l1.46-17.75c.05-.65.15-1.27.3-1.85.15-.59.37-1.12.63-1.59a4.3 4.3 0 011.02-1.2c.43-.34.92-.57 1.5-.7a7.09 7.09 0 00-2.8.58c-.68.34-1.2.78-1.58 1.3-.37.5-.63 1.06-.78 1.68-.13.62-.22 1.21-.27 1.78L55.57 57.5a9.73 9.73 0 01-1.61 4.52 10.6 10.6 0 01-3.78 3.61zM67 35.35c0-.57.05-1.07.15-1.49.1-.42.28-.77.56-1.05.28-.3.66-.51 1.15-.66a6.8 6.8 0 011.9-.22h10.89c.94 0 1.66.14 2.15.42.5.27.85.62 1.05 1.05.21.4.32.84.34 1.31.02.46.02.88.02 1.27v27.05c0 .38-.03.8-.1 1.25-.06.46-.22.89-.48 1.3-.26.38-.66.72-1.2 1-.53.27-1.28.41-2.22.41H70.77a6.8 6.8 0 01-1.9-.22 2.68 2.68 0 01-1.15-.63 2.12 2.12 0 01-.56-1.05c-.1-.43-.15-.92-.15-1.5V35.37zm16.14.2c0-.36-.03-.65-.07-.86a.72.72 0 00-.3-.46 1.05 1.05 0 00-.58-.2 7.5 7.5 0 00-.95-.05v30.96c.39 0 .7 0 .95-.03.24-.03.44-.1.58-.2a.82.82 0 00.3-.45c.05-.22.07-.5.07-.88V35.55z"
+                                        fill="white" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0">
+                                        <rect width="97" height="97" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="col-9 align-self-center">
+                            <div class="greeting">
+                                <h3>Sinar Sejahtera Inti</h3>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="col-12">
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" autofocus placeholder="email@example.com">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            placeholder="Type password">
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember"
+                                                id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                            <label class="form-check-label" for="remember">
+                                                {{ __('Remember Me') }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            {{ __('Login') }}
+                                        </button>
+                                    </div>
+                                    @if (Route::has('password.request'))
+                                    <a class="nav-link text-right w-100" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
-                                @endif
-                            </div>
+                                    @endif
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+
+@push('styles')
+
+<style>
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+        height: 100vh;
+        width: 100vw;
+        background: #222;
+        overflow: hidden;
+    }
+
+    .card {
+        padding: 10px 20px 50px;
+        background: none;
+        border: none;
+        border-top: 1px solid #5454547d;
+        border-bottom: 1px solid #5454547d;
+    }
+
+    .btn {
+        font-size: 17px;
+        text-transform: lowercase;
+        letter-spacing: 3px;
+        padding: 5px
+    }
+
+    .btn-primary {
+        background-color: #2f308b;
+        border-color: #25455f;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        background-color: #3042a7;
+        border-color: #1f3d56;
+    }
+
+    .form-control {
+        background: #222;
+        border-color: #5454547d;
+        transition: .3s all;
+        color: rgb(214, 214, 214);
+    }
+
+    .form-control:active,
+    .form-control:focus {
+        background: #222;
+        border-color: #b5b5b57d;
+        outline: none;
+        box-shadow: none;
+        color: rgb(214, 214, 214);
+    }
+
+    ::placeholder {
+        color: #5454547d;
+    }
+
+    .form-check-label {
+        color: rgb(214, 214, 214);
+    }
+
+    .greeting {
+        text-align: center;
+    }
+
+    .greeting h3,
+    .greeting h5 {
+        margin-bottom: 0;
+        text-transform: uppercase;
+        font-size: 19px;
+        letter-spacing: 2px;
+        font-weight: 900;
+        color: rgb(214, 214, 214);
+    }
+
+    a {
+        color: rgb(214, 214, 214);
+    }
+</style>
+@endpush
