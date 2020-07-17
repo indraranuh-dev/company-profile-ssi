@@ -79,6 +79,12 @@ use Illuminate\Support\Facades\Storage;
                         </div>
 
                     </div>
+
+                    <div class="row">
+                        <div class="col-12 col-lg-8 col-md-8">
+                            <canvas id="visitor-chart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,3 +92,11 @@ use Illuminate\Support\Facades\Storage;
 </div>
 
 @endsection
+
+@push('styles')
+
+@endpush
+
+@push('scripts')
+
+@endpush

@@ -69,6 +69,8 @@ class RegisterController extends Controller
             'id' => Generator::shortUUID(),
             'name' => $data['name'],
             'email' => $data['email'],
+            'image' => 'user.png',
+            'is_active' => 1,
             'password' => Hash::make($data['password']),
         ]);
     }

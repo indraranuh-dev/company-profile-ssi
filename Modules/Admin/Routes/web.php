@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => '_admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware' => ['auth', 'verified', 'role:admin', 'x-frame']
 ], function () {
 
     Route::get('/', 'AdminController@index')->name('index');
