@@ -18,7 +18,8 @@ class VisitorCounter
     {
         Counter::create([
             'status' => 1,
-            'pages' => request()->getRequestUri()
+            'pages' => (substr(request()->getRequestUri(), 1) !== '')
+                ? substr(request()->getRequestUri(), 1) : 'root'
         ]);
         return $next($request);
     }
