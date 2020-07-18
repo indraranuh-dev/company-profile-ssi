@@ -48,9 +48,11 @@
                         <a href="#">{{$sub->name}}</a>
                         <ul>
                             @foreach ($sub->suppliers as $supplier)
-                            <a href="{{route('product.index', [$sub->slug_name, $supplier->slug_name])}}">
-                                {{$supplier->name}}
-                            </a>
+                            <li>
+                                <a href="{{route('product.index', [$sub->slug_name, $supplier->slug_name])}}">
+                                    {{$supplier->name}}
+                                </a>
+                            </li>
                             @endforeach
                         </ul>
                     </li>
@@ -63,35 +65,8 @@
         @endslot
     </x-static-header>
 
-    {{-- Hero --}}
-    <x-static-hero />
-
-    <main id="main">
-
-        {{-- Companies section --}}
-        <x-static-companies />
-
-        {{-- About us section --}}
-        <x-static-about />
-
-        {{-- Counts section --}}
-        <x-static-counts />
-
-        {{-- Services setion --}}
-        <x-static-services />
-
-        {{-- More services section --}}
-        <x-static-more-services />
-
-        {{-- testimonials section --}}
-        <x-static-testimonials />
-
-        {{-- Portfolio setion --}}
-        <x-static-portfolio />
-
-        {{-- Contact setion--}}
-        <x-static-contact />
-
+    <main style="margin-top: 80px">
+        @yield('content')
     </main>
 
     {{-- Footer --}}
