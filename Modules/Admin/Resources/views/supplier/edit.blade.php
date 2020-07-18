@@ -47,6 +47,26 @@ use App\Utilities\Generator;
                                 </fieldset>
 
                                 <fieldset class="form-group row">
+                                    <div class="col-12">
+                                        <label for="name">{{__('Sub kategori')}}</label>
+                                        <select name="subCategory[]" multiple
+                                            class="form-control @error('subCategory'){{'is-invalid'}}@enderror">
+                                            @foreach ($selects['selected'] as $selected)
+                                            <option value="{{Generator::crypt($selected['id'], 'encrypt')}}" selected>
+                                                {{$selected['name']}}
+                                            </option>
+                                            @endforeach
+                                            @foreach ($selects['notSelected'] as $notSelected)
+                                            <option value="{{Generator::crypt($notSelected['id'], 'encrypt')}}">
+                                                {{$notSelected['name']}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('subCategory')<small class="text-danger">{{$message}}</small>@enderror
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="form-group row">
                                     <div class="col-12 text-right">
                                         <button id="save" class="btn btn-success">
                                             <i class="fa fa-save fa-fw mr-2"></i>Simpan
@@ -63,3 +83,20 @@ use App\Utilities\Generator;
     </div>
 </div>
 @endsection
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2-bootstrap.min.css')}}">
+@endpush
+
+@push('scripts')
+<script src="{{asset('libs/select2/dist/js/select2.full.min.js')}}"></script>
+<script>
+    $('select').select2({
+        theme: 'bootstrap'
+    })
+    if($('select').hasClass('is-invalid')){
+        $('.select2-selection--multiple').addClass('is-invalid');
+    }
+</script>
+@endpush

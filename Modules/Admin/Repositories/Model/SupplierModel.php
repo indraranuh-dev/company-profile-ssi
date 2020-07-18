@@ -11,7 +11,7 @@ class SupplierModel implements SupplierRepositoryInterface
 {
     public function getAll($request)
     {
-        $supplier = Supplier::orderBy('created_at', 'desc');
+        $supplier = Supplier::orderBy('created_at', 'desc')->with('subCategories:id,name');
         return $supplier->get();
     }
 
@@ -33,7 +33,8 @@ class SupplierModel implements SupplierRepositoryInterface
         $supplier->id = Generator::shortUUID();
         $supplier->name = $request->name;
         $supplier->slug_name = Str::slug($request->name);
-        return $supplier->save();
+        $supplier->save();
+        return $this->sync($request);
     }
 
     public function update($request, $id)
@@ -41,7 +42,8 @@ class SupplierModel implements SupplierRepositoryInterface
         $supplier = Supplier::findOrFail($this->decrypt(false, $id));
         $supplier->name = $request->name;
         $supplier->slug_name = Str::slug($request->name);
-        return $supplier->save();
+        $supplier->save();
+        return $this->sync($request);
     }
 
     public function delete($id)
@@ -49,7 +51,6 @@ class SupplierModel implements SupplierRepositoryInterface
         $supplier = Supplier::findOrFail($this->decrypt(false, $id));
         return $supplier->delete();
     }
-
 
     protected function decrypt($isArray = false, $id = '', $arr = [])
     {
@@ -62,5 +63,12 @@ class SupplierModel implements SupplierRepositoryInterface
             }
             return $newArr;
         }
+    }
+
+
+    protected function sync($request)
+    {
+        $find = Supplier::where('name', $request->name)->first();
+        return $find->subCategories()->sync($this->decrypt(true, '', $request->subCategory));
     }
 }

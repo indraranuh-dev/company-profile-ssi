@@ -2,24 +2,25 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Utilities\ArrayCheck;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Http\Requests\SupplierRequest;
+use Modules\Admin\Repositories\ProdSubCategoryRepositoryInterface as SubCategory;
 use Modules\Admin\Repositories\SupplierRepositoryInterface as Supplier;
 
 class SupplierController extends Controller
 {
     private $model;
 
-    /**
-     * Constroctor method
-     *
-     * @param Supplier $supplierRepositoryInterface
-     */
-    public function __construct(Supplier $supplierRepositoryInterface)
-    {
+    private $subCategory;
+    public function __construct(
+        Supplier $supplierRepositoryInterface,
+        SubCategory $prodSubCategoryRepositoryInterface
+    ) {
         $this->model = $supplierRepositoryInterface;
+        $this->subCategory = $prodSubCategoryRepositoryInterface;
     }
 
     /**
@@ -38,7 +39,8 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('admin::supplier.create');
+        $subCategories = $this->subCategory->getAll();
+        return view('admin::supplier.create', compact('subCategories'));
     }
 
     /**
@@ -60,11 +62,9 @@ class SupplierController extends Controller
     public function edit($id)
     {
         $supplier = $this->model->findById($id);
-        return view('admin::supplier.edit', compact('supplier'));
-        // return [
-        //     'encrypted' => $id,
-        //     'decrypted' => Generator::crypt($id, 'decrypt')
-        // ];
+        $subCategories = $this->subCategory->getAll();
+        $selects = ArrayCheck::notSelected($subCategories, $supplier->subCategories);
+        return view('admin::supplier.edit', compact('supplier', 'selects'));
     }
 
     /**

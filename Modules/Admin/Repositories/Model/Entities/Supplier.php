@@ -16,6 +16,21 @@ class Supplier extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'suppliers_has_products', 'suppliers_id', 'products_id');
+        return $this->belongsToMany(
+            Product::class,
+            'suppliers_has_products',
+            'suppliers_id',
+            'products_id'
+        );
+    }
+
+    public function subCategories()
+    {
+        return $this->belongsToMany(
+            ProductSubCategory::class,
+            'suppliers_has_subcategories',
+            'suppliers_id',
+            'subcategories_id'
+        );
     }
 }

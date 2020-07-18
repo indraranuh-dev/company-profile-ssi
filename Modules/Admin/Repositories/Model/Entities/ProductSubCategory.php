@@ -21,4 +21,14 @@ class ProductSubCategory extends Model
             'categories_id'
         );
     }
+
+    public function suppliers()
+    {
+        return $this->belongsToMany(
+            Supplier::class,
+            'suppliers_has_subcategories',
+            'subcategories_id',
+            'suppliers_id'
+        );
+    }
 }

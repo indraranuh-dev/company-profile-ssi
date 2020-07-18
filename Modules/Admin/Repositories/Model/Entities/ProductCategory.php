@@ -10,7 +10,7 @@ class ProductCategory extends Model
 
     protected $fillable = ['name', 'slug_name'];
 
-    // protected $hidden = ['pivot'];
+    protected $hidden = ['pivot'];
 
     public function subCategories()
     {
