@@ -2,7 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\Model\Counter;
+use App\Model\Entities\Counter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
