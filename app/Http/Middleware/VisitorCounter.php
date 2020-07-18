@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Model\Counter;
+use App\Model\Entities\Counter;
 use Closure;
 
 class VisitorCounter
