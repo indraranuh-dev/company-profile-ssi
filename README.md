@@ -2,6 +2,17 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Sabtu 18/07/2020</b></h3>
+
+<ul> 
+    <li>Membuat resource visitor untuk chart pada dashboard</li>
+    <li>Menambahkan chart visitor pada dashboard</li>
+    <li>Perbaikan pada halaman supplier (menambahkan sub kategori)</li>
+    <li>Perbaikan pada halaman company profile</li>
+    <li>Perbaikan routing</li>
+    <li>Membuat resouce pada model untuk dikonsumsi pada halaman company profile</li>
+</ul>
+
 <h3><b>Jum'at 17/07/2020</b></h3>
 
 <ul> 
