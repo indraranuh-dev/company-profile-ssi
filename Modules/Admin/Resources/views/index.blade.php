@@ -1,9 +1,3 @@
-@php
-use App\Utilities\Converter;
-use App\Utilities\Generator;
-use Illuminate\Support\Facades\Storage;
-@endphp
-
 @extends('layouts/master')
 
 @section('content')
@@ -82,7 +76,11 @@ use Illuminate\Support\Facades\Storage;
 
                     <div class="row">
                         <div class="col-12 col-lg-8 col-md-8">
-                            <canvas id="visitor-chart"></canvas>
+                            <div class="card-body">
+                                <h3 class="card-title">Analisis Pengunjung</h3>
+                                <p class="card-text">Tahun {{date('Y')}}</p>
+                                <canvas id="visitor-chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,9 +92,10 @@ use Illuminate\Support\Facades\Storage;
 @endsection
 
 @push('styles')
-
+<link rel="stylesheet" href="{{asset('libs/chart/chart.min.css')}}">
 @endpush
 
 @push('scripts')
-
+<script src="{{asset('libs/chart/chart.min.js')}}"></script>
+<script src="{{Module::asset('admin:ts/app.ts')}}"></script>
 @endpush
