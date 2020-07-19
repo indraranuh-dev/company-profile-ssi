@@ -28,7 +28,7 @@
 
                     <div class="d-flex">
                         <i class="ri-phone-line mr-3"></i>
-                        <p>+1 5589 55488 55s</p>
+                        <p>(0271) 6881188</p>
                     </div>
 
                 </div>
