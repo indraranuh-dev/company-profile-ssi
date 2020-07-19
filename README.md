@@ -7,6 +7,7 @@ Setiap perkembangan dan perubahan file akan ditampilkan disini.
 <ul> 
     <li>Perbaikan halaman produk pada company profile</li>
     <li>Perbaikan footer</li>
+    <li>Styling ulang halaman</li>
     <li>
         Pembuatan error handling
         <ul>
