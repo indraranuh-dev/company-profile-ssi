@@ -2,6 +2,24 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Minggu 19/07/2020</b></h3>
+
+<ul> 
+    <li>Perbaikan halaman produk pada company profile</li>
+    <li>Perbaikan footer</li>
+    <li>
+        Pembuatan error handling
+        <ul>
+            <li>Pembuatan halaman error 401</li>
+            <li>Pembuatan halaman error 403</li>
+            <li>Pembuatan halaman error 404</li>
+            <li>Pembuatan halaman error 419</li>
+            <li>Pembuatan halaman error 500</li>
+            <li>Pembuatan halaman error 529</li>
+        </ul>
+    </li>
+</ul>
+
 <h3><b>Sabtu 18/07/2020</b></h3>
 
 <ul> 
