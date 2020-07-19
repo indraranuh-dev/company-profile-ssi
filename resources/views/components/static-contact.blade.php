@@ -5,17 +5,7 @@
             <h2>Hubungi kami</h2>
         </div>
 
-        <div class="row">
-
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="contact-about">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2678.0427712301043!2d110.88708124034449!3d-7.574604299935071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a174835fd5f17%3A0xdb77971fdd6e2b86!2sCV.%20Sinar%20Sejahtera%20Inti%20(Daikin%2C%20McQuay%2C%20Gree%2C%20Mitsubishi%20Electric%20%26%20Japan%20Air%20Filter)!5e0!3m2!1sen!2sid!4v1591932085890!5m2!1sen!2sid"
-                        width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen=""
-                        aria-hidden="false" tabindex="0">
-                    </iframe>
-                </div>
-            </div>
+        <div class="row justify-content-around">
 
             <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
                 <div class="info">

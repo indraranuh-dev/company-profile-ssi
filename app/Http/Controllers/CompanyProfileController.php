@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Admin\Repositories\Model\Entities\Product;
-use Modules\Admin\Repositories\Model\Entities\Supplier;
-use Modules\Admin\Repositories\Model\Entities\ProductCategory;
-use Modules\Admin\Repositories\Model\Entities\ProductSubCategory;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response as Res;
 use Modules\Admin\Repositories\ProductRepositoryInterface;
+use Modules\Admin\Repositories\Model\Entities\ProductCategory;
 
 class CompanyProfileController extends Controller
 {
@@ -47,5 +45,13 @@ class CompanyProfileController extends Controller
             'productCategories',
             'products'
         ));
+    }
+
+    public function getProductImage($image)
+    {
+        $storage = Storage::disk('image');
+        $response = Res::make($storage->get($image), 200);
+        $response->header('Content-Type', $storage->mimeType($image));
+        return $response;
     }
 }

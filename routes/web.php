@@ -14,15 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter');
 
 Auth::routes(['verify' => true, 'register' => false]);
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::get('/product/{category}/{subCategory}/{product}', function (Request $request) {
 //     if (!$request->category && !$request->subCategory) return abort(404, 'Halaman tidak ditemukan');
 // });
+Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter')->name('index');
 
 Route::group([
     'prefix' => 'produk',
@@ -31,3 +29,5 @@ Route::group([
 ], function () {
     Route::get('/{subCategory}/{supplier}', 'CompanyProfileController@product')->name('index');
 });
+
+Route::get('/image/{image}', 'CompanyProfileController@getProductImage')->name('productImage');

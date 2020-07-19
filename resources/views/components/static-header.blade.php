@@ -20,7 +20,9 @@
                             </clipPath>
                         </defs>
                     </svg>
-                    <span>Sinar Sejahtera Inti</span>
+                    <span style="font-size: 17px; text-transform:uppercase; font-weight: 800; letter-spacing: 2px;">
+                        Sinar Sejahtera Inti
+                    </span>
                 </a>
                 {{-- <a href="index.html"><img src="{{asset('img/logo.png')}}" alt="" class="img-fluid"></a> --}}
             </h1>
@@ -29,13 +31,22 @@
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="active"><a href="#header">Beranda</a></li>
-                <li><a href="#about">Tentang Kami</a></li>
-                <li class="drop-down"><a href="">Produk</a>
+                <li>
+                    <a href="{{route('index')}}{{request()->routeIs('index')? '#header' : ''}}">Beranda</a>
+                </li>
+                <li>
+                    <a href="{{route('index')}}{{request()->routeIs('index')? '#about' : ''}}">Tentang Kami</a>
+                </li>
+                <li class="drop-down {{request()->routeIs('product*')? 'active' : ''}}">
+                    <a href="javascript:void(0)">Produk</a>
                     {{$produk}}
                 </li>
-                <li><a href="#services">Servis</a></li>
-                <li><a href="#contact">Hubungi Kami</a></li>
+                <li>
+                    <a href="{{route('index')}}{{request()->routeIs('index')? '#services' : ''}}">Servis</a>
+                </li>
+                <li>
+                    <a href="{{route('index')}}{{request()->routeIs('index')? '#contact' : ''}}">Hubungi Kami</a>
+                </li>
             </ul>
         </nav>
 
