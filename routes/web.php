@@ -15,12 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter');
-Route::get('/produk', 'CompanyProfileController@index')->middleware('VisitorCounter');
 
 Auth::routes(['verify' => true, 'register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/product/{category}/{subCategory}/{product}', function (Request $request) {
-    if (!$request->category && !$request->subCategory) return abort(404, 'Halaman tidak ditemukan');
+// Route::get('/product/{category}/{subCategory}/{product}', function (Request $request) {
+//     if (!$request->category && !$request->subCategory) return abort(404, 'Halaman tidak ditemukan');
+// });
+
+Route::group([
+    'prefix' => 'produk',
+    'as' => 'product.',
+    'middleware' => 'VisitorCounter'
+], function () {
+    Route::get('/{subCategory}/{supplier}', 'CompanyProfileController@product')->name('index');
 });

@@ -3,11 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Admin\Repositories\Model\Entities\Product;
+use Modules\Admin\Repositories\Model\Entities\Supplier;
 use Modules\Admin\Repositories\Model\Entities\ProductCategory;
 use Modules\Admin\Repositories\Model\Entities\ProductSubCategory;
+use Modules\Admin\Repositories\ProductRepositoryInterface;
 
 class CompanyProfileController extends Controller
 {
+    private $model;
+
+    /**
+     * Class constructor.
+     */
+    public function __construct(ProductRepositoryInterface $productRepositoryInterface)
+    {
+        $this->model = $productRepositoryInterface;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,75 +28,24 @@ class CompanyProfileController extends Controller
      */
     public function index()
     {
-        $productCategories = ProductCategory::OrderBy('name', 'desc')->with('subCategories:name,slug_name')->get(['id', 'name', 'slug_name']);
+        $productCategories = ProductCategory::OrderBy('name', 'desc')
+            ->with('subCategories.suppliers:name,slug_name')
+            ->get(['id', 'name', 'slug_name']);
+
         return view('welcome', compact(
             'productCategories'
         ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function product($subCategory, $supplier, Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $productCategories = ProductCategory::OrderBy('name', 'desc')
+            ->with('subCategories.suppliers:name,slug_name')
+            ->get(['id', 'name', 'slug_name']);
+        $products = $this->model->findBySupplierNSubCategory($supplier, $subCategory);
+        return view('pages.product', compact(
+            'productCategories',
+            'products'
+        ));
     }
 }

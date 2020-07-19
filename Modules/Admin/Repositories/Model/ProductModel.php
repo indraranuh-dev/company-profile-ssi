@@ -5,11 +5,13 @@ namespace Modules\Admin\Repositories\Model;
 use Illuminate\Support\Str;
 use App\Utilities\Generator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Admin\Transformers\ProductResource;
 use Modules\Admin\Repositories\Model\Entities\Feature;
 use Modules\Admin\Repositories\Model\Entities\Product;
-use Modules\Admin\Repositories\Model\Entities\ProductSubCategory;
+use Modules\Admin\Repositories\Model\Entities\Supplier;
 use Modules\Admin\Repositories\ProductRepositoryInterface;
-use Modules\Admin\Transformers\ProductResource;
+use Modules\Admin\Repositories\Model\Entities\ProductSubCategory;
 
 class ProductModel implements ProductRepositoryInterface
 {
@@ -20,6 +22,20 @@ class ProductModel implements ProductRepositoryInterface
         //     $product->whereHas('')
         // }
         return $product;
+    }
+
+    public function findBySupplierNSubCategory($supplier, $subCategory)
+    {
+        $products = Product::orderBy('name', 'asc')->with('suppliers', 'subCategories');
+        $subCategories = $this->findSubCategory($subCategory);
+        $suppliers = $this->findSupplier($supplier);
+        $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
+            $query->where('subcategories_id', $subCategories->id);
+        });
+        $products->whereHas('suppliers', function (Builder $query) use ($suppliers) {
+            $query->where('suppliers_id', $suppliers->id);
+        });
+        return $products->paginate(10);
     }
 
     public function findById($id)
@@ -101,11 +117,15 @@ class ProductModel implements ProductRepositoryInterface
         }
     }
 
-    // protected function findCategory($category)
-    // {
-    //     return FeatureCategory::where('slug_name', $category);
-    // }
+    protected function findSupplier($slug)
+    {
+        return Supplier::where('slug_name', $slug)->first();
+    }
 
+    protected function findSubCategory($slug)
+    {
+        return ProductSubCategory::where('slug_name', $slug)->first();
+    }
     protected function sync($request)
     {
         $findSub = Product::where('name', $request->name)->first();
