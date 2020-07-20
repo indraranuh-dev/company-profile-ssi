@@ -2,6 +2,30 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Senin 20/07/2020</b></h3>
+
+<ul> 
+    <li>Membuat tag untuk produk</li>
+    <li>
+        Pembuatan halaman tag
+        <ul>
+            <li>Membuat tabel untuk tag</li>
+            <li>Membuat entities, mode, repository</li>
+            <li>Membuat Halaman untuk menambah tag</li>
+            <li>Membuat Halaman untuk mengubah tag</li>
+            <li>Membuat Halaman utama tag</li>
+        </ul>
+    </li>
+    <li>Memberikan paginasi pada halaman fitur</li>
+    <li>Bug fixing
+        <ul>
+            <li>Halaman produk</li>   
+            <li>Halaman Fitur</li>   
+            <li>Model Fitur dan menambah method baru</li>   
+        </ul>
+    </li>
+</ul>
+
 <h3><b>Minggu 19/07/2020</b></h3>
 
 <ul> 
