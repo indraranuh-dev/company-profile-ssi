@@ -48,4 +48,14 @@ class Product extends Model
             'suppliers_id',
         );
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(
+            Tag::class,
+            'products_has_tags',
+            'products_id',
+            'tags_id'
+        );
+    }
 }

@@ -17,8 +17,10 @@ use Modules\Admin\Repositories\ProdTypeRepositoryInterface;
 use Modules\Admin\Repositories\SupplierRepositoryInterface;
 use Modules\Admin\Repositories\Model\ProductSubCategoryModel;
 use Modules\Admin\Repositories\Model\ProductSubTypeModel;
+use Modules\Admin\Repositories\Model\TagModel;
 use Modules\Admin\Repositories\ProdSubCategoryRepositoryInterface;
 use Modules\Admin\Repositories\ProdSubTypeRepositoryInterface;
+use Modules\Admin\Repositories\TagRepositoryInterface;
 
 class RepositoriesServiceProvider extends ServiceProvider
 {
@@ -48,5 +50,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(ProdSubTypeRepositoryInterface::class, ProductSubTypeModel::class);
         $this->app->bind(FeatureCategoryRepositoryInterface::class, FeatureCategoryModel::class);
         $this->app->bind(FeatureRepositoryInterface::class, FeatureModel::class);
+        $this->app->bind(TagRepositoryInterface::class, TagModel::class);
     }
 }

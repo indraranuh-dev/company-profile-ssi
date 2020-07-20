@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuppliersHasSubcategoriesTable extends Migration
+class CreateProductsHasTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateSuppliersHasSubcategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('suppliers_has_subcategories', function (Blueprint $table) {
-            $table->char('suppliers_id', 36);
-            $table->unsignedBigInteger('subcategories_id');
+        Schema::create('products_has_tags', function (Blueprint $table) {
+            $table->char('products_id', 36);
+            $table->unsignedBigInteger('tags_id');
 
-            $table->foreign('suppliers_id')
+            $table->foreign('products_id')
                 ->references('id')
-                ->on('suppliers')
+                ->on('products')
                 ->cascadeOnDelete();
-            $table->foreign('subcategories_id')
+            $table->foreign('tags_id')
                 ->references('id')
-                ->on('products_subcategories')
+                ->on('product_tags')
                 ->cascadeOnDelete();
         });
     }
@@ -35,6 +35,6 @@ class CreateSuppliersHasSubcategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suppliers_has_subcategories');
+        Schema::dropIfExists('products_has_tags');
     }
 }
