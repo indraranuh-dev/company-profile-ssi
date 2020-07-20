@@ -106,6 +106,14 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item {{request()->routeIs('admin.tag*') ? 'selected' : ''}}">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link {{request()->routeIs('admin.tag*') ? 'active' : ''}}"
+                        href="{{route('admin.tag.index')}}" aria-expanded="false">
+                        <i class="fa fa-fw fa-hashtag"></i>
+                        <span class="hide-menu">Tag</span>
+                    </a>
+                </li>
+
             </ul>
         </nav>
     </div>

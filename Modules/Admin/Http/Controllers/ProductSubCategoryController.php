@@ -90,9 +90,4 @@ class ProductSubCategoryController extends Controller
         $this->model->delete($id);
         return redirect()->route('admin.prod.subcategory.index')->with('success', 'Sub kategori berhasil dihapus.');
     }
-
-    public function test()
-    {
-        return $this->model->getAll();
-    }
 }

@@ -131,6 +131,17 @@ Route::group([
         Route::put('/{id}', 'FeatureCategoryController@update')->name('update');
         Route::delete('/{id}', 'FeatureCategoryController@destroy')->name('destroy');
     });
-});
 
-Route::get('test', 'ProductSubCategoryController@test');
+    # Route kategori fitur
+    Route::group([
+        'prefix' => 'tag',
+        'as' => 'tag.'
+    ], function () {
+        Route::get('/', 'TagController@index')->name('index');
+        Route::get('/tambah', 'TagController@create')->name('create');
+        Route::post('/', 'TagController@store')->name('store');
+        Route::get('/{id}/ubah', 'TagController@edit')->name('edit');
+        Route::put('/{id}', 'TagController@update')->name('update');
+        Route::delete('/{id}', 'TagController@destroy')->name('destroy');
+    });
+});
