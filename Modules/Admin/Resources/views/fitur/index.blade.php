@@ -99,7 +99,7 @@ use Illuminate\Support\Facades\Storage;
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12 col-lg-6 col-md-6">
-                                Showing 1 - {{$features->perPage()}} of {{$features->total()}}
+                                Showing 1 - {{$features->count()}} of {{$features->total()}}
                             </div>
                             <div class="col-12 col-lg-6 col-md-6 text-center text-lg-center">
                                 {{$features->links()}}

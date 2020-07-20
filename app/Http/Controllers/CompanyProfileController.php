@@ -5,18 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response as Res;
-use Modules\Admin\Repositories\ProductRepositoryInterface;
+use Modules\Admin\Repositories\ProductRepositoryInterface as Product;
 use Modules\Admin\Repositories\Model\Entities\ProductCategory;
 
 class CompanyProfileController extends Controller
 {
     private $model;
 
-    /**
-     * Class constructor.
-     */
-    public function __construct(ProductRepositoryInterface $productRepositoryInterface)
-    {
+    public function __construct(
+        Product $productRepositoryInterface
+
+    ) {
         $this->model = $productRepositoryInterface;
     }
     /**

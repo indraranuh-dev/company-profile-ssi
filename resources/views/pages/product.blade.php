@@ -9,6 +9,12 @@
 <section class="portfolio product">
     <div class="container">
 
+        <div class="row">
+            <div class="filter-container">
+                <h4>Filter produk</h4>
+            </div>
+        </div>
+
         <div class="section-title" data-aos="fade-up">
             <h2>Semua Produk</h2>
             <p>
@@ -34,11 +40,12 @@
 
             @forelse ($products as $product)
             <div class="col-lg-4 col-md-6 portfolio-item filter-{{$product->inverter}}">
-                <div class="portfolio-wrap text-center">
+                <div class="portfolio-wrap text-center" style="background: none;">
                     <img class="img-fluid" src="{{route('productImage', $product->product_image)}}" alt="product-image"
-                        style="max-height: 200px">
+                        style="height: 200px">
                     <div class="portfolio-info">
                         <h4>{{$product->name}}</h4>
+                        <p>{{$product->series}}</p>
                         <p>{{$product->series}}</p>
                         <div class="portfolio-links">
                             <a href="{{route('productImage', $product->product_image)}}" data-gall="portfolioGallery"
@@ -64,6 +71,30 @@
 </section>
 
 @endsection
+
+@push('styles')
+<style>
+    section {
+        padding: 20px 0 60px;
+    }
+
+    .filter-container {
+        background: #e9ecef;
+        padding: 10px 20px;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 5px;
+        margin-bottom: 30px
+    }
+
+    .filter-container h4 {
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 2px
+    }
+</style>
+@endpush
 
 @push('scripts')
 <script>

@@ -85,7 +85,7 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $subCategories = $this->subCategory->getAll();
-        $features = $this->feature->getAll($request);
+        $features = $this->feature->getOnly('');
         $featureCategories = $this->featureCategory->getAll();
         $types = $this->type->getAll();
         $suppliers = $this->supplier->getAll($request);

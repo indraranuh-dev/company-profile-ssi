@@ -6,8 +6,6 @@ use Illuminate\Support\Str;
 use App\Utilities\Generator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Admin\Transformers\ProductResource;
-use Modules\Admin\Repositories\Model\Entities\Feature;
 use Modules\Admin\Repositories\Model\Entities\Product;
 use Modules\Admin\Repositories\Model\Entities\Supplier;
 use Modules\Admin\Repositories\ProductRepositoryInterface;
@@ -26,7 +24,7 @@ class ProductModel implements ProductRepositoryInterface
 
     public function findBySupplierNSubCategory($supplier, $subCategory)
     {
-        $products = Product::orderBy('name', 'asc')->with('suppliers', 'subCategories');
+        $products = Product::orderBy('name', 'asc')->with('suppliers', 'subCategories', 'tags:name,slug_name');
         $subCategories = $this->findSubCategory($subCategory);
         $suppliers = $this->findSupplier($supplier);
         $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {

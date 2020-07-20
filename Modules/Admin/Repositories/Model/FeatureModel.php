@@ -31,6 +31,9 @@ class FeatureModel implements FeatureRepositoryInterface
     public function getOnly($column)
     {
         $feature = Feature::orderBy('created_at', 'desc');
+        if ($column === '') {
+            return $feature->with('category:id,name')->get();
+        }
         return $feature->get($column);
     }
 

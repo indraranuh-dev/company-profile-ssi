@@ -39,7 +39,7 @@ use App\Utilities\Generator;
                 <div class="card-body">
                     <div class="row">
                         @foreach ($products as $product)
-                        <div class="col-lg-3 col-md-4 col-sm-12 mb-3 mb-lg-0">
+                        <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
                             <div class="row">
                                 <div class="col-12">
                                     <figure>
