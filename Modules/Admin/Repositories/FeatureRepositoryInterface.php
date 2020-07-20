@@ -12,6 +12,14 @@ interface FeatureRepositoryInterface
     public function getAll($request);
 
     /**
+     * Get all feature ina a specific column
+     *
+     * @param array $column
+     * @return void
+     */
+    public function getOnly($column);
+
+    /**
      * Find feature by passing id
      *
      * @param int $id

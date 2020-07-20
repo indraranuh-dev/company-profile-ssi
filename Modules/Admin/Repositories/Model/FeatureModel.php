@@ -28,6 +28,12 @@ class FeatureModel implements FeatureRepositoryInterface
         return $feature->paginate(10);
     }
 
+    public function getOnly($column)
+    {
+        $feature = Feature::orderBy('created_at', 'desc');
+        return $feature->get($column);
+    }
+
     public function findById($id)
     {
         $feature = Feature::findOrfail($this->decrypt(false, $id));
