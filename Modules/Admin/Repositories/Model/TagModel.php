@@ -11,7 +11,7 @@ class TagModel implements TagRepositoryInterface
 {
     public function getAll()
     {
-        $category = Tag::orderBy('created_at', 'desc')->with('categories:id,name');
+        $category = Tag::orderBy('created_at', 'desc');
         return $category->get();
     }
 

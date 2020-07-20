@@ -58,7 +58,7 @@ $(function() {
                     animation: {
                         tension: {
                             duration: 1000,
-                            easing: "linear",
+                            easing: "easeInQuint",
                             from: 1,
                             to: 0,
                             loop: true

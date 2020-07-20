@@ -5,16 +5,31 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Requests\TagRequest;
+use Modules\Admin\Repositories\TagRepositoryInterface as Tag;
 
 class TagController extends Controller
 {
+    private $model;
+
+    /**
+     * Class constroctor
+     *
+     * @param Tag $tagRepositoryInterface
+     */
+    public function __construct(Tag $tagRepositoryInterface)
+    {
+        $this->model = $tagRepositoryInterface;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('admin::index');
+        $tags = $this->model->getAll();
+        return view('admin::tag.index', compact('tags'));
     }
 
     /**
@@ -23,7 +38,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin::create');
+        return view('admin::tag.create');
     }
 
     /**
@@ -31,19 +46,10 @@ class TagController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('admin::show');
+        $this->model->create($request);
+        return redirect()->route('admin.tag.index')->with('success', 'Tag berhasil ditambahkan.');
     }
 
     /**
@@ -53,7 +59,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        return view('admin::edit');
+        $tag = $this->model->findById($id);
+        return view('admin::tag.edit', compact('tag'));
     }
 
     /**
@@ -62,9 +69,10 @@ class TagController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(TagRequest $request, $id)
     {
-        //
+        $this->model->update($request, $id);
+        return redirect()->route('admin.tag.index')->with('success', 'Tag berhasil diubah.');
     }
 
     /**
@@ -74,6 +82,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return redirect()->route('admin.tag.index')->with('success', 'Tag berhasil dihapus');
     }
 }
