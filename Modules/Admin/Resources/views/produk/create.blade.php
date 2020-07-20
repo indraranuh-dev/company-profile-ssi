@@ -135,6 +135,19 @@ use App\Utilities\Generator;
 
                                 <fieldset class="form-group row">
                                     <div class="col-12">
+                                        <label for="tags">{{__('Tag produk')}}</label>
+                                        <select name="tags[]" id="tags" multiple
+                                            class="form-control @error('tags'){{'is-invalid'}}@enderror">
+                                            @foreach ($tags as $tag)
+                                            <option value="{{Generator::crypt($tag->id)}}">{{$tag->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('tags')<small class="text-danger">{{$message}}</small>@enderror
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="form-group row">
+                                    <div class="col-12">
                                         <label for="features">{{__('Fitur produk')}}</label>
                                         <select name="features[]" id="features" multiple
                                             class="form-control @error('features'){{'is-invalid'}}@enderror">
@@ -265,8 +278,28 @@ use App\Utilities\Generator;
         }
     })
 
-    if($('select').hasClass('is-invalid')){
-        $('.select2-selection--single').addClass('is-invalid');
+    if($('select[name="supplier"]').hasClass('is-invalid')){
+        $('select[name="supplier"]').parent().find('.select2-selection--single').addClass('is-invalid');
+    }
+
+    if($('select[name="inverter"]').hasClass('is-invalid')){
+        $('select[name="inverter"]').parent().find('.select2-selection--single').addClass('is-invalid');
+    }
+
+    if($('select[name="subCategory"]').hasClass('is-invalid')){
+        $('select[name="subCategory"]').parent().find('.select2-selection--single').addClass('is-invalid');
+    }
+
+    if($('select[name="type"]').hasClass('is-invalid')){
+        $('select[name="type"]').parent().find('.select2-selection--single').addClass('is-invalid');
+    }
+
+    if($('select[name="tags[]"]').hasClass('is-invalid')){
+        $('select[name="tags[]"]').parent().find('.select2-selection--multiple').addClass('is-invalid');
+    }
+
+    if($('select[name="features[]"]').hasClass('is-invalid')){
+        $('select[name="features[]"]').find('.select2-selection--multiple').addClass('is-invalid');
     }
 
     async function readURL(input) {

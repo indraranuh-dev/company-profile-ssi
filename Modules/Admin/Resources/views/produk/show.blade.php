@@ -43,6 +43,11 @@ use App\Utilities\Generator;
                                     {{$product->name}}
                                 </h3>
                                 <h5 class="text-muted">{{$product->series}}</h5>
+                                <h5 class="text-muted">
+                                    @foreach ($product->tags as $tag)
+                                    <span class="badge badge-primary"># {{$tag->name}}</span>
+                                    @endforeach
+                                </h5>
                                 <p class="card-text">
                                     {{$product->description}}
                                 </p>

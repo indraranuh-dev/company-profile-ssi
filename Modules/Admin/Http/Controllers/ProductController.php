@@ -11,6 +11,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Storage;
 use Modules\Admin\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Response as res;
+use Modules\Admin\Http\Requests\ProductUpdateRequest;
 use Modules\Admin\Repositories\ProdTypeRepositoryInterface as Type;
 use Modules\Admin\Repositories\FeatureRepositoryInterface as Feature;
 use Modules\Admin\Repositories\ProductRepositoryInterface as Product;
@@ -18,6 +19,7 @@ use Modules\Admin\Repositories\ProdCatRepositoryInterface as Category;
 use Modules\Admin\Repositories\SupplierRepositoryInterface as Supplier;
 use Modules\Admin\Repositories\ProdSubCategoryRepositoryInterface as SubCategory;
 use Modules\Admin\Repositories\FeatureCategoryRepositoryInterface as FeatureCategory;
+use Modules\Admin\Repositories\TagRepositoryInterface as Tag;
 
 class ProductController extends Controller
 {
@@ -35,6 +37,8 @@ class ProductController extends Controller
 
     private $type;
 
+    private $tag;
+
     /**
      * Class constructor.
      */
@@ -45,7 +49,8 @@ class ProductController extends Controller
         Feature $featureRepositoryInterface,
         FeatureCategory $featureCategoryRepositoryInterface,
         Supplier $supplierRepositoryInterface,
-        Type $prodTypeRepositoryInterface
+        Type $prodTypeRepositoryInterface,
+        Tag $tagRepositoryInterface
     ) {
         $this->model = $productRepositoryInterface;
         $this->category = $prodCatRepositoryInterface;
@@ -54,6 +59,7 @@ class ProductController extends Controller
         $this->featureCategory = $featureCategoryRepositoryInterface;
         $this->supplier = $supplierRepositoryInterface;
         $this->type = $prodTypeRepositoryInterface;
+        $this->tag = $tagRepositoryInterface;
     }
 
     /**
@@ -83,12 +89,14 @@ class ProductController extends Controller
         $featureCategories = $this->featureCategory->getAll();
         $types = $this->type->getAll();
         $suppliers = $this->supplier->getAll($request);
+        $tags = $this->tag->getAll();
         return view('admin::produk.create', compact(
             'subCategories',
             'features',
             'types',
             'suppliers',
-            'featureCategories'
+            'featureCategories',
+            'tags'
         ));
     }
 
@@ -116,11 +124,13 @@ class ProductController extends Controller
     {
         $product = $this->model->findById($id);
         $subCategories = $this->subCategory->getAll();
-        $features = $this->feature->getAll($request);
+        $features = $this->feature->getOnly(['id', 'name']);
         $featureCategories = $this->featureCategory->getAll();
         $types = $this->type->getAll();
         $suppliers = $this->supplier->getAll($request);
+        $tags = $this->tag->getAll();
         $selects =  ArrayCheck::notSelected($features, $product->features);
+        $selectTags =  ArrayCheck::notSelected($tags, $product->tags);
         return view('admin::produk.edit', compact(
             'product',
             'subCategories',
@@ -128,7 +138,8 @@ class ProductController extends Controller
             'types',
             'suppliers',
             'featureCategories',
-            'selects'
+            'selects',
+            'selectTags'
         ));
     }
 
@@ -137,7 +148,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $this->model->create($request);
         return redirect()->route('admin.product.index')
@@ -150,7 +161,7 @@ class ProductController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
         $this->model->update($request, $id);
         return redirect()->route('admin.product.index')

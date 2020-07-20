@@ -57,7 +57,8 @@ class ProductModel implements ProductRepositoryInterface
                 'subCategories:id,name',
                 'suppliers:id,name',
                 'features.category:id,name',
-                'type:id,name'
+                'type:id,name',
+                'tags:id,name'
             );
         return $product->first();
     }
@@ -131,6 +132,7 @@ class ProductModel implements ProductRepositoryInterface
         $findSub = Product::where('name', $request->name)->first();
         $findSub->subCategories()->sync($this->decrypt(false, $request->subCategory));
         $findSub->suppliers()->sync($this->decrypt(false, $request->supplier));
+        $findSub->tags()->sync($this->decrypt(true, '', $request->tags));
         return $findSub->features()->sync($this->decrypt(true, '', $request->features));
     }
 

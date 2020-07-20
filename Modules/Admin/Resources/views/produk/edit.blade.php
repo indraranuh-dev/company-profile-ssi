@@ -91,7 +91,7 @@ use App\Utilities\Generator;
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <label for="series">{{__('Series')}}</label>
                                             <input type="text"
-                                                class="form-control @error('name'){{'is-invalid'}}@enderror"
+                                                class="form-control @error('series'){{'is-invalid'}}@enderror"
                                                 name="series" id="series" value="{{$product->series}}">
                                             @error('series')<small class="text-danger">{{$message}}</small>@enderror
                                         </div>
@@ -162,6 +162,24 @@ use App\Utilities\Generator;
                                             @endforeach
                                         </select>
                                         @error('type')<small class="text-danger">{{$message}}</small>@enderror
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="form-group row">
+                                    <div class="col-12">
+                                        <label for="tags">{{__('Tag produk')}}</label>
+                                        <select name="tags[]" id="tags" multiple
+                                            class="form-control @error('tags'){{'is-invalid'}}@enderror">
+                                            @foreach ($selectTags['selected'] as $tag)
+                                            <option value="{{Generator::crypt($tag['id'])}}" selected>{{$tag['name']}}
+                                            </option>
+                                            @endforeach
+                                            @foreach ($selectTags['notSelected'] as $tag)
+                                            <option value="{{Generator::crypt($tag['id'])}}">{{$tag['name']}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('tags')<small class="text-danger">{{$message}}</small>@enderror
                                     </div>
                                 </fieldset>
 
@@ -289,16 +307,36 @@ use App\Utilities\Generator;
 
     $('#checkAll').click(function () {
         if($(this).is(':checked')){
-            $('#features > optgroup > option').prop("selected", true);
+            $('#features > option').prop("selected", true);
             $('#features').trigger("change");
         } else {
-            $('#features > optgroup > option').prop("selected", false);
+            $('#features > option').prop("selected", false);
             $('#features').trigger("change");
         }
     })
 
-    if($('select').hasClass('is-invalid')){
-        $('.select2-selection--single').addClass('is-invalid');
+    if($('select[name="supplier"]').hasClass('is-invalid')){
+        $('select[name="supplier"]').parent().find('.select2-selection--single').addClass('is-invalid');
+    }
+
+    if($('select[name="inverter"]').hasClass('is-invalid')){
+        $('select[name="inverter"]').parent().find('.select2-selection--single').addClass('is-invalid');
+    }
+
+    if($('select[name="subCategory"]').hasClass('is-invalid')){
+        $('select[name="subCategory"]').parent().find('.select2-selection--single').addClass('is-invalid');
+    }
+
+    if($('select[name="type"]').hasClass('is-invalid')){
+        $('select[name="type"]').parent().find('.select2-selection--single').addClass('is-invalid');
+    }
+
+    if($('select[name="tags[]"]').hasClass('is-invalid')){
+        $('select[name="tags[]"]').parent().find('.select2-selection--multiple').addClass('is-invalid');
+    }
+
+    if($('select[name="features[]"]').hasClass('is-invalid')){
+        $('select[name="features[]"]').find('.select2-selection--multiple').addClass('is-invalid');
     }
 
     async function readURL(input) {

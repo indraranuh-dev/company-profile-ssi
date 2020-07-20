@@ -6,7 +6,7 @@ use App\Utilities\Generator;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
