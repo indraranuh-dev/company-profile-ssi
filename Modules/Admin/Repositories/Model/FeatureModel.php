@@ -25,7 +25,7 @@ class FeatureModel implements FeatureRepositoryInterface
             });
         }
 
-        return $feature->get();
+        return $feature->paginate(10);
     }
 
     public function findById($id)

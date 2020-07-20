@@ -5,10 +5,6 @@ const table = $("#table").DataTable({
             >
             <'row mb-2'
                 <'col-12'<'table-responsive' t>>
-            >
-            <'row'
-                <'col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0' i>
-                <'col-lg-6 col-md-6 col-sm-12' p>
             >`,
     buttons: [
         {
@@ -37,7 +33,8 @@ const table = $("#table").DataTable({
             titleAttr: "Print"
         }
     ],
-    columnDefs: [{ width: "30%", targets: 4 }]
+    columnDefs: [{ width: "30%", targets: 4 }],
+    paging: false
 });
 async function deleteConfirmation(id) {
     $("#confirm-modal").modal("show");
