@@ -47,8 +47,33 @@
                 <li>
                     <a href="{{route('index')}}{{request()->routeIs('index')? '#contact' : ''}}">Hubungi Kami</a>
                 </li>
+                <li>
+                    <label for="" class="toggle-search">
+                        <i class="bx bx-search"></i>
+                    </label>
+                </li>
             </ul>
         </nav>
 
     </div>
 </header>
+
+<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="search-box">
+                    <div class="search">
+                        <i class="bx bx-search"></i>
+                        <input type="text" class="form-control-sm form-control" name="search"
+                            placeholder="Cari disini...">
+                        <i class="bx bx-x px-2" id="reset-input" style="cursor: pointer" title="Hapus semua"></i>
+                    </div>
+                    <ul class="result">
+                        <li id="res-not-found">Data tidak ditemukan</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

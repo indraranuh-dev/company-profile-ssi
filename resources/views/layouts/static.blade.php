@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Sinar Sejahtera Inti company profile">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{config('app.name')}}</title>
 
@@ -56,9 +57,10 @@
 
     <a href="javascript:void(0)" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
-    <script src="{{mix('js/app.js')}}" `></script>
-    <script src="{{mix('js/vendor.js')}}" `></script>
+    <script src="{{mix('js/app.js')}}"></script>
+    <script src="{{mix('js/vendor.js')}}"></script>
     <script src="{{mix('js/main.js')}}"></script>
+    <script src="{{asset('js/additional.js')}}"></script>
 
     @stack('scripts')
 

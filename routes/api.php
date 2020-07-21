@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('visitors', 'Api\CounterApiController@index');
+Route::get('search', 'Api\ProductApiController@getProduct');

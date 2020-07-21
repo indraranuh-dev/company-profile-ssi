@@ -22,6 +22,14 @@ interface ProductRepositoryInterface
     public function findBySupplierNSubCategory($supplier, $subCategory);
 
     /**
+     * Find product with keywords
+     *
+     * @param string $keyword
+     * @return void
+     */
+    public function searchProduct($keyword);
+
+    /**
      * Find product by passing id
      *
      * @param string $id

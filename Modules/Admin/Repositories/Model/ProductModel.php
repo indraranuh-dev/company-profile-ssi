@@ -6,10 +6,12 @@ use Illuminate\Support\Str;
 use App\Utilities\Generator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Modules\Admin\Repositories\Model\Entities\Product;
 use Modules\Admin\Repositories\Model\Entities\Supplier;
 use Modules\Admin\Repositories\ProductRepositoryInterface;
 use Modules\Admin\Repositories\Model\Entities\ProductSubCategory;
+use Modules\Admin\Repositories\Model\Entities\Tag;
 
 class ProductModel implements ProductRepositoryInterface
 {
@@ -34,6 +36,18 @@ class ProductModel implements ProductRepositoryInterface
             $query->where('suppliers_id', $suppliers->id);
         });
         return $products->paginate(10);
+    }
+
+    public function searchProduct($keyword)
+    {
+        $products = Product::whereRaw('name like "%' . $keyword . '%"');
+        $tag = $this->findTag($keyword);
+        if ($tag) {
+            $products->orWhereHas('tags', function (Builder $query) use ($tag) {
+                $query->where('tags_id', $tag->id);
+            });
+        }
+        return $products->with('tags:id,name')->limit(10)->get(['id', 'name', 'slug_name']);
     }
 
     public function findById($id)
@@ -116,6 +130,11 @@ class ProductModel implements ProductRepositoryInterface
         }
     }
 
+    protected function findTag($k)
+    {
+        return Tag::whereRaw('slug_name LIKE "%' . $k . '%"')->orWhereRaw('name LIKE "%' . $k . '%"')->first();
+    }
+
     protected function findSupplier($slug)
     {
         return Supplier::where('slug_name', $slug)->first();
@@ -125,6 +144,7 @@ class ProductModel implements ProductRepositoryInterface
     {
         return ProductSubCategory::where('slug_name', $slug)->first();
     }
+
     protected function sync($request)
     {
         $findSub = Product::where('name', $request->name)->first();
@@ -133,7 +153,6 @@ class ProductModel implements ProductRepositoryInterface
         $findSub->tags()->sync($this->decrypt(true, '', $request->tags));
         return $findSub->features()->sync($this->decrypt(true, '', $request->features));
     }
-
 
     /**
      * Processing image and move to storage

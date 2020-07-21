@@ -9,12 +9,6 @@
 <section class="portfolio product">
     <div class="container">
 
-        <div class="row">
-            <div class="filter-container">
-                <h4>Filter produk</h4>
-            </div>
-        </div>
-
         <div class="section-title" data-aos="fade-up">
             <h2>Semua Produk</h2>
             <p>

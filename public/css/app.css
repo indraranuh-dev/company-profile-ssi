@@ -11183,6 +11183,8 @@ h6 {
     margin: 0;
     padding: 0;
     list-style: none;
+    display: flex;
+    align-items: center;
 }
 
 .nav-menu>ul>li {
@@ -12567,4 +12569,93 @@ section {
 
 .product {
     min-height: calc(100vh - 80px);
+}
+
+.toggle-search {
+    padding: 5px;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+    margin: 0 0 0 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.modal#search .modal-content {
+    box-shadow: -1px 5px 5px 2px #0000002e;
+    border: none;
+    animation: search .5s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.search-box {
+    display: block;
+    padding: 10px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e2e2e2;
+    transition: .3s all;
+}
+
+.search i {
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+.search input.form-control {
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+.search input.form-control:focus {
+    background: white;
+    outline: none;
+    box-shadow: none;
+}
+
+.search .input-group>.input-group-append>.btn {
+    padding: 6px 10px;
+}
+
+ul.result {
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+    transition: .3s all;
+}
+
+ul.result li {
+    padding: 8px 20px;
+    transition: .2s all;
+    color: #222222;
+    border-radius: 3px;
+    display: flex;
+    transition: .3s all;
+}
+
+ul.result li a {
+    padding: 0;
+    color: #222;
+    width: 100%;
+}
+
+ul.result li:hover {
+    color: #000;
+    background: rgb(218, 218, 218);
+}
+
+@keyframes search {
+    from {
+        transform: translateY(-100px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }
