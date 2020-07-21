@@ -2,6 +2,20 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Selasa 21/07/2020</b></h3>
+
+<ul> 
+    <li>Menambahkan fitur search
+        <ul>
+            <li>Menambahkan method baru pada produk model</li>
+            <li>Menentukan algoritma yang responsif untuk search</li>
+            <li>Menambahkan route untuk API search</li>
+            <li>Membuat controller api untuk search</li>
+            <li>Styling untuk search</li>
+        </ul>
+    </li>
+</ul>
+
 <h3><b>Senin 20/07/2020</b></h3>
 
 <ul> 
