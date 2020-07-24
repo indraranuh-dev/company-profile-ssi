@@ -2,6 +2,23 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Jum'at 24/07/2020</b></h3>
+
+<ul> 
+    <li>Menambahkan fitur filter pada halaman porduk(company profile)
+        <ul>
+            <li>Merubah struktur method pada produk model</li>
+            <li>Menentukan algoritma yang responsif untuk filter</li>
+            <li>Styling untuk filter</li>
+        </ul>
+    </li>
+    <li>Menambahkan relasi baru antara supplier(vendor) dengan jenis produk pada database</li>
+    <li>Membuat tabel baru untuk relasi vendor dengan jenis produk</li>
+    <li>Revisi footer pintasan link</li>
+    <li>Revisi posisi nama produk dan button lihat detail</li>
+    <li>Bug fixing halaman sub jenis produk</li>
+</ul>
+
 <h3><b>Selasa 21/07/2020</b></h3>
 
 <ul> 
