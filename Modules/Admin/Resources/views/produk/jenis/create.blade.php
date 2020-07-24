@@ -1,3 +1,6 @@
+@php
+use App\Utilities\Generator;
+@endphp
 @extends('layouts/master')
 
 @section('content')
@@ -43,8 +46,22 @@
                                 </fieldset>
 
                                 <fieldset class="form-group row">
+                                    <div class="col-12">
+                                        <label for="name">{{__('Nama supplier (vendor)')}}</label>
+                                        <select name="supplier[]" multiple
+                                            class="form-control @error('supplier'){{'is-invalid'}}@enderror">
+                                            @foreach ($suppliers as $supplier)
+                                            <option value="{{Generator::crypt($supplier->id, 'encrypt')}}">
+                                                {{$supplier->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('supplier')<small class="text-danger">{{$message}}</small>@enderror
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="form-group row">
                                     <div class="col-12 text-right">
-                                        <button id="save" class="btn btn-success">
+                                        <button class="btn btn-success">
                                             <i class="fa fa-save fa-fw mr-2"></i>Simpan
                                         </button>
                                     </div>
@@ -59,3 +76,20 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('libs/select2/dist/css/select2-bootstrap.min.css')}}">
+@endpush
+
+@push('scripts')
+<script src="{{asset('libs/select2/dist/js/select2.full.min.js')}}"></script>
+<script>
+    $('select').select2({
+        theme: 'bootstrap'
+    })
+    if($('select').hasClass('is-invalid')){
+        $('.select2-selection--multiple').addClass('is-invalid');
+    }
+</script>
+@endpush

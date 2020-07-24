@@ -33,4 +33,14 @@ class Supplier extends Model
             'subcategories_id'
         );
     }
+
+    public function types()
+    {
+        return $this->belongsToMany(
+            ProductType::class,
+            'suppliers_has_product_types',
+            'suppliers_id',
+            'types_id'
+        );
+    }
 }

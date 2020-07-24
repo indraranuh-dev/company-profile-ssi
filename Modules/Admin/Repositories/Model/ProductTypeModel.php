@@ -12,7 +12,7 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
 {
     public function getAll()
     {
-        $types = ProductType::orderBy('created_at', 'desc');
+        $types = ProductType::orderBy('created_at', 'desc')->with('suppliers');
         return $types->get();
     }
 
@@ -33,7 +33,8 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
         $types = new ProductType();
         $types->name = $request->name;
         $types->slug_name = Str::slug($request->name);
-        return $types->save();
+        $types->save();
+        return $this->sync($request);
     }
 
     public function update($request, $id)
@@ -41,7 +42,8 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
         $types = ProductType::findOrFail($this->decrypt(false, $id));
         $types->name = $request->name;
         $types->slug_name = Str::slug($request->name);
-        return $types->save();
+        $types->save();
+        return $this->sync($request);
     }
 
     public function delete($id)
@@ -62,5 +64,11 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
             }
             return $newArr;
         }
+    }
+
+    protected function sync($request)
+    {
+        $type = ProductType::where('name', $request->name)->first();
+        return $type->suppliers()->sync($this->decrypt(true, '', $request->supplier));
     }
 }

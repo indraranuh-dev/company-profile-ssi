@@ -46,6 +46,16 @@ class CompanyProfileController extends Controller
         ));
     }
 
+    public function contactUs()
+    {
+        $productCategories = ProductCategory::OrderBy('name', 'desc')
+            ->with('subCategories.suppliers:name,slug_name')
+            ->get(['id', 'name', 'slug_name']);
+        return view('pages.contact', compact(
+            'productCategories'
+        ));
+    }
+
     public function getProductImage($image)
     {
         $storage = Storage::disk('image');

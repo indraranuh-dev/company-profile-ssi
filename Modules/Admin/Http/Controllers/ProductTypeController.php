@@ -2,20 +2,26 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Utilities\ArrayCheck;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Http\Requests\ProductTypeRequest;
 use Modules\Admin\Repositories\ProdTypeRepositoryInterface as Type;
+use Modules\Admin\Repositories\SupplierRepositoryInterface as Supplier;
 
 class ProductTypeController extends Controller
 {
-
     private $model;
 
-    public function __construct(Type $prodTypeRepositoryInterface)
-    {
+    private $supplier;
+
+    public function __construct(
+        Type $prodTypeRepositoryInterface,
+        Supplier $supplierRepositoryInterface
+    ) {
         $this->model = $prodTypeRepositoryInterface;
+        $this->supplier = $supplierRepositoryInterface;
     }
     /**
      * Display a listing of the resource.
@@ -33,7 +39,8 @@ class ProductTypeController extends Controller
      */
     public function create()
     {
-        return view('admin::produk.jenis.create');
+        $suppliers = $this->supplier->getAll('');
+        return view('admin::produk.jenis.create', compact('suppliers'));
     }
 
     /**
@@ -55,7 +62,9 @@ class ProductTypeController extends Controller
     public function edit($id)
     {
         $type = $this->model->findById($id);
-        return view('admin::produk.jenis.edit', compact('type'));
+        $suppliers = $this->supplier->getAll('');
+        $selects = ArrayCheck::notSelected($suppliers, $type->suppliers);
+        return view('admin::produk.jenis.edit', compact('type', 'selects'));
     }
 
     /**

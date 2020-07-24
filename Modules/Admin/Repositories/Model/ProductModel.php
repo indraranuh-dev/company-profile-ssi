@@ -29,12 +29,23 @@ class ProductModel implements ProductRepositoryInterface
         $products = Product::orderBy('name', 'asc')->with('suppliers', 'subCategories', 'tags:name,slug_name');
         $subCategories = $this->findSubCategory($subCategory);
         $suppliers = $this->findSupplier($supplier);
-        $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
-            $query->where('subcategories_id', $subCategories->id);
-        });
-        $products->whereHas('suppliers', function (Builder $query) use ($suppliers) {
-            $query->where('suppliers_id', $suppliers->id);
-        });
+
+        if ($subCategories) {
+            $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
+                $query->where('subcategories_id', $subCategories->id);
+            });
+        } else {
+            return abort(404);
+        }
+
+        if ($suppliers) {
+            $products->whereHas('suppliers', function (Builder $query) use ($suppliers) {
+                $query->where('suppliers_id', $suppliers->id);
+            });
+        } else {
+            return abort(404);
+        }
+
         return $products->paginate(10);
     }
 

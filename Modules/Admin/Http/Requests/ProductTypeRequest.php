@@ -18,6 +18,7 @@ class ProductTypeRequest extends FormRequest
         return [
             'name' => 'required|' . Rule::unique('product_types', 'name')
                 ->ignore(Generator::crypt($this->id, 'decrypt')),
+            'supplier' => 'required'
         ];
     }
 

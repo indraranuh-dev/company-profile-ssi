@@ -46,6 +46,7 @@ use App\Utilities\Generator;
                                 <tr>
                                     <th>#</th>
                                     <th>Nama</th>
+                                    <th>Supplier</th>
                                     <th>Dibuat pada</th>
                                     <th>Diubah pada</th>
                                     <th>Aksi</th>
@@ -56,6 +57,11 @@ use App\Utilities\Generator;
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td>{{$type->name}}</td>
+                                    <td>
+                                        @foreach ($type->suppliers as $supplier)
+                                        <span class="badge badge-info">{{$supplier->name}}</span><br>
+                                        @endforeach
+                                    </td>
                                     <td>{{Converter::convertDate($type->created_at)}}</td>
                                     <td>{{Converter::convertDate($type->updated_at)}}</td>
                                     <td class="d-flex justify-content-center">
