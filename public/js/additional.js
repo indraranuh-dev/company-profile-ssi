@@ -1,33 +1,3 @@
-// const search = document.querySelector('input[name="search"]');
-// search.addEventListener('keyup', function (e) {
-//     fetch(`http://127.0.0.1:8000/api/search?k=${this.value}`, {
-//             headers: {
-//                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-//                 'Content-Type': 'application/json'
-//             },
-//             method: 'GET'
-//         })
-//         .then(response => response.json())
-//         .then(response => {
-//             const res = document.querySelector('.result');
-//             const nfe = document.querySelector('#res-not-found');
-//             if (response.data.length !== 0) {
-//                 nfe.style.display = 'none';
-//                 response.data.forEach((elm, i) => {});
-//             } else {
-//                 nfe.style.display = 'block';
-//             }
-//                  console.log(res.childNodes)
-//                  lg.className = 'list-group';
-//                  a.className = 'list-group-item list-group-item-action';
-//                  lg.appendChild(a);
-//                  console.log(response)
-//         })
-//         .catch(err => {
-//             console.log(err)
-//         })
-// })
-
 $('input[name="search"]').keyup(function () {
     const res = $('.result');
     const nfe = $('#res-not-found');
@@ -37,7 +7,7 @@ $('input[name="search"]').keyup(function () {
     $.ajax({
         url: `http://127.0.0.1:8000/api/search?k=${$(this).val()}`,
         headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             'Content-Type': 'application/json'
         },
         method: 'GET',

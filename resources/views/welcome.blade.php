@@ -102,7 +102,7 @@
     <script src="{{mix('js/app.js')}}" `></script>
     <script src="{{mix('js/vendor.js')}}" `></script>
     <script src="{{mix('js/main.js')}}"></script>
-
+    <script src="{{asset('js/additional.js')}}"></script>
     <script>
         setTimeout(() => {
             $('body').removeClass('preloader-show').fadeIn();

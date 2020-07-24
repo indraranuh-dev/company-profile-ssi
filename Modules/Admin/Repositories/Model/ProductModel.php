@@ -11,6 +11,7 @@ use Modules\Admin\Repositories\Model\Entities\Product;
 use Modules\Admin\Repositories\Model\Entities\Supplier;
 use Modules\Admin\Repositories\ProductRepositoryInterface;
 use Modules\Admin\Repositories\Model\Entities\ProductSubCategory;
+use Modules\Admin\Repositories\Model\Entities\ProductType;
 use Modules\Admin\Repositories\Model\Entities\Tag;
 
 class ProductModel implements ProductRepositoryInterface
@@ -24,18 +25,27 @@ class ProductModel implements ProductRepositoryInterface
         return $product;
     }
 
-    public function findBySupplierNSubCategory($supplier, $subCategory)
+    public function findBySupplierNSubCategory($supplier, $subCategory, $request)
     {
-        $products = Product::orderBy('name', 'asc')->with('suppliers', 'subCategories', 'tags:name,slug_name');
+        $products = Product::orderBy('name', 'asc')->with(
+            'suppliers',
+            'subCategories',
+            'tags',
+            'type'
+        );
+
         $subCategories = $this->findSubCategory($subCategory);
         $suppliers = $this->findSupplier($supplier);
+        $category = $this->findTag($request->kategori);
+        $type = $this->findTag($request->jenis);
+        $inverter = $this->findTag($request->inverter);
 
         if ($subCategories) {
             $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
                 $query->where('subcategories_id', $subCategories->id);
             });
         } else {
-            return abort(404);
+            return [];
         }
 
         if ($suppliers) {
@@ -43,7 +53,29 @@ class ProductModel implements ProductRepositoryInterface
                 $query->where('suppliers_id', $suppliers->id);
             });
         } else {
-            return abort(404);
+            return [];
+        }
+
+        if ($type !== null || $category !== null || $inverter !== null) {
+            if ($request->kategori !== 'all' && !empty($request->kategori)) {
+                $products->whereHas('tags', function (Builder $query) use ($category) {
+                    $query->where('tags_id', $category->id);
+                });
+            }
+
+            if ($request->jenis !== 'all' && !empty($request->jenis)) {
+                $products->whereHas('tags', function (Builder $query) use ($type) {
+                    $query->where('tags_id', $type->id);
+                });
+            }
+
+            if ($request->inveter !== 'all' && !empty($request->inveter)) {
+                $products->whereHas('tags', function (Builder $query) use ($inverter) {
+                    $query->where('tags_id', $inverter->id);
+                });
+            }
+        } else {
+            return [];
         }
 
         return $products->paginate(10);
@@ -144,6 +176,11 @@ class ProductModel implements ProductRepositoryInterface
     protected function findTag($k)
     {
         return Tag::whereRaw('slug_name LIKE "%' . $k . '%"')->orWhereRaw('name LIKE "%' . $k . '%"')->first();
+    }
+
+    protected function findType($slug)
+    {
+        return ProductType::where('slug_name', $slug)->first();
     }
 
     protected function findSupplier($slug)

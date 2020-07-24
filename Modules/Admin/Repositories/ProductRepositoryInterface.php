@@ -19,7 +19,7 @@ interface ProductRepositoryInterface
      * @param string $subCategory
      * @return void
      */
-    public function findBySupplierNSubCategory($supplier, $subCategory);
+    public function findBySupplierNSubCategory($supplier, $subCategory, $request);
 
     /**
      * Find product with keywords

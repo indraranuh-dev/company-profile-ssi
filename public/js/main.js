@@ -317,7 +317,21 @@
                         itemSelector: '.portfolio-item',
                         layoutMode: 'fitRows'
                     });
-                    $('#portfolio-flters li').on('click', function () {
+                    $('#kategori input[type="radio"]').on('click', function () {
+                        $("#portfolio-flters li").removeClass('filter-active');
+                        $(this).addClass('filter-active');
+                        portfolioIsotope.isotope({
+                            filter: $(this).data('filter')
+                        });
+                    }); // Initiate venobox (lightbox feature used in portofilo)
+                    $('#jenis input[type="radio"]').on('click', function () {
+                        $("#portfolio-flters li").removeClass('filter-active');
+                        $(this).addClass('filter-active');
+                        portfolioIsotope.isotope({
+                            filter: $(this).data('filter')
+                        });
+                    }); // Initiate venobox (lightbox feature used in portofilo)
+                    $('#inverter input[type="radio"]').on('click', function () {
                         $("#portfolio-flters li").removeClass('filter-active');
                         $(this).addClass('filter-active');
                         portfolioIsotope.isotope({

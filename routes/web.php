@@ -20,6 +20,7 @@ Auth::routes(['verify' => true, 'register' => false]);
 // Route::get('/product/{category}/{subCategory}/{product}', function (Request $request) {
 //     if (!$request->category && !$request->subCategory) return abort(404, 'Halaman tidak ditemukan');
 // });
+
 Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter')->name('index');
 
 Route::group([
@@ -29,5 +30,7 @@ Route::group([
 ], function () {
     Route::get('/{subCategory}/{supplier}', 'CompanyProfileController@product')->name('index');
 });
+
+Route::get('/hubungi-kami', 'CompanyProfileController@contactUs')->middleware('VisitorCounter')->name('contact');
 
 Route::get('/image/{image}', 'CompanyProfileController@getProductImage')->name('productImage');
