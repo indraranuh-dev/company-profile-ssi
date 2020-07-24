@@ -38,13 +38,16 @@
                 <h4>Pintasan Link</h4>
                 <ul class="footer-ul">
                     <li class="footer-li">
-                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>Daikin</a>
+                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>HVAC - Applied</a>
                     </li>
                     <li class="footer-li">
-                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>Gree</a>
+                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>HVAC - Unitary</a>
                     </li>
                     <li class="footer-li">
-                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>Japan Air Filter</a>
+                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>General Supplies</a>
+                    </li>
+                    <li class="footer-li">
+                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>Filtration</a>
                     </li>
                 </ul>
             </div>
