@@ -4,7 +4,9 @@ namespace Modules\Admin\Repositories\Model;
 
 use Illuminate\Support\Str;
 use App\Utilities\Generator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Modules\Admin\Repositories\Model\Entities\Supplier;
 use Modules\Admin\Repositories\Model\Entities\ProductType;
 use Modules\Admin\Repositories\ProdTypeRepositoryInterface;
 
@@ -14,6 +16,18 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
     {
         $types = ProductType::orderBy('created_at', 'desc')->with('suppliers');
         return $types->get();
+    }
+
+    public function findBySupplier($supplier)
+    {
+        $types = ProductType::orderBy('name', 'asc')->with('suppliers:id,name', 'subTypes:id,name,slug_name');
+        $suppliers = $this->findSupplier($supplier);
+        if ($suppliers) {
+            $types->whereHas('suppliers', function (Builder $query) use ($suppliers) {
+                $query->where('suppliers_id', $suppliers->id);
+            });
+        }
+        return $types->get(['id', 'name', 'slug_name']);
     }
 
     public function findById($id)
@@ -66,9 +80,16 @@ class ProductTypeModel implements ProdTypeRepositoryInterface
         }
     }
 
+    protected function findSupplier($name)
+    {
+        return Supplier::where('name', $name)->first();
+    }
+
     protected function sync($request)
     {
         $type = ProductType::where('name', $request->name)->first();
+        // if ($request->method() !== 'PUT') {
+        // }else
         return $type->suppliers()->sync($this->decrypt(true, '', $request->supplier));
     }
 }

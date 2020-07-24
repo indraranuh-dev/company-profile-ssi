@@ -12,6 +12,13 @@ interface ProdTypeRepositoryInterface
     public function getAll();
 
     /**
+     * Get all product_type by passing supplier from resource
+     *
+     * @return void
+     */
+    public function findBySupplier($supplier);
+
+    /**
      * Find product_type by passing id
      *
      * @param int $id

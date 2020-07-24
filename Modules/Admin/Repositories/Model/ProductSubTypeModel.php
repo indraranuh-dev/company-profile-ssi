@@ -44,6 +44,7 @@ class ProductSubTypeModel implements ProdSubTypeRepositoryInterface
         $types = ProductSubType::findOrFail($this->decrypt(false, $id));
         $types->name = $request->name;
         $types->slug_name = Str::slug($request->name);
+        $types->save();
         return $this->sync($request);
     }
 

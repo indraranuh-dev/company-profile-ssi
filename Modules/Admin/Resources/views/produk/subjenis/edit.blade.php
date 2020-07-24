@@ -44,7 +44,7 @@ use App\Utilities\Generator;
                                     <div class="col-12">
                                         <label for="name">{{__('Nama sub jenis produk')}}</label>
                                         <input type="text" class="form-control @error('name'){{'is-invalid'}}@enderror"
-                                            name="name" id="name" value="{{$subType->name}}">
+                                            name="name" value="{{$subType->name}}">
                                         @error('name')<small class="text-danger">{{$message}}</small>@enderror
                                     </div>
                                 </fieldset>
