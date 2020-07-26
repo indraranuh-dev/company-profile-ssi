@@ -101,22 +101,23 @@ use App\Utilities\Generator;
                                 <fieldset class="form-group">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0">
-                                            <label for="inverter">{{__('Inverter')}}</label>
-                                            <select name="inverter"
-                                                class="form-control @error('inverter'){{'is-invalid'}}@enderror">
-                                                <option value="" disabled>Produk ini inverter ?</option>
-                                                @if($product->inverter === 'inverter')
-                                                <option value="inverter" selected>Ya</option>
+                                            <label for="type">{{__('Jenis produk')}}</label>
+                                            <select name="type"
+                                                class="form-control @error('type'){{'is-invalid'}}@enderror">
+                                                <option value="" disabled selected>Pilih jenis produk</option>
+                                                @foreach ($types as $type)
+                                                @if ($product->type->id === $type->id)
+                                                <option value="{{Generator::crypt($type->id, 'encrypt')}}" selected>
+                                                    {{$type->name}}
+                                                </option>
                                                 @else
-                                                <option value="inverter">Ya</option>
+                                                <option value="{{Generator::crypt($type->id, 'encrypt')}}">
+                                                    {{$type->name}}
+                                                </option>
                                                 @endif
-                                                @if($product->inverter === 'non-inverter')
-                                                <option value="non-inverter" selected>Bukan inverter</option>
-                                                @else
-                                                <option value="non-inverter">Bukan inverter</option>
-                                                @endif
+                                                @endforeach
                                             </select>
-                                            @error('inverter')<small class="text-danger">{{$message}}</small>@enderror
+                                            @error('type')<small class="text-danger">{{$message}}</small>@enderror
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -140,28 +141,6 @@ use App\Utilities\Generator;
                                             @error('subCategory')<small
                                                 class="text-danger">{{$message}}</small>@enderror
                                         </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="form-group row">
-                                    <div class="col-12">
-                                        <label for="type">{{__('Jenis produk')}}</label>
-                                        <select name="type"
-                                            class="form-control @error('type'){{'is-invalid'}}@enderror">
-                                            <option value="" disabled selected>Pilih jenis produk</option>
-                                            @foreach ($types as $type)
-                                            @if ($product->type->id === $type->id)
-                                            <option value="{{Generator::crypt($type->id, 'encrypt')}}" selected>
-                                                {{$type->name}}
-                                            </option>
-                                            @else
-                                            <option value="{{Generator::crypt($type->id, 'encrypt')}}">
-                                                {{$type->name}}
-                                            </option>
-                                            @endif
-                                            @endforeach
-                                        </select>
-                                        @error('type')<small class="text-danger">{{$message}}</small>@enderror
                                     </div>
                                 </fieldset>
 

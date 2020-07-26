@@ -11,7 +11,7 @@ class Product extends Model
     protected $hidden = ['pivot'];
 
     protected $fillable = [
-        'id', 'name', 'slug_name', 'product_image', 'description', 'series', 'inverter', 'spesification'
+        'id', 'name', 'slug_name', 'product_image', 'description', 'series', 'spesification'
     ];
 
     public function type()

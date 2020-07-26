@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->string('series')->nullable();
             $table->string('inverter')->nullable();
-            $table->string('spesification');
+            $table->string('spesification')->nullable();
             $table->unsignedBigInteger('product_type_id');
             $table->timestamps();
 

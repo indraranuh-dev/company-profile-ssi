@@ -22,12 +22,12 @@ class ProductRequest extends FormRequest
             'subCategory' => 'required',
             'series' => 'nullable',
             'supplier' => 'required',
-            'inverter' => 'required',
+            'inverter' => 'nullable',
             'type' => 'required',
             'tags' => 'required',
-            'features' => 'required',
+            'features' => 'nullable',
             'description' => 'required|min:10',
-            'spesification' => 'nullable|min:10'
+            'spesification' => 'nullable'
         ];
     }
 

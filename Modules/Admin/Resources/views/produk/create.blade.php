@@ -80,7 +80,7 @@ use App\Utilities\Generator;
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <label for="series">{{__('Series')}}</label>
                                             <input type="text"
-                                                class="form-control @error('name'){{'is-invalid'}}@enderror"
+                                                class="form-control @error('series'){{'is-invalid'}}@enderror"
                                                 name="series" id="series" value="{{old('series')}}">
                                             @error('series')<small class="text-danger">{{$message}}</small>@enderror
                                         </div>
@@ -90,14 +90,17 @@ use App\Utilities\Generator;
                                 <fieldset class="form-group">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0">
-                                            <label for="inverter">{{__('Inverter')}}</label>
-                                            <select name="inverter"
-                                                class="form-control @error('inverter'){{'is-invalid'}}@enderror">
-                                                <option value="" disabled selected>Produk ini inverter ?</option>
-                                                <option value="inverter">Ya</option>
-                                                <option value="non-inverter">Bukan inverter</option>
+                                            <label for="type">{{__('Jenis produk')}}</label>
+                                            <select name="type"
+                                                class="form-control @error('type'){{'is-invalid'}}@enderror">
+                                                <option value="" disabled selected>Pilih jenis produk</option>
+                                                @foreach ($types as $type)
+                                                <option value="{{Generator::crypt($type->id, 'encrypt')}}">
+                                                    {{$type->name}}
+                                                </option>
+                                                @endforeach
                                             </select>
-                                            @error('inverter')<small class="text-danger">{{$message}}</small>@enderror
+                                            @error('type')<small class="text-danger">{{$message}}</small>@enderror
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -114,22 +117,6 @@ use App\Utilities\Generator;
                                             @error('subCategory')<small
                                                 class="text-danger">{{$message}}</small>@enderror
                                         </div>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset class="form-group row">
-                                    <div class="col-12">
-                                        <label for="type">{{__('Jenis produk')}}</label>
-                                        <select name="type"
-                                            class="form-control @error('type'){{'is-invalid'}}@enderror">
-                                            <option value="" disabled selected>Pilih jenis produk</option>
-                                            @foreach ($types as $type)
-                                            <option value="{{Generator::crypt($type->id, 'encrypt')}}">
-                                                {{$type->name}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                        @error('type')<small class="text-danger">{{$message}}</small>@enderror
                                     </div>
                                 </fieldset>
 
