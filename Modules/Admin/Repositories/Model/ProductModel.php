@@ -36,9 +36,11 @@ class ProductModel implements ProductRepositoryInterface
 
         $subCategories = $this->findSubCategory($subCategory);
         $suppliers = $this->findSupplier($supplier);
-        $category = $this->findTag($request->kategori);
+        $category = $this->findType($request->kategori);
         $type = $this->findTag($request->jenis);
         $inverter = $this->findTag($request->inverter);
+
+        // dd($inverter);
 
         if ($subCategories) {
             $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
@@ -56,26 +58,26 @@ class ProductModel implements ProductRepositoryInterface
             return [];
         }
 
-        if ($type !== null || $category !== null || $inverter !== null) {
-            if ($request->kategori !== 'all' && !empty($request->kategori)) {
-                $products->whereHas('tags', function (Builder $query) use ($category) {
-                    $query->where('tags_id', $category->id);
-                });
+        if ($category) {
+            if ($request->kategori !== 'all' && $request->kategori) {
+                $products->where('product_type_id', $category->id);
             }
+        }
 
-            if ($request->jenis !== 'all' && !empty($request->jenis)) {
+        if ($type) {
+            if ($request->jenis !== 'all' && $request->jenis) {
                 $products->whereHas('tags', function (Builder $query) use ($type) {
                     $query->where('tags_id', $type->id);
                 });
             }
+        }
 
-            if ($request->inveter !== 'all' && !empty($request->inveter)) {
+        if ($inverter) {
+            if ($request->inverter !== 'all' && $request->inverter) {
                 $products->whereHas('tags', function (Builder $query) use ($inverter) {
                     $query->where('tags_id', $inverter->id);
                 });
             }
-        } else {
-            return [];
         }
 
         return $products->paginate(10);

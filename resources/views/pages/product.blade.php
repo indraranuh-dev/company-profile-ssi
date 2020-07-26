@@ -9,13 +9,19 @@
 <section class="portfolio product">
     <div class="container">
 
-        <div class="section-title" data-aos="fade-up">
-            <h2>Semua Produk</h2>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque, provident reprehenderit aliquam veniam
-                quo quibusdam nostrum rerum dolorum dolor eius mollitia praesentium sapiente, magnam expedita magni, id
-                voluptates dolore ab.
-            </p>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-7 col-md-7">
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Semua Produk</h2>
+                    <p>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque, provident reprehenderit aliquam
+                        veniam
+                        quo quibusdam nostrum rerum dolorum dolor eius mollitia praesentium sapiente, magnam expedita
+                        magni, id
+                        voluptates dolore ab.
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="row mt-3">
@@ -130,12 +136,12 @@
                     </div>
                     <div class="row my-3">
                         <div class="col-12">
-                            <button class="btn btn-primary">Terapkan</button>
+                            <button class="btn btn-primary"><i class="icofont-filter mr-2"></i>Terapkan</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-lg-9 col-md-9">
+            <div class="col-12 col-lg-9 col-md-9 {{(count($products) !== 0) ? 'align-self-center' : ''}}">
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
 
