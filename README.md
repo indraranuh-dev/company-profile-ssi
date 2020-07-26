@@ -2,6 +2,14 @@
 
 Setiap perkembangan dan perubahan file akan ditampilkan disini.
 
+<h3><b>Minggu 26/07/2020</b></h3>
+
+<ul> 
+    <li>Bug fixing filter produk</li>
+    <li>Revisi penghapusan inverter pada halaman tambah produk</li>
+    <li>Revisi rule pada halaman tambah produk</li>
+</ul>
+
 <h3><b>Jum'at 24/07/2020</b></h3>
 
 <ul> 
