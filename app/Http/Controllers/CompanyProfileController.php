@@ -43,7 +43,6 @@ class CompanyProfileController extends Controller
         $productCategories = ProductCategory::OrderBy('name', 'desc')
             ->with('subCategories.suppliers:name,slug_name')
             ->get(['id', 'name', 'slug_name']);
-
         $filters = $this->type->findBySupplier($supplier);
         $products = $this->model->findBySupplierNSubCategory($supplier, $subCategory, $request);
         return view('pages.product', compact(
