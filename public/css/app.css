@@ -12683,6 +12683,46 @@ ul.result li:hover {
     font-weight: 300;
 }
 
+section.contact {
+    padding: 20px 0 60px;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px 70px;
+    background: #fff;
+    border-bottom: 2px solid #2F308B;
+    border-top: 2px solid #2F308B;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.034);
+    border-radius: 5px;
+}
+
+.contact-form form {
+    width: 100%;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #2F308B;
+}
+
+textarea.form-control {
+    resize: none;
+    height: 100px;
+}
+
+.btn-detail-primary i {
+    font-size: 18px;
+    margin-right: .7rem;
+    transform: translateY(4px);
+}
+
 #accordion .card {
     background: none;
     border: none;

@@ -22,15 +22,14 @@ Auth::routes(['verify' => true, 'register' => false]);
 // });
 
 Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter')->name('index');
+Route::get('/hubungi-kami', 'CompanyProfileController@contactUs')->middleware('VisitorCounter')->name('contact');
 
 Route::group([
     'prefix' => 'produk',
     'as' => 'product.',
     'middleware' => 'VisitorCounter'
 ], function () {
-    Route::get('/{subCategory}/{supplier}', 'CompanyProfileController@product')->name('index');
+    Route::get('/{subCategory}/{supplier}', 'ProductController@product')->name('index');
 });
 
-Route::get('/hubungi-kami', 'CompanyProfileController@contactUs')->middleware('VisitorCounter')->name('contact');
-
-Route::get('/image/{image}', 'CompanyProfileController@getProductImage')->name('productImage');
+Route::get('/image/{image}', 'ProductController@getProductImage')->name('productImage');
