@@ -32,8 +32,7 @@
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse"
-                                        data-target="#kategori" aria-expanded="true" aria-controls="kategori">
+                                    <button class="btn btn-link" type="button" data-target="#kategori">
                                         Kategori
                                     </button>
                                 </h5>
@@ -65,14 +64,13 @@
                         <div class="card">
                             <div class="card-header" id="headingTwo">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                        data-target="#jenis" aria-expanded="false" aria-controls="jenis">
+                                    <button class="btn btn-link collapsed" type="button" data-target="#jenis">
                                         Jenis
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="jenis" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div id="jenis" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="form-check">
                                         <label class="form-check-label">
@@ -99,13 +97,13 @@
                         <div class="card">
                             <div class="card-header" id="headingThree">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                        data-target="#inverter" aria-expanded="false" aria-controls="inverter">
+                                    <button class="btn btn-link collapsed" type="button" data-target="#inverter">
                                         Inverter
                                     </button>
                                 </h5>
                             </div>
-                            <div id="inverter" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div id="inverter" class="collapse show" aria-labelledby="headingThree"
+                                data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="form-check">
                                         <label class="form-check-label">
@@ -201,6 +199,29 @@
         font-weight: 700;
         letter-spacing: 2px
     }
+
+    .collapse.show {
+        animation: try .5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+        height: 100%;
+    }
+
+    .collapse {
+        animation: try .5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+        height: 0;
+        overflow: hidden;
+    }
+
+    @keyframes try {
+        form {
+            height: 0;
+            opacity: 1;
+        }
+
+        to {
+            height: 100%;
+            opacity: 1;
+        }
+    }
 </style>
 @endpush
 
@@ -217,5 +238,10 @@
     $(document).ready(function () {
         $('.portfolio-item').css('top', '20px !important');
     })
+    $('#accordion .btn-link').click(function(){
+        const target = $(this).data('target');
+        $(target).toggleClass('show');
+    })
+
 </script>
 @endpush
