@@ -8,11 +8,11 @@
         <div class="row justify-content-center">
 
             <div class="col-12 col-lg-4 col-md-6 mt-4 mt-md-0 mb-3 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-                <div class="contact-form flex-column h-100 py-3" data-aos="fade-up">
+                <div class="contact-form flex-column h-100 justify-content-start" data-aos="fade-up">
                     <div class="info">
                         <div>
                             <i class="ri-map-pin-line"></i>
-                            <p>Jl. Solo-Karanganyar Km. 7, Triyagan, Kec. Mojolaban, Kabupaten Sukoharjo, Jawa
+                            <p>Jl. Solo-Karanganyar Km. 7, Triyagan, Mojolaban, Sukoharjo, Jawa
                                 Tengah 57554</p>
                         </div>
 
@@ -27,40 +27,49 @@
                         </div>
 
                     </div>
-                    <div class="d-block my-3">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2678.0427712301043!2d110.88708124034449!3d-7.574604299935071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a174835fd5f17%3A0xdb77971fdd6e2b86!2sCV.%20Sinar%20Sejahtera%20Inti%20(Daikin%2C%20McQuay%2C%20Gree%2C%20Mitsubishi%20Electric%20%26%20Japan%20Air%20Filter)!5e0!3m2!1sen!2sid!4v1591932085890!5m2!1sen!2sid"
-                            frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"
-                            style="height:12em; width:100%;">
-                        </iframe>
-                    </div>
                 </div>
             </div>
 
             <div class="col-12 col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="contact-form" data-aos="fade-up">
-                    <form action="mailto:mr.indra97@gmail.com" method="post">
+                    <form action="{{route('sendMail')}}" method="post">
+                        @csrf
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-12 col-lg-6 col-md-6 col-sm-12 mb-3 mb-lg-0">
-                                    <label for="name">Nama lengkap</label>
-                                    <input type="text" name="name" class="form-control" />
+                                    <label for="name">Nama Lengkap</label>
+                                    <input type="text" name="name"
+                                        class="form-control @error('name') {{'is-invalid'}}@enderror"
+                                        value="{{old('name')}}" />
+                                    @error('name') <small class="text-danger">{{$message}}</small>@enderror
                                 </div>
                                 <div class="col-12 col-lg-6 col-md-6 col-sm-12">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" />
+                                    <input type="text" class="form-control @error('email') {{'is-invalid'}}@enderror"
+                                        name="email" value="{{old('email')}}" />
+                                    @error('email') <small class="text-danger">{{$message}}</small>@enderror
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Judul pesan</label>
-                            <input type="text" class="form-control" name="subject" />
+                            <label for="subject">Telp.</label>
+                            <input type="text" class="form-control @error('phone') {{'is-invalid'}}@enderror"
+                                name="phone" value="{{old('phone')}}" />
+                            @error('phone') <small class="text-danger">{{$message}}</small>@enderror
                         </div>
                         <div class="form-group">
-                            <label for="message">Pesan anda</label>
-                            <textarea class="form-control" name="message"></textarea>
+                            <label for="subject">Judul Pesan</label>
+                            <input type="text" class="form-control @error('subject') {{'is-invalid'}}@enderror"
+                                name="subject" value="{{old('subject')}}" />
+                            @error('subject') <small class="text-danger">{{$message}}</small>@enderror
                         </div>
-                        <div class="text-center form-group mt-4">
+                        <div class="form-group">
+                            <label for="message">Pesan Anda</label>
+                            <textarea class="form-control @error('message') {{'is-invalid'}}@enderror"
+                                name="message">{{old('message')}}</textarea>
+                            @error('message') <small class="text-danger">{{$message}}</small>@enderror
+                        </div>
+                        <div class=" text-center form-group mt-4">
                             <button class="btn btn-detail-primary" type="submit">
                                 <i class="bx bx-mail-send"></i>Kirim pesan
                             </button>

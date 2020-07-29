@@ -23,6 +23,7 @@ Auth::routes(['verify' => true, 'register' => false]);
 
 Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter')->name('index');
 Route::get('/hubungi-kami', 'CompanyProfileController@contactUs')->middleware('VisitorCounter')->name('contact');
+Route::post('/hubungi-kami', 'CompanyProfileController@sendEmail')->name('sendMail');
 
 Route::group([
     'prefix' => 'produk',
