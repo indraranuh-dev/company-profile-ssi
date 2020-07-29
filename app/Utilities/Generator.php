@@ -40,4 +40,37 @@ class Generator
 
         return $output;
     }
+
+    /**
+     * Get uri segment from url
+     *
+     * @param integer $index
+     * @return void
+     */
+    public static function uriSegment($index)
+    {
+        $segmentPath = explode('/', request()->path());
+        if (!is_integer($index)) return '';
+        if ($index > (count($segmentPath) - 1)) return '';
+        else return $segmentPath[$index];
+    }
+
+    /**
+     * Get uri segment from url
+     *
+     * @param integer $index
+     * @return void
+     */
+    public static function urlSegment($index)
+    {
+        $segmentPath = explode('/', request()->path());
+        $host =  request()->getHttpHost();
+        if (!is_integer($index)) return '';
+        if ($index > (count($segmentPath) - 1)) {
+            return '';
+        } else {
+            unset($segmentPath[$index + 1]);
+            return  $host . '/' . implode('/', $segmentPath);
+        }
+    }
 }
