@@ -1,9 +1,17 @@
+@php
+use App\Utilities\Generator;
+@endphp
+
 @extends('layouts/static')
 
 @section('content')
 <nav class="breadcrumb container">
-    <a class="breadcrumb-item" href="{{route('index')}}">Home</a>
-    <span class="breadcrumb-item active">Produk</span>
+    <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
+    <a class="breadcrumb-item" style="text-transform: uppercase;"
+        href="{{route('product.category.index', Generator::uriSegment(1))}}">{{Generator::uriSegment(1)}}</a>
+    <a class="breadcrumb-item" style="text-transform: capitalize;"
+        href="{{route('product.subCategory.index', [Generator::uriSegment(1),Generator::uriSegment(2)])}}">{{Generator::uriSegment(2)}}</a>
+    <span class="breadcrumb-item active" style="text-transform: capitalize;">{{Generator::uriSegment(3)}}</span>
 </nav>
 
 <section class="portfolio product">

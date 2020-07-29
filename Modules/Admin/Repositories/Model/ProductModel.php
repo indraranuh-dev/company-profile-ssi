@@ -36,9 +36,6 @@ class ProductModel implements ProductRepositoryInterface
 
         $subCategories = $this->findSubCategory($subCategory);
         $suppliers = $this->findSupplier($supplier);
-        $category = $this->findType($request->kategori);
-        $type = $this->findTag($request->jenis);
-        $inverter = $this->findTag($request->inverter);
 
         if ($subCategories) {
             $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
@@ -56,21 +53,7 @@ class ProductModel implements ProductRepositoryInterface
             return [];
         }
 
-        if ($request->kategori !== 'all' && $request->kategori && $category) {
-            $products->where('product_type_id', $category->id);
-        }
-
-        if ($request->jenis !== 'all' && $request->jenis && $type) {
-            $products->whereHas('tags', function (Builder $query) use ($type) {
-                $query->whereRaw("tags_id = $type->id");
-            });
-        }
-
-        if ($request->inverter !== 'all' && $request->inverter && $inverter) {
-            $products->whereHas('tags', function (Builder $query) use ($inverter) {
-                $query->whereRaw("tags_id = $inverter->id");
-            });
-        }
+        $this->filter($products, $request);
 
         return $products->paginate(10);
     }
@@ -100,6 +83,21 @@ class ProductModel implements ProductRepositoryInterface
     }
 
     public function findBySlug($slug)
+    {
+        $product = Product::where('slug_name', $slug)
+            ->with(
+                'subCategories:id,name',
+                'suppliers:id,name',
+                'features.category:id,name',
+                'type:id,name',
+                'tags:id,name'
+            );
+        return ($product->limit(1)->get())
+            ? $product->limit(1)->get()
+            : [];
+    }
+
+    public function adminFindBySlug($slug)
     {
         $product = Product::where('slug_name', $slug)
             ->with(
@@ -153,6 +151,29 @@ class ProductModel implements ProductRepositoryInterface
         return $product->delete();
     }
 
+
+    protected function filter($products, $request)
+    {
+        $category = $this->findType($request->kategori);
+        $type = $this->findTag($request->jenis);
+        $inverter = $this->findTag($request->inverter);
+
+        if ($request->kategori !== 'all' && $request->kategori && $category) {
+            $products->where('product_type_id', $category->id);
+        }
+
+        if ($request->jenis !== 'all' && $request->jenis && $type) {
+            $products->whereHas('tags', function (Builder $query) use ($type) {
+                $query->whereRaw("tags_id = $type->id");
+            });
+        }
+
+        if ($request->inverter !== 'all' && $request->inverter && $inverter) {
+            $products->whereHas('tags', function (Builder $query) use ($inverter) {
+                $query->whereRaw("tags_id = $inverter->id");
+            });
+        }
+    }
 
     protected function decrypt($isArray = false, $id = '', $arr = [])
     {

@@ -46,6 +46,14 @@ interface ProductRepositoryInterface
     public function findBySlug($slug);
 
     /**
+     * find product by passing slug_name
+     *
+     * @param string $slug
+     * @return object
+     */
+    public function adminFindBySlug($slug);
+
+    /**
      * Store new product to resource
      *
      * @param Illuminate\Http\Request $request

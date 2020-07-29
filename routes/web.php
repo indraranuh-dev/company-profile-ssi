@@ -30,7 +30,13 @@ Route::group([
     'as' => 'product.',
     'middleware' => 'VisitorCounter'
 ], function () {
-    Route::get('/{subCategory}/{supplier}', 'ProductController@product')->name('index');
+    Route::get('/{category}', function ($category) {
+    })->name('category.index');
+    Route::get('/{category}/{subCategory}', function ($category, $subCategory) {
+    })->name('subCategory.index');
+    Route::get('/{category}/{subCategory}/{supplier}', 'ProductController@product')->name('vendor.index');
+    Route::get('/{category}/{subCategory}/{supplier}/{product}', 'ProductController@showProduct')->name('show');
 });
 
 Route::get('/image/{image}', 'ProductController@getProductImage')->name('productImage');
+Route::get('/icon/{icon}', 'ProductController@getFeatureIcon')->name('icon');

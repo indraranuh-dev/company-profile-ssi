@@ -49,7 +49,8 @@
                         <a href="#">{{$sub->name}}</a>
                         <ul>
                             @foreach ($sub->suppliers as $supplier)
-                            <a href="{{route('product.index', [$sub->slug_name, $supplier->slug_name])}}">
+                            <a
+                                href="{{route('product.index', [$category->slug_name, $sub->slug_name, $supplier->slug_name])}}">
                                 {{$supplier->name}}
                             </a>
                             @endforeach

@@ -107,7 +107,7 @@ class ProductController extends Controller
      */
     public function show(Request $request, $slug)
     {
-        $product = $this->model->findBySlug($slug);
+        $product = $this->model->adminFindBySlug($slug);
         $featureCategories = $this->featureCategory->getAll();
         return view('admin::produk.show', compact(
             'product',
