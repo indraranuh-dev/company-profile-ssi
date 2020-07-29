@@ -7,6 +7,8 @@ use App\Utilities\Generator;
 @section('content')
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
+    <a class="breadcrumb-item" style="text-transform: capitalize;"
+        href="{{route('product.index')}}">{{Generator::uriSegment(0)}}</a>
     <a class="breadcrumb-item" style="text-transform: uppercase;"
         href="{{route('product.category.index', Generator::uriSegment(1))}}">{{Generator::uriSegment(1)}}</a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"

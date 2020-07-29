@@ -3,10 +3,13 @@ use App\Utilities\Generator;
 @endphp
 
 @extends('layouts/static')
+@section('title', 'Produk')
 
 @section('content')
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
+    <a class="breadcrumb-item" style="text-transform: capitalize;"
+        href="{{route('product.index')}}">{{Generator::uriSegment(0)}}</a>
     <a class="breadcrumb-item" style="text-transform: uppercase;"
         href="{{route('product.category.index', Generator::uriSegment(1))}}">{{Generator::uriSegment(1)}}</a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
@@ -34,11 +37,12 @@ use App\Utilities\Generator;
                 <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="400">
 
                     @forelse ($products as $product)
-                    <div class="col-12 col-lg-4 col-md-6 mb-5 mb-lg-0 mb-md-0 text-center">
-                        <img class="img-fluid" src="{{route('productImage', $product->product_image)}}"
-                            alt="product-image">
+                    <div class="col-12 col-lg-5 col-md-6 mb-3 text-center">
+                        <div class="img-container">
+                            <img src="{{route('productImage', $product->product_image)}}" alt="product-image">
+                        </div>
                     </div>
-                    <div class="col-12 col-lg-6 col-md-6 align-self-center">
+                    <div class="col-12 col-lg-6 col-md-6">
                         <h4 class="text-left" style="font-weight: 700;">{{$product->name}}</h4>
                         <h6 class="text-left" style="text-transform:uppercase;">{{$product->series}}</h6>
                         <div class="mb-3">
@@ -108,6 +112,18 @@ use App\Utilities\Generator;
 <style>
     section {
         padding: 20px 0 60px;
+    }
+
+    .img-container {
+        height: 250px;
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .img-container img {
+        height: 100%;
+        margin: auto
     }
 </style>
 @endpush

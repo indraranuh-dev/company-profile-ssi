@@ -7,7 +7,7 @@
     <meta name="description" content="Sinar Sejahtera Inti company profile">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{config('app.name')}}</title>
+    <title>{{config('app.name')}} | @yield('title')</title>
 
     <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet' " href="{{mix('css/app.css')}}">
     <link rel="stylesheet" href=" {{mix('css/vendor.css')}}">
