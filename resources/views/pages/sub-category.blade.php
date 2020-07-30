@@ -44,7 +44,7 @@ use App\Utilities\Generator as G;
                 </p>
                 <ul class="list-group">
                     @foreach ($suppliers as $supplier)
-                    <li class="list-group-item border-0 pl-0" style="background:none">
+                    <li class="list-group-item border-0 pl-0 py-2" style="background:none">
                         <a
                             href="{{route('product.vendor.index', [G::uriSegment(1),G::uriSegment(2), $supplier->slug_name])}}">
                             <i class='bx bxs-chevron-right mr-2'></i>{{$supplier->name}}
