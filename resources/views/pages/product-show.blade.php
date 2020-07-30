@@ -80,7 +80,7 @@ use App\Utilities\Generator as G;
                                             onclick="fetchDescription('{{$feature->slug_name}}')">
                                             <img src="{{route('icon', $feature->icon)}}" alt="icon" height="60px">
                                         </a>
-                                        <h6 class="my-2 text-muted"><strong>{{$feature->name}}</strong></h6>
+                                        <h6 class="my-2 text-muted">{{$feature->name}}</h6>
                                     </div>
                                     @endif
                                     @endforeach
@@ -94,11 +94,22 @@ use App\Utilities\Generator as G;
                     @if ($product->spesification !== '' && $product->spesification !== null)
                     <div class="col-12 col-lg-8 col-md-8 my-3">
                         <h5 class="text-center"
-                            style="font-weight: 700; text-transform:uppercase; font-size:14px; letter-spacing:2px;">
+                            style="font-weight: 700; text-transform:uppercase; font-size:17px; letter-spacing:2px;">
                             Spesifikasi
                         </h5>
-                        <img src="{{route('productImage', $product->spesification)}}" alt="{{$product->spesification}}"
-                            width="100%">
+                        <div class="portfolio-wrap text-center" style="background: none;">
+                            <img src="{{route('productImage', $product->spesification)}}" alt="spesifikasi"
+                                width="100%">
+                            <div class="portfolio-info">
+                                <div class="portfolio-links">
+                                    <a href="{{route('productImage', $product->spesification)}}" class="venobox"
+                                        title="Perbesar Gambar" data-placement="bottom">
+                                        <i class="bx bx-zoom-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     @endif
 

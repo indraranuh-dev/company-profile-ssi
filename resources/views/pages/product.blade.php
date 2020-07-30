@@ -149,7 +149,7 @@ use App\Utilities\Generator;
                     </div>
                 </form>
             </div>
-            <div class="col-12 col-lg-9 col-md-9 {{(count($products) !== 0) ? 'align-self-center' : ''}}">
+            <div class="col-12 col-lg-9 col-md-9 {{(count($products) === 0) ? 'align-self-center' : ''}}">
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
 
