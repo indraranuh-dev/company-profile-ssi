@@ -18,11 +18,33 @@ class ProductModel implements ProductRepositoryInterface
 {
     public function getAll($request)
     {
-        $product = Product::orderBy('name', 'asc')->paginate(10);
+        $product = Product::orderBy('name', 'asc')->with('suppliers:id,name');
         // if(! empty($request->kategori) && $request->kategori !== 'all'){
         //     $product->whereHas('')
         // }
-        return $product;
+        return $product->paginate(10);
+    }
+
+    public function findBySubCategory($subCategory, $request)
+    {
+        $products = Product::orderBy('name', 'asc')->with(
+            'suppliers',
+            'subCategories',
+            'tags',
+            'type'
+        );
+
+        $subCategories = $this->findSubCategory($subCategory);
+
+        if ($subCategories) {
+            $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
+                $query->where('subcategories_id', $subCategories->id);
+            });
+        } else {
+            return [];
+        }
+
+        return $products->paginate(10);
     }
 
     public function findBySupplierNSubCategory($supplier, $subCategory, $request)

@@ -15,6 +15,14 @@ interface ProductRepositoryInterface
     /**
      * Find product by passing suppliers slug and subcategories slug
      *
+     * @param string $subCategory
+     * @return void
+     */
+    public function findBySubCategory($subCategory, $request);
+
+    /**
+     * Find product by passing suppliers slug and subcategories slug
+     *
      * @param string $supplier
      * @param string $subCategory
      * @return void
