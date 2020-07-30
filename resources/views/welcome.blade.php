@@ -46,13 +46,18 @@
                 <ul>
                     @foreach ($category->subCategories as $sub)
                     <li class="{{(! $sub->suppliers->isEmpty()) ? 'drop-down' : ''}}">
-                        <a href="#">{{$sub->name}}</a>
+                        <a href="{{route('product.subCategory.index',
+                             ['hvac', $sub->slug_name])}}">
+                            {{$sub->name}}
+                        </a>
                         <ul>
                             @foreach ($sub->suppliers as $supplier)
-                            <a
-                                href="{{route('product.index', [$category->slug_name, $sub->slug_name, $supplier->slug_name])}}">
-                                {{$supplier->name}}
-                            </a>
+                            <li>
+                                <a
+                                    href="{{route('product.vendor.index', [$category->slug_name, $sub->slug_name, $supplier->slug_name])}}">
+                                    {{$supplier->name}}
+                                </a>
+                            </li>
                             @endforeach
                         </ul>
                     </li>

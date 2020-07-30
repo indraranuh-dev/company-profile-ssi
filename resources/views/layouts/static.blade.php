@@ -16,6 +16,9 @@
 </head>
 
 <body class="preloader-show">
+    @php
+    use App\Utilities\Generator as G;
+    @endphp
 
     {{-- Header --}}
     <header id="header" class="fixed-top d-flex align-items-center">
@@ -67,7 +70,10 @@
                                 <ul>
                                     @foreach ($category->subCategories as $sub)
                                     <li class="{{(! $sub->suppliers->isEmpty()) ? 'drop-down' : ''}}">
-                                        <a href="javascript:void(0)">{{$sub->name}}</a>
+                                        <a href="{{route('product.subCategory.index',
+                                             [G::uriSegment(1), $sub->slug_name])}}">
+                                            {{$sub->name}}
+                                        </a>
                                         <ul>
                                             @foreach ($sub->suppliers as $supplier)
                                             <li>

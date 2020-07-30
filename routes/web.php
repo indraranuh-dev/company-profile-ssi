@@ -34,9 +34,8 @@ Route::group([
     })->name('index');
     Route::get('/{category}', function ($category) {
     })->name('category.index');
-    Route::get('/{category}/{subCategory}', function ($category, $subCategory) {
-    })->name('subCategory.index');
-    Route::get('/{category}/{subCategory}/{supplier}', 'ProductController@product')->name('vendor.index');
+    Route::get('/{category}/{subCategory}', 'ProductController@getProducts')->name('subCategory.index');
+    Route::get('/{category}/{subCategory}/{supplier}', 'ProductController@getSupplierProducts')->name('vendor.index');
     Route::get('/{category}/{subCategory}/{supplier}/{product}', 'ProductController@showProduct')->name('show');
 });
 
