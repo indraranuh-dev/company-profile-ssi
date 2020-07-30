@@ -1,5 +1,7 @@
 @extends('layouts/static')
 
+@section('title', 'Hubungi Kami')
+
 @section('content')
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" href="{{route('index')}}">Home</a>

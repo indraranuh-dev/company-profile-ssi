@@ -3,6 +3,7 @@ use App\Utilities\Generator as G;
 @endphp
 
 @extends('layouts/static')
+
 @section('title', 'Produk')
 
 @section('content')

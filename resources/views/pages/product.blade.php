@@ -4,6 +4,8 @@ use App\Utilities\Generator;
 
 @extends('layouts/static')
 
+@section('title', 'Produk')
+
 @section('content')
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
