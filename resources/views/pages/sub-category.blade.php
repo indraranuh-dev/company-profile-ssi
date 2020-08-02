@@ -66,23 +66,30 @@ use App\Utilities\Generator as G;
                         <h4 class="text-left" style="font-weight: 700;">
                             {{$product->name}}
                         </h4>
-                        <p class="text-left" style="text-transform:uppercase;">{{$product->series}}</p>
+                        <h6 class="text-left text-muted" style="text-transform:uppercase; font-weight:600;">
+                            <strong>{{$product->suppliers[0]->name}}</strong> -
+                            {{$product->series}}
+                        </h6>
                         <div class="portfolio-wrap text-center" style="background: none;">
                             <img class="img-fluid" src="{{route('productImage', $product->product_image)}}"
                                 alt="product-image" style="height: 150px">
                             <div class="portfolio-info">
-                                <p><span class="text-white">{{$product->suppliers[0]->name}}</span></p>
                                 <div class="portfolio-links">
-                                    <a href="{{route('productImage', $product->product_image)}}"
-                                        data-gall="portfolioGallery" class="venobox" title="Perbesar Gambar"
-                                        data-placement="bottom">
+                                    <a href="{{route('productImage', $product->product_image)}}" class="venobox"
+                                        title="Perbesar Gambar" data-placement="bottom">
                                         <i class="bx bx-zoom-in"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <a href="{{request()->url().'/'.$product->slug_name}}" class="btn btn-detail-primary mt-3">Lihat
-                            detail</a>
+                        <a href="{{route('product.show',[
+                            G::uriSegment(1),
+                            G::uriSegment(2),
+                            $product->suppliers[0]->slug_name,
+                            $product->slug_name]
+                            )}}" class="btn btn-detail-primary mt-3">
+                            Lihat detail
+                        </a>
                     </div>
                     @empty
                     <div class="col-12 text-center">

@@ -158,7 +158,9 @@ use App\Utilities\Generator;
                     @forelse ($products as $product)
                     <div class="col-lg-4 col-md-6 portfolio-item pb-5 text-center">
                         <h4 class="text-left" style="font-weight: 700;">{{$product->name}}</h4>
-                        <p class="text-left" style="text-transform:uppercase;">{{$product->series}}</p>
+                        <h6 class="text-left text-muted" style="text-transform:uppercase; font-weight:600;">
+                            {{$product->series}}
+                        </h6>
                         <div class="portfolio-wrap text-center" style="background: none;">
                             <img class="img-fluid" src="{{route('productImage', $product->product_image)}}"
                                 alt="product-image" style="height: 150px">

@@ -30,10 +30,8 @@ Route::group([
     'as' => 'product.',
     'middleware' => 'VisitorCounter'
 ], function () {
-    Route::get('/', function () {
-    })->name('index');
-    Route::get('/{category}', function ($category) {
-    })->name('category.index');
+    Route::get('/', 'ProductController@index')->name('index');
+    Route::get('/{category}', 'ProductController@getCategory')->name('category.index');
     Route::get('/{category}/{subCategory}', 'ProductController@getProducts')->name('subCategory.index');
     Route::get('/{category}/{subCategory}/{supplier}', 'ProductController@getSupplierProducts')->name('vendor.index');
     Route::get('/{category}/{subCategory}/{supplier}/{product}', 'ProductController@showProduct')->name('show');
