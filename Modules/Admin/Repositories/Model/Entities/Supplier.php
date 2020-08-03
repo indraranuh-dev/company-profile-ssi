@@ -24,6 +24,16 @@ class Supplier extends Model
         );
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(
+            ProductCategory::class,
+            'suppliers_has_categories',
+            'suppliers_id',
+            'categories_id'
+        );
+    }
+
     public function subCategories()
     {
         return $this->belongsToMany(

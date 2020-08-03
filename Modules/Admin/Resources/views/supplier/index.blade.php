@@ -42,6 +42,7 @@ use App\Utilities\Generator;
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
+                                <th>Kategori</th>
                                 <th>Sub Kategori</th>
                                 <th>Dibuat pada</th>
                                 <th>Diubah pada</th>
@@ -54,9 +55,22 @@ use App\Utilities\Generator;
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td>{{$supplier->name}}</td>
                                 <td>
+                                    @if (!$supplier->categories->isEmpty())
+                                    @foreach ($supplier->categories as $category)
+                                    <span class="badge badge-info">{{$category->name}}</span><br>
+                                    @endforeach
+                                    @else
+                                    -
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (!$supplier->subCategories->isEmpty())
                                     @foreach ($supplier->subCategories as $subCategory)
                                     <span class="badge badge-info">{{$subCategory->name}}</span><br>
                                     @endforeach
+                                    @else
+                                    -
+                                    @endif
                                 </td>
                                 <td>{{Converter::convertDate($supplier->created_at)}}</td>
                                 <td>{{Converter::convertDate($supplier->updated_at)}}</td>

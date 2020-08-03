@@ -15,7 +15,7 @@ class SupplierRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|unique:suppliers,name,' . $this->name,
-            'subCategory' => 'required'
+            'subCategory' => 'nullable'
         ];
     }
 

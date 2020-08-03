@@ -48,15 +48,36 @@ use App\Utilities\Generator;
 
                                 <fieldset class="form-group row">
                                     <div class="col-12">
-                                        <label for="name">{{__('Sub kategori')}}</label>
-                                        <select name="subCategory[]" multiple
-                                            class="form-control @error('subCategory'){{'is-invalid'}}@enderror">
-                                            @foreach ($selects['selected'] as $selected)
+                                        <label for="category">{{__('Kategori')}}</label>
+                                        <select name="category"
+                                            class="form-control @error('category'){{'is-invalid'}}@enderror">
+                                            <option value="" disabled selected>Pilih kategori</option>
+                                            @foreach ($sc['selected'] as $selected)
                                             <option value="{{Generator::crypt($selected['id'], 'encrypt')}}" selected>
                                                 {{$selected['name']}}
                                             </option>
                                             @endforeach
-                                            @foreach ($selects['notSelected'] as $notSelected)
+                                            @foreach ($sc['notSelected'] as $notSelected)
+                                            <option value="{{Generator::crypt($notSelected['id'], 'encrypt')}}">
+                                                {{$notSelected['name']}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('category')<small class="text-danger">{{$message}}</small>@enderror
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="form-group row">
+                                    <div class="col-12">
+                                        <label for="name">{{__('Sub kategori')}}</label>
+                                        <select name="subCategory[]" multiple
+                                            class="form-control @error('subCategory'){{'is-invalid'}}@enderror">
+                                            @foreach ($ssc['selected'] as $selected)
+                                            <option value="{{Generator::crypt($selected['id'], 'encrypt')}}" selected>
+                                                {{$selected['name']}}
+                                            </option>
+                                            @endforeach
+                                            @foreach ($ssc['notSelected'] as $notSelected)
                                             <option value="{{Generator::crypt($notSelected['id'], 'encrypt')}}">
                                                 {{$notSelected['name']}}
                                             </option>

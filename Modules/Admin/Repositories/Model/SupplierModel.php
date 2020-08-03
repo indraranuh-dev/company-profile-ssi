@@ -69,6 +69,9 @@ class SupplierModel implements SupplierRepositoryInterface
     protected function sync($request)
     {
         $find = Supplier::where('name', $request->name)->first();
-        return $find->subCategories()->sync($this->decrypt(true, '', $request->subCategory));
+        $find->categories()->sync($this->decrypt(false, $request->category));
+        if ($request->subCategory) {
+            return $find->subCategories()->sync($this->decrypt(true, '', $request->subCategory));
+        }
     }
 }

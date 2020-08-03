@@ -21,7 +21,7 @@ class CompanyProfileController extends Controller
     public function index()
     {
         $productCategories = ProductCategory::OrderBy('name', 'desc')
-            ->with('subCategories.suppliers:name,slug_name')
+            ->with('subCategories.suppliers:name,slug_name', 'suppliers:id,name,slug_name')
             ->get(['id', 'name', 'slug_name']);
 
         return view('welcome', compact(
@@ -41,7 +41,6 @@ class CompanyProfileController extends Controller
 
     public function sendEmail(SendMailRequest $request)
     {
-        // dd($request->all());
         Mail::to('indraranuh1@gmail.com')->send(new ContactUsClientEmail(
             $request->name,
             $request->email,

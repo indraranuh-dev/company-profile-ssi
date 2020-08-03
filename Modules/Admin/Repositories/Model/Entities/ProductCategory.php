@@ -12,6 +12,16 @@ class ProductCategory extends Model
 
     protected $hidden = ['pivot'];
 
+    public function suppliers()
+    {
+        return $this->belongsToMany(
+            Supplier::class,
+            'suppliers_has_categories',
+            'categories_id',
+            'suppliers_id',
+        );
+    }
+
     public function subCategories()
     {
         return $this->belongsToMany(

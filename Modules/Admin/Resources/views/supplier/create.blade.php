@@ -45,7 +45,26 @@ use App\Utilities\Generator;
 
                                 <fieldset class="form-group row">
                                     <div class="col-12">
-                                        <label for="name">{{__('Sub kategori')}}</label>
+                                        <label for="category">{{__('Kategori')}}</label>
+                                        <select name="category"
+                                            class="form-control @error('category'){{'is-invalid'}}@enderror">
+                                            <option value="" disabled selected>Pilih kategori</option>
+                                            @foreach ($categories as $category)
+                                            <option value="{{Generator::crypt($category->id, 'encrypt')}}">
+                                                {{$category->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('category')<small class="text-danger">{{$message}}</small>@enderror
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="form-group row">
+                                    <div class="col-12">
+                                        <label for="name">
+                                            {{__('Sub kategori')}}
+                                            <small id="helpId" class="text-muted">(Boleh kosong)</small>
+                                        </label>
                                         <select name="subCategory[]" multiple
                                             class="form-control @error('subCategory'){{'is-invalid'}}@enderror">
                                             @foreach ($subCategories as $subCategory)
@@ -54,7 +73,6 @@ use App\Utilities\Generator;
                                             </option>
                                             @endforeach
                                         </select>
-                                        @error('subCategory')<small class="text-danger">{{$message}}</small>@enderror
                                     </div>
                                 </fieldset>
 
