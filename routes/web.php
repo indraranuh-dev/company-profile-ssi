@@ -35,6 +35,14 @@ Route::group([
     Route::get('/{category}/{subCategory}', 'ProductController@getProducts')->name('subCategory.index');
     Route::get('/{category}/{subCategory}/{supplier}', 'ProductController@getSupplierProducts')->name('vendor.index');
     Route::get('/{category}/{subCategory}/{supplier}/{product}', 'ProductController@showProduct')->name('show');
+    Route::group([
+        'prefix' => 'filtration',
+        'as' => 'filtration.'
+    ], function () {
+        Route::get('/', 'ProductController@showProduct')->name('index');
+        Route::get('/{supplier}', 'ProductController@showProduct')->name('supplier.index');
+        Route::get('/{supplier}/{product}', 'ProductController@showProduct')->name('show');
+    });
 });
 
 Route::get('/image/{image}', 'ProductController@getProductImage')->name('productImage');

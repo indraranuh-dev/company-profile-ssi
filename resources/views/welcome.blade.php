@@ -40,7 +40,8 @@
         @slot('produk')
         <ul>
             @foreach ($productCategories as $category)
-            <li class="{{(! $category->subcategories->isEmpty()) ? 'drop-down' : ''}}">
+            @if (! $category->subcategories->isEmpty())
+            <li class="drop-down">
                 <a href="#">{{$category->name}}</a>
                 @if (! $category->subcategories->isEmpty())
                 <ul>
@@ -65,6 +66,22 @@
                 </ul>
                 @endif
             </li>
+            @else
+            <li class="{{(! $category->suppliers->isEmpty()) ? 'drop-down' : ''}}">
+                <a href="#">{{$category->name}}</a>
+                @if (! $category->suppliers->isEmpty())
+                <ul class="py-1">
+                    @foreach ($category->suppliers as $supplier)
+                    <li class="m-0">
+                        <a href="{{route('product.filtration.supplier.index', $supplier->slug_name)}}">
+                            {{$supplier->name}}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+                @endif
+            </li>
+            @endif
             @endforeach
         </ul>
         @endslot

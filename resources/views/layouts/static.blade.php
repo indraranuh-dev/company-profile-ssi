@@ -69,14 +69,15 @@
                         <a href="javascript:void(0)">Produk</a>
                         <ul>
                             @foreach ($productCategories as $category)
-                            <li class="{{(! $category->subcategories->isEmpty()) ? 'drop-down' : ''}}">
-                                <a href="javascript:void(0)">{{$category->name}}</a>
+                            @if (! $category->subcategories->isEmpty())
+                            <li class="drop-down">
+                                <a href="#">{{$category->name}}</a>
                                 @if (! $category->subcategories->isEmpty())
                                 <ul>
                                     @foreach ($category->subCategories as $sub)
                                     <li class="{{(! $sub->suppliers->isEmpty()) ? 'drop-down' : ''}}">
                                         <a href="{{route('product.subCategory.index',
-                                             [G::uriSegment(1), $sub->slug_name])}}">
+                                             ['hvac', $sub->slug_name])}}">
                                             {{$sub->name}}
                                         </a>
                                         <ul>
@@ -94,6 +95,22 @@
                                 </ul>
                                 @endif
                             </li>
+                            @else
+                            <li class="{{(! $category->suppliers->isEmpty()) ? 'drop-down' : ''}}">
+                                <a href="#">{{$category->name}}</a>
+                                @if (! $category->suppliers->isEmpty())
+                                <ul class="py-1">
+                                    @foreach ($category->suppliers as $supplier)
+                                    <li class="m-0">
+                                        <a href="{{route('product.filtration.supplier.index', $supplier->slug_name)}}">
+                                            {{$supplier->name}}
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                @endif
+                            </li>
+                            @endif
                             @endforeach
                         </ul>
                     </li>
