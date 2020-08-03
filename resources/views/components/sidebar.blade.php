@@ -106,6 +106,36 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item {{request()->routeIs('admin.jaf*') ? 'selected' : ''}}">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark {{request()->routeIs('admin.jaf*') ? 'active' : ''}}"
+                        href="javascript:void(0)" aria-expanded="false">
+                        <i class="fa fa-fw fa-filter"></i>
+                        <span class="hide-menu">Japan Air Filter</span>
+                    </a>
+                    <ul aria-expanded="false"
+                        class="collapse first-level {{request()->is('_admin/japan-air-filter*') ? 'in' : ''}}">
+
+                        <li class="sidebar-item">
+                            <a href="{{route('admin.jaf.index')}}"
+                                class="sidebar-link ml-4 {{request()->routeIs('admin.jaf.*') ? 'active' : ''}}">
+                                <span class="hide-menu">
+                                    Semua produk
+                                </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="{{route('admin.feat.category.index')}}"
+                                class="sidebar-link ml-4 {{request()->routeIs('admin.feat.category.*') ? 'active' : ''}}">
+                                <span class="hide-menu">
+                                    Kategori
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
                 <li class="sidebar-item {{request()->routeIs('admin.tag*') ? 'selected' : ''}}">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link {{request()->routeIs('admin.tag*') ? 'active' : ''}}"
                         href="{{route('admin.tag.index')}}" aria-expanded="false">
