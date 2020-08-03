@@ -40,7 +40,7 @@ class ProductSubCategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->getAll();
+        $categories = $this->category->getWhere(['name', '!=', 'Filtration']);
         return view('admin::produk.subkategori.create', compact('categories'));
     }
 

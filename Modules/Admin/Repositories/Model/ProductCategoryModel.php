@@ -16,6 +16,21 @@ class ProductCategoryModel implements ProdCatRepositoryInterface
         return $category->get();
     }
 
+    public function getWhere($array)
+    {
+        if (is_array($array)) {
+            if (count($array) === 2) {
+                $category = ProductCategory::orderBy('created_at', 'desc')->where($array[0], $array[1]);
+                return $category->get();
+            } elseif (count($array) === 3) {
+                $category = ProductCategory::orderBy('created_at', 'desc')->where($array[0], $array[1], $array[2]);
+                return $category->get();
+            }
+            return [];
+        }
+        return [];
+    }
+
     public function findById($id)
     {
         $category = ProductCategory::findOrfail($this->decrypt(false, $id));

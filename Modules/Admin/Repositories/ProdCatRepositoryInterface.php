@@ -12,6 +12,15 @@ interface ProdCatRepositoryInterface
     public function getAll();
 
     /**
+     * Get all product_category from resource where array 0 = array 1
+     * ex ['name', 'ssi']
+     *
+     * @param array $array
+     * @return void
+     */
+    public function getWhere($array);
+
+    /**
      * Find product_category by passing id
      *
      * @param int $id
