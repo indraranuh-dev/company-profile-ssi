@@ -2,108 +2,168 @@
 use App\Utilities\Generator as G;
 @endphp
 
-@extends('layouts/static')
+@extends('layouts/filtration')
 
 @section('title', 'Produk')
 
 @section('content')
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
-    <span class="breadcrumb-item active" style="text-transform: capitalize;">{{G::uriSegment(0)}}</span>
+    <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">
+        {{request()->segment(1)}}
+    </a>
+    <a class="breadcrumb-item" style="text-transform: capitalize;"
+        href="{{route('product.'.request()->segment(2).'.index')}}">
+        {{request()->segment(2)}}
+    </a>
+    <span class="breadcrumb-item active" style="text-transform: capitalize;">
+        {{request()->segment(3)}}
+    </span>
 </nav>
 
-<section class="product more-services">
-    <div class="container">
+<section class="portfolio product">
+    {{-- <div class="container">
 
+        @if(count($products) !== 0)
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-7 col-md-7" data-aos="fade-up">
-                <div class="section-title">
-                    <h2>Produk</h2>
-                    <p>
-                        Kami menyediakan 3 kategori produk yang biasa digunakan pada industri maupun non industri.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil nisi error molestiae mollitia
-                        nesciunt, quas amet possimus quo totam repellendus iste ipsa voluptas aperiam ullam non quia
-                        cum, recusandae molestias.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-
-            <div class="col-12 col-lg-4 col-md-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-stretch" data-aos="fade-right"
-                data-oas-delay="300" data-aos-duration="800">
-                <div class="card p-0">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <strong style="text-transform: uppercase; letter-spacing:2px;">HVAC</strong>
-                        </h5>
-                        <p class="card-text text-justify">
-                            HVAC adalah Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime dolores
-                            reiciendis voluptatum facilis, laborum sint dicta rerum perspiciatis architecto similique.
-                        </p>
-                        <div class="read-more">
-                            <a href="{{route('product.category.index', ['hvac'])}}">
-                                <i class="icofont-arrow-right"></i> Baca selengkapnya
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-4 col-md-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-stretch" data-aos="fade-up"
-                ata-oas-delay="300" data-aos-duration="800">
-                <div class="card p-0">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <strong style="text-transform: uppercase; letter-spacing:2px;">General Supplies</strong>
-                        </h5>
-                        <p class="card-text text-justify">
-                            General Supplies adalah Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                            beatae hic fugit cupiditate sequi exercitationem saepe commodi quam similique sint.
-                        </p>
-                        <div class="read-more">
-                            <a href="{{route('product.category.index', ['general-supplies'])}}">
-                                <i class="icofont-arrow-right"></i> Baca selengkapnya
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-12 col-lg-4 col-md-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-stretch" data-aos="fade-left"
-                data-oas-delay="300" data-aos-duration="800">
-                <div class="card p-0">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <strong style="text-transform: uppercase; letter-spacing:2px;">Filtration</strong>
-                        </h5>
-                        <p class="card-text text-justify">
-                            Filtration adalah Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad iusto
-                            laboriosam quisquam. Cum modi fuga ducimus eligendi id commodi porro.
-                        </p>
-                        <div class="read-more">
-                            <a href="{{route('product.category.index', ['filtration'])}}">
-                                <i class="icofont-arrow-right"></i> Baca selengkapnya
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
+            <div class="col-12 col-lg-7 col-md-7">
+                <div class="section-title" data-aos="fade-up">
+                    <h2>{{request()->segment(3)}}</h2>
+    @if(request()->segment(3) === 'applied')
+    <p>Applied adalah</p>
+    @elseif(request()->segment(3) === 'unitary')
+    <p>Tipe <strong>Unitary</strong> adalah jenis ac dengan mesin yang didalamnya mengeluarkan udara
+        dingin ke dalam ruangan yang diinginkan dan mengeluarkan
+        udara panas dibagian luar ruangan. Biasanya AC Window mempunyai kapasitas dari 0,5 PK hingga 2,5
+        PK.</p>
+    @endif
     </div>
+    </div>
+    </div>
+    @endif
+
+    <div class="row mt-3" style="min-height: 400px">
+
+        @if(count($products) !== 0)
+        <div class="col-12 col-lg-3 col-md-3 mb-3 mb-lg-0">
+            <p class="text-left" style="font-weight: 700; text-transform:uppercase; font-size:15px">
+                Merek
+            </p>
+            <ul class="list-group">
+                @foreach ($suppliers as $supplier)
+                <li class="list-group-item border-0 pl-0 py-2" style="background:none">
+                    <a
+                        href="{{route('product.'.request()->segment(2).'.vendor.index', [request()->segment(3), $supplier->slug_name])}}">
+                        <i class='bx bxs-chevron-right mr-2'></i>{{$supplier->name}}
+                    </a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <div class="col-12 {{(count($products) === 0) ? 'align-self-center' : 'col-lg-9 col-md-9 '}}">
+
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
+
+                @forelse ($products as $product)
+                <div class="col-lg-4 col-md-6 portfolio-item pb-5 text-center">
+                    <h4 class="text-left" style="font-weight: 700;">
+                        {{$product->name}}
+                    </h4>
+                    <h6 class="text-left text-muted" style="text-transform:uppercase; font-weight:600;">
+                        <strong>{{$product->suppliers[0]->name}}</strong> -
+                        {{$product->series}}
+                    </h6>
+                    <div class="portfolio-wrap text-center" style="background: none;">
+                        <img class="img-fluid" src="{{route('productImage', $product->product_image)}}"
+                            alt="product-image" style="height: 150px">
+                        <div class="portfolio-info">
+                            <div class="portfolio-links">
+                                <a href="{{route('productImage', $product->product_image)}}" class="venobox"
+                                    title="Perbesar Gambar" data-placement="bottom">
+                                    <i class="bx bx-zoom-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mt-3">
+                        <a href="{{route('product.'.request()->segment(2).'.show',[
+                                request()->segment(3),
+                                $product->suppliers[0]->slug_name,
+                                $product->slug_name]
+                                )}}" class="btn btn-detail-primary mr-2">
+                            Lihat detail
+                        </a>
+                        <form action="{{route('pricing')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="_link" value="{{route('product.'.request()->segment(2).'.show',[
+                                    request()->segment(3),
+                                    $product->suppliers[0]->slug_name,
+                                    $product->slug_name]
+                                    )}}">
+                            <button class="btn btn-detail-primary rounded" title="Harga">
+                                <i class='bx bx-dollar'></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                @empty
+                <div class="col-12 text-center">
+                    <h4>Maaf, produk yang kamu cari tidak kita temukan &#x1F61E;</h4>
+                </div>
+                @endforelse
+
+            </div>
+        </div>
+    </div>
+
+    </div> --}}
 </section>
 
 @endsection
 
 @push('styles')
 <style>
+    .rounded {
+        height: 40px !important;
+        width: 40px !important;
+        border-radius: 50% !important;
+    }
+
+    .rounded i {
+        transform: translateY(0)
+    }
+
     section {
         padding: 20px 0 60px;
+    }
+
+    .filter-container {
+        background: #e9ecef;
+        padding: 10px 20px;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 5px;
+        margin-bottom: 30px
+    }
+
+    .filter-container h4 {
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 2px
+    }
+
+    .collapse.show {
+        animation: try .5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+        height: 100%;
+    }
+
+    .collapse {
+        animation: try .5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+        height: 0;
+        overflow: hidden;
     }
 
     @keyframes try {

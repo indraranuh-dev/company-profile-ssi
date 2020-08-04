@@ -55,9 +55,9 @@ Route::group([
         'prefix' => 'filtration',
         'as' => 'filtration.'
     ], function () {
-        Route::get('/', 'ProductController@showProduct')->name('index');
-        Route::get('/{supplier}', 'ProductController@showProduct')->name('supplier.index');
-        Route::get('/{supplier}/{product}', 'ProductController@showProduct')->name('show');
+        Route::get('/', 'JafController@index')->name('index');
+        Route::get('/{supplier}', 'JafController@showProduct')->name('supplier.index');
+        Route::get('/{supplier}/{product}', 'JafController@showProduct')->name('show');
     });
 });
 

@@ -42,12 +42,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $productCategories = ProductCategory::OrderBy('name', 'desc')
-            ->with('subCategories.suppliers:name,slug_name')
-            ->get(['id', 'name', 'slug_name']);
-        return view('pages.hvac.index', compact(
-            'productCategories',
-        ));
+        return view('pages.hvac.index');
     }
 
     /**
@@ -59,13 +54,7 @@ class ProductController extends Controller
      */
     public function getCategory(Request $request)
     {
-        $productCategories = ProductCategory::OrderBy('name', 'desc')
-            ->with('subCategories.suppliers:name,slug_name')
-            ->get(['id', 'name', 'slug_name']);
-
-        return view('pages.hvac.category', compact(
-            'productCategories',
-        ));
+        return view('pages.hvac.category');
     }
 
     /**
@@ -81,14 +70,9 @@ class ProductController extends Controller
         $subCategory,
         Request $request
     ) {
-        $productCategories = ProductCategory::OrderBy('name', 'desc')
-            ->with('subCategories.suppliers:name,slug_name')
-            ->get(['id', 'name', 'slug_name']);
-
         $suppliers = $this->supplier->getWhere(['name', '!=', 'japan air filter']);
         $products = $this->model->findBySubCategory($subCategory, $request);
         return view('pages.hvac.sub-category', compact(
-            'productCategories',
             'suppliers',
             'products',
         ));
@@ -108,13 +92,9 @@ class ProductController extends Controller
         $supplier,
         Request $request
     ) {
-        $productCategories = ProductCategory::OrderBy('name', 'desc')
-            ->with('subCategories.suppliers:name,slug_name')
-            ->get(['id', 'name', 'slug_name']);
         $filters = $this->type->findBySupplier($supplier);
         $products = $this->model->findBySupplierNSubCategory($supplier, $subCategory, $request);
         return view('pages.hvac.vendor', compact(
-            'productCategories',
             'products',
             'filters',
         ));
@@ -136,13 +116,9 @@ class ProductController extends Controller
         $product,
         Request $request
     ) {
-        $productCategories = ProductCategory::OrderBy('name', 'desc')
-            ->with('subCategories.suppliers:name,slug_name')
-            ->get(['id', 'name', 'slug_name']);
         $products = $this->model->findBySlug($product);
         $featureCategories = $this->featureCategory->getAll();
         return view('pages.hvac.product-show', compact(
-            'productCategories',
             'products',
             'featureCategories',
         ));

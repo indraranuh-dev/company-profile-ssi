@@ -20,23 +20,12 @@ class CompanyProfileController extends Controller
      */
     public function index()
     {
-        $productCategories = ProductCategory::OrderBy('name', 'desc')
-            ->with('subCategories.suppliers:name,slug_name', 'suppliers:id,name,slug_name')
-            ->get(['id', 'name', 'slug_name']);
-
-        return view('welcome', compact(
-            'productCategories'
-        ));
+        return view('welcome');
     }
 
     public function contactUs()
     {
-        $productCategories = ProductCategory::OrderBy('name', 'desc')
-            ->with('subCategories.suppliers:name,slug_name')
-            ->get(['id', 'name', 'slug_name']);
-        return view('pages.contact', compact(
-            'productCategories'
-        ));
+        return view('pages.contact');
     }
 
     public function sendEmail(SendMailRequest $request)
