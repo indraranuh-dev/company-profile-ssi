@@ -102,8 +102,8 @@ use App\Utilities\Generator as G;
                                     $product->suppliers[0]->slug_name,
                                     $product->slug_name]
                                     )}}">
-                                <button class="btn btn-detail-primary rounded">
-                                    <i class='bx bx-cart-alt'></i>
+                                <button class="btn btn-detail-primary rounded" title="Harga">
+                                    <i class='bx bx-dollar'></i>
                                 </button>
                             </form>
                         </div>

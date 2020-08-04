@@ -179,13 +179,22 @@ use App\Utilities\Generator;
                                 </div>
                             </div>
                         </div>
-                        <a href="{{request()->url().'/'.$product->slug_name}}" class="btn btn-detail-primary mt-3">Lihat
-                            detail</a>
-                        <form action="{{route('pricing')}}" method="post">
-                            <button class="btn btn-outline-secondary">
-                                Harga
-                            </button>
-                        </form>
+                        <div class="d-flex align-items-center justify-content-center mt-3">
+                            <a href="{{request()->url().'/'.$product->slug_name}}"
+                                class="btn btn-detail-primary mr-3">Lihat
+                                detail</a>
+                            <form action="{{route('pricing')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="_link" value="{{route('product.'.request()->segment(2).'.show',[
+                                        request()->segment(3),
+                                        $product->suppliers[0]->slug_name,
+                                        $product->slug_name]
+                                        )}}">
+                                <button class="btn btn-detail-primary rounded" title="Harga">
+                                    <i class='bx bx-dollar'></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     @empty
                     <div class="col-12 text-center">
@@ -204,6 +213,16 @@ use App\Utilities\Generator;
 
 @push('styles')
 <style>
+    .rounded {
+        height: 40px !important;
+        width: 40px !important;
+        border-radius: 50% !important;
+    }
+
+    .rounded i {
+        transform: translateY(0)
+    }
+
     section {
         padding: 20px 0 60px;
     }
