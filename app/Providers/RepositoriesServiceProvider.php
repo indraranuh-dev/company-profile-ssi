@@ -3,10 +3,14 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Admin\Repositories\Model\JafProductModel;
 use Modules\Admin\Repositories\FeatureCategoryRepositoryInterface;
 use Modules\Admin\Repositories\FeatureRepositoryInterface;
+use Modules\Admin\Repositories\JafCategoryRepositoryInterface;
+use Modules\Admin\Repositories\JafProductRepositoryInterface;
 use Modules\Admin\Repositories\Model\FeatureCategoryModel;
 use Modules\Admin\Repositories\Model\FeatureModel;
+use Modules\Admin\Repositories\Model\JafCategoryModel;
 use Modules\Admin\Repositories\Model\ProductModel;
 use Modules\Admin\Repositories\Model\SupplierModel;
 use Modules\Admin\Repositories\Model\ProductTypeModel;
@@ -51,5 +55,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(FeatureCategoryRepositoryInterface::class, FeatureCategoryModel::class);
         $this->app->bind(FeatureRepositoryInterface::class, FeatureModel::class);
         $this->app->bind(TagRepositoryInterface::class, TagModel::class);
+        $this->app->bind(JafCategoryRepositoryInterface::class, JafCategoryModel::class);
+        $this->app->bind(JafProductRepositoryInterface::class, JafProductModel::class);
     }
 }

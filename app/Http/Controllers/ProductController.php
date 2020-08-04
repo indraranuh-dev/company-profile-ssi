@@ -41,6 +41,42 @@ class ProductController extends Controller
         $this->supplier = $supplierRepositoryInterface;
     }
 
+    public function index()
+    {
+        $productCategories = ProductCategory::OrderBy('name', 'desc')
+            ->with('subCategories.suppliers:name,slug_name')
+            ->get(['id', 'name', 'slug_name']);
+        return view('pages.product-index', compact(
+            'productCategories',
+        ));
+    }
+
+    /**
+     * Show product menu
+     *
+     * @param [type] $category
+     * @param Request $request
+     * @return void
+     */
+    public function getCategory(
+        $category,
+        Request $request
+    ) {
+        $productCategories = ProductCategory::OrderBy('name', 'desc')
+            ->with('subCategories.suppliers:name,slug_name')
+            ->get(['id', 'name', 'slug_name']);
+        if ($category === 'hvac') {
+            return view('pages.hvac', compact(
+                'productCategories',
+            ));
+        } elseif ($category === 'general-supplies') {
+            return  $category;
+        } elseif ($category === 'filtration') {
+            return  $category;
+        }
+        return abort(404);
+    }
+
     /**
      * Get product from resource by passing category, subcategory and supplier
      *

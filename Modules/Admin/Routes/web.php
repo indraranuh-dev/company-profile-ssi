@@ -144,4 +144,35 @@ Route::group([
         Route::put('/{id}', 'TagController@update')->name('update');
         Route::delete('/{id}', 'TagController@destroy')->name('destroy');
     });
+
+    # Route Japan air filter
+    Route::group([
+        'prefix' => 'japan-air-filter',
+        'as' => 'jaf.'
+    ], function () {
+        Route::get('/', 'JafController@index')->name('index');
+        Route::get('/tambah', 'JafController@create')->name('create');
+        Route::get('/{slug}/detail', 'JafController@show')->name('show');
+        Route::post('/', 'JafController@store')->name('store');
+        Route::get('/{id}/ubah', 'JafController@edit')->name('edit');
+        Route::put('/{id}', 'JafController@update')->name('update');
+        Route::delete('/{id}', 'JafController@destroy')->name('destroy');
+        Route::get('/{id}/deskripsi/tambah', 'JafController@createDescription')->name('createDescription');
+        Route::get('/{id}/deskripsi', 'JafController@showDescription')->name('showDescription');
+        Route::post('/{id}/deskripsi', 'JafController@storeDescription')->name('storeDescription');
+        Route::put('/{id}/deskripsi', 'JafController@updateDescription')->name('updateDescription');
+        Route::delete('/{id}/deskripsi', 'JafController@destroyDescription')->name('destroyDescription');
+    });
+
+    Route::group([
+        'prefix' => 'japan-air-filter/kategori',
+        'as' => 'jaf-category.'
+    ], function () {
+        Route::get('/', 'JafCategoryController@index')->name('index');
+        Route::get('/tambah', 'JafCategoryController@create')->name('create');
+        Route::post('/', 'JafCategoryController@store')->name('store');
+        Route::get('/{id}/ubah', 'JafCategoryController@edit')->name('edit');
+        Route::put('/{id}', 'JafCategoryController@update')->name('update');
+        Route::delete('/{id}', 'JafCategoryController@destroy')->name('destroy');
+    });
 });

@@ -125,8 +125,8 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="{{route('admin.feat.category.index')}}"
-                                class="sidebar-link ml-4 {{request()->routeIs('admin.feat.category.*') ? 'active' : ''}}">
+                            <a href="{{route('admin.jaf-category.index')}}"
+                                class="sidebar-link ml-4 {{request()->routeIs('admin.jaf-category.*') ? 'active' : ''}}">
                                 <span class="hide-menu">
                                     Kategori
                                 </span>
