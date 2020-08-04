@@ -38,18 +38,20 @@
                 <h4>Pintasan Link</h4>
                 <ul class="footer-ul">
                     <li class="footer-li">
-                        <a href="{{route('product.subCategory.index', ['hvac', 'applied'])}}"><i
+                        <a href="{{route('product.hvac.subCategory.index', 'applied')}}"><i
                                 class='bx bxs-chevron-right mr-2'></i>HVAC - Applied</a>
                     </li>
                     <li class="footer-li">
-                        <a href="{{route('product.subCategory.index', ['hvac', 'unitary'])}}"><i
+                        <a href="{{route('product.hvac.subCategory.index', 'unitary')}}"><i
                                 class='bx bxs-chevron-right mr-2'></i>HVAC - Unitary</a>
                     </li>
                     <li class="footer-li">
-                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>General Supplies</a>
+                        <a href="{{route('product.general-supplies.index')}}"><i
+                                class='bx bxs-chevron-right mr-2'></i>General Supplies</a>
                     </li>
                     <li class="footer-li">
-                        <a href=""><i class='bx bxs-chevron-right mr-2'></i>Filtration</a>
+                        <a href="{{route('product.filtration.index')}}"><i
+                                class='bx bxs-chevron-right mr-2'></i>Filtration</a>
                     </li>
                 </ul>
             </div>

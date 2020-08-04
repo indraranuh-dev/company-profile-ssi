@@ -2,18 +2,23 @@
 use App\Utilities\Generator as G;
 @endphp
 
-@extends('layouts/static')
+@extends('layouts/hvac')
 
 @section('title', 'Produk')
 
 @section('content')
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
-    <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.index')}}">{{G::uriSegment(0)}}</a>
+    <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">
+        {{request()->segment(1)}}
+    </a>
     <a class="breadcrumb-item" style="text-transform: uppercase;"
-        href="{{route('product.category.index', G::uriSegment(1))}}">{{G::uriSegment(1)}}</a>
-    <span class="breadcrumb-item active" style="text-transform: capitalize;">{{G::uriSegment(2)}}</span>
+        href="{{route('product.'.request()->segment(2).'.index')}}">
+        {{request()->segment(2)}}
+    </a>
+    <span class="breadcrumb-item active" style="text-transform: capitalize;">
+        {{request()->segment(3)}}
+    </span>
 </nav>
 
 <section class="portfolio product">
@@ -23,10 +28,10 @@ use App\Utilities\Generator as G;
         <div class="row justify-content-center">
             <div class="col-12 col-lg-7 col-md-7">
                 <div class="section-title" data-aos="fade-up">
-                    <h2>{{G::uriSegment(2)}}</h2>
-                    @if(G::uriSegment(2) === 'applied')
+                    <h2>{{request()->segment(3)}}</h2>
+                    @if(request()->segment(3) === 'applied')
                     <p>Applied adalah</p>
-                    @elseif(G::uriSegment(2) === 'unitary')
+                    @elseif(request()->segment(3) === 'unitary')
                     <p>Tipe <strong>Unitary</strong> adalah jenis ac dengan mesin yang didalamnya mengeluarkan udara
                         dingin ke dalam ruangan yang diinginkan dan mengeluarkan
                         udara panas dibagian luar ruangan. Biasanya AC Window mempunyai kapasitas dari 0,5 PK hingga 2,5
@@ -48,7 +53,7 @@ use App\Utilities\Generator as G;
                     @foreach ($suppliers as $supplier)
                     <li class="list-group-item border-0 pl-0 py-2" style="background:none">
                         <a
-                            href="{{route('product.vendor.index', [G::uriSegment(1),G::uriSegment(2), $supplier->slug_name])}}">
+                            href="{{route('product.'.request()->segment(2).'.vendor.index', [request()->segment(3), $supplier->slug_name])}}">
                             <i class='bx bxs-chevron-right mr-2'></i>{{$supplier->name}}
                         </a>
                     </li>
@@ -82,14 +87,26 @@ use App\Utilities\Generator as G;
                                 </div>
                             </div>
                         </div>
-                        <a href="{{route('product.show',[
-                            G::uriSegment(1),
-                            G::uriSegment(2),
-                            $product->suppliers[0]->slug_name,
-                            $product->slug_name]
-                            )}}" class="btn btn-detail-primary mt-3">
-                            Lihat detail
-                        </a>
+                        <div class="d-flex align-items-center justify-content-center mt-3">
+                            <a href="{{route('product.'.request()->segment(2).'.show',[
+                                request()->segment(3),
+                                $product->suppliers[0]->slug_name,
+                                $product->slug_name]
+                                )}}" class="btn btn-detail-primary mr-2">
+                                Lihat detail
+                            </a>
+                            <form action="{{route('pricing')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="_link" value="{{route('product.'.request()->segment(2).'.show',[
+                                    request()->segment(3),
+                                    $product->suppliers[0]->slug_name,
+                                    $product->slug_name]
+                                    )}}">
+                                <button class="btn btn-detail-primary rounded">
+                                    <i class='bx bx-cart-alt'></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     @empty
                     <div class="col-12 text-center">
@@ -108,6 +125,16 @@ use App\Utilities\Generator as G;
 
 @push('styles')
 <style>
+    .rounded {
+        height: 40px !important;
+        width: 40px !important;
+        border-radius: 50% !important;
+    }
+
+    .rounded i {
+        transform: translateY(0)
+    }
+
     section {
         padding: 20px 0 60px;
     }

@@ -55,4 +55,10 @@ class CompanyProfileController extends Controller
                 'Email berhasil dikirim. Mohon tunggu respon kami selanjutnya. Terima kasih.'
             );
     }
+
+    public function pricing(Request $request)
+    {
+        return redirect()->route('contact')
+            ->with('link', 'Saya ingin bertanya seputar produk : ' . $request->_link);
+    }
 }

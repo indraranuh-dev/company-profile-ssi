@@ -1,4 +1,4 @@
-@extends('layouts/static')
+@extends('layouts/hvac')
 
 @section('title', 'Hubungi Kami')
 
@@ -125,7 +125,7 @@
                         <div class="form-group">
                             <label for="message">Pesan Anda</label>
                             <textarea class="form-control @error('message') {{'is-invalid'}}@enderror"
-                                name="message">{{old('message')}}</textarea>
+                                name="message">{{old('message')}}{{(session()->has('link') ? session()->get('link') : '')}}</textarea>
                             @error('message') <small class="text-danger">{{$message}}</small>@enderror
                         </div>
                         <div class=" text-center form-group mt-4">

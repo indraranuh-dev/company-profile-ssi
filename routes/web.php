@@ -17,13 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true, 'register' => false]);
 
-// Route::get('/product/{category}/{subCategory}/{product}', function (Request $request) {
-//     if (!$request->category && !$request->subCategory) return abort(404, 'Halaman tidak ditemukan');
-// });
-
 Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter')->name('index');
 Route::get('/hubungi-kami', 'CompanyProfileController@contactUs')->middleware('VisitorCounter')->name('contact');
 Route::post('/hubungi-kami', 'CompanyProfileController@sendEmail')->name('sendMail');
+Route::post('/harga', 'CompanyProfileController@pricing')->name('pricing');
 
 Route::group([
     'prefix' => 'produk',
@@ -31,10 +28,29 @@ Route::group([
     'middleware' => 'VisitorCounter'
 ], function () {
     Route::get('/', 'ProductController@index')->name('index');
-    Route::get('/{category}', 'ProductController@getCategory')->name('category.index');
-    Route::get('/{category}/{subCategory}', 'ProductController@getProducts')->name('subCategory.index');
-    Route::get('/{category}/{subCategory}/{supplier}', 'ProductController@getSupplierProducts')->name('vendor.index');
-    Route::get('/{category}/{subCategory}/{supplier}/{product}', 'ProductController@showProduct')->name('show');
+
+    # Route hvac
+    Route::group([
+        'prefix' => 'hvac',
+        'as' => 'hvac.'
+    ], function () {
+        Route::get('/', 'ProductController@getCategory')->name('index');
+        Route::get('/{subCategory}', 'ProductController@getProducts')->name('subCategory.index');
+        Route::get('/{subCategory}/{supplier}', 'ProductController@getSupplierProducts')->name('vendor.index');
+        Route::get('/{subCategory}/{supplier}/{product}', 'ProductController@showProduct')->name('show');
+    });
+
+    # Route general-supplies
+    Route::group([
+        'prefix' => 'general-supplies',
+        'as' => 'general-supplies.'
+    ], function () {
+        Route::get('/', 'ProductController@showProduct')->name('index');
+        Route::get('/{supplier}', 'ProductController@showProduct')->name('supplier.index');
+        Route::get('/{supplier}/{product}', 'ProductController@showProduct')->name('show');
+    });
+
+    # Route filtration
     Route::group([
         'prefix' => 'filtration',
         'as' => 'filtration.'

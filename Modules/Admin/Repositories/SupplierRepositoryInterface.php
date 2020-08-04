@@ -13,6 +13,15 @@ interface SupplierRepositoryInterface
     public function getAll($request);
 
     /**
+     * Get all suppliers from resource with condition
+     * ex ['name', 'daikin'] OR ['name', '!=', 'daikin']
+     *
+     * @param array $array
+     * @return object
+     */
+    public function getWhere($array);
+
+    /**
      * Find supplier by passing id
      *
      * @param string $id

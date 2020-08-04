@@ -2,20 +2,25 @@
 use App\Utilities\Generator;
 @endphp
 
-@extends('layouts/static')
+@extends('layouts/hvac')
 
 @section('title', 'Produk')
 
 @section('content')
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
-    <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.index')}}">{{Generator::uriSegment(0)}}</a>
+    <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">
+        {{request()->segment(1)}}
+    </a>
     <a class="breadcrumb-item" style="text-transform: uppercase;"
-        href="{{route('product.category.index', Generator::uriSegment(1))}}">{{Generator::uriSegment(1)}}</a>
+        href="{{route('product.'.request()->segment(2).'.index')}}">
+        {{request()->segment(2)}}
+    </a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.subCategory.index', [Generator::uriSegment(1),Generator::uriSegment(2)])}}">{{Generator::uriSegment(2)}}</a>
-    <span class="breadcrumb-item active" style="text-transform: capitalize;">{{Generator::uriSegment(3)}}</span>
+        href="{{route('product.'.request()->segment(2).'.subCategory.index', [request()->segment(3)])}}">
+        {{request()->segment(3)}}
+    </a>
+    <span class="breadcrumb-item active" style="text-transform: capitalize;">{{request()->segment(4)}}</span>
 </nav>
 
 <section class="portfolio product">
@@ -176,6 +181,11 @@ use App\Utilities\Generator;
                         </div>
                         <a href="{{request()->url().'/'.$product->slug_name}}" class="btn btn-detail-primary mt-3">Lihat
                             detail</a>
+                        <form action="{{route('pricing')}}" method="post">
+                            <button class="btn btn-outline-secondary">
+                                Harga
+                            </button>
+                        </form>
                     </div>
                     @empty
                     <div class="col-12 text-center">

@@ -2,7 +2,7 @@
 use App\Utilities\Generator as G;
 @endphp
 
-@extends('layouts/static')
+@extends('layouts/hvac')
 
 @section('title', 'Produk')
 
@@ -10,7 +10,7 @@ use App\Utilities\Generator as G;
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.index')}}">{{G::uriSegment(0)}}</a>
+        href="{{route('product.index')}}">{{request()->segment(1)}}</a>
     <span class="breadcrumb-item active" style="text-transform: uppercase;">{{G::uriSegment(1)}}</span>
 </nav>
 
@@ -48,7 +48,7 @@ use App\Utilities\Generator as G;
                             dan kinerjanya, efektivitas produk akan sangat bervariasi.
                         </p>
                         <div class="read-more">
-                            <a href="{{route('product.subCategory.index', ['hvac', 'applied'])}}">
+                            <a href="{{route('product.hvac.subCategory.index', 'applied')}}">
                                 <i class="icofont-arrow-right"></i> Baca selengkapnya
                             </a>
                         </div>
@@ -71,7 +71,7 @@ use App\Utilities\Generator as G;
                             dan kinerjanya, efektivitas produk akan sangat bervariasi.
                         </p>
                         <div class="read-more">
-                            <a href="{{route('product.subCategory.index', ['hvac', 'unitary'])}}">
+                            <a href="{{route('product.hvac.subCategory.index', 'unitary')}}">
                                 <i class="icofont-arrow-right"></i> Baca selengkapnya
                             </a>
                         </div>

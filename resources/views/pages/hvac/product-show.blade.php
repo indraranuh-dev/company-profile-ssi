@@ -2,7 +2,7 @@
 use App\Utilities\Generator as G;
 @endphp
 
-@extends('layouts/static')
+@extends('layouts/hvac')
 
 @section('title', 'Produk')
 
@@ -10,22 +10,22 @@ use App\Utilities\Generator as G;
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">
-        {{G::uriSegment(0)}}
+        {{request()->segment(1)}}
     </a>
     <a class="breadcrumb-item" style="text-transform: uppercase;"
-        href="{{route('product.category.index', G::uriSegment(1))}}">
-        {{G::uriSegment(1)}}
+        href="{{route('product.'.request()->segment(2).'.index')}}">
+        {{request()->segment(2)}}
     </a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.subCategory.index', [G::uriSegment(1),G::uriSegment(2)])}}">
-        {{G::uriSegment(2)}}
+        href="{{route('product.'.request()->segment(2).'.subCategory.index', [request()->segment(3)])}}">
+        {{request()->segment(3)}}
     </a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.vendor.index', [G::uriSegment(1),G::uriSegment(2), G::uriSegment(3)])}}">
-        {{G::uriSegment(3)}}
+        href="{{route('product.'.request()->segment(2).'.vendor.index', [request()->segment(3), request()->segment(4)])}}">
+        {{request()->segment(4)}}
     </a>
     <span class="breadcrumb-item active" style="text-transform: capitalize;">
-        {{str_replace('-', ' ', G::uriSegment(4))}}
+        {{str_replace('-', ' ', request()->segment(5))}}
     </span>
 </nav>
 <section class="portfolio product">

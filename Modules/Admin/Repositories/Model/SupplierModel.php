@@ -15,6 +15,18 @@ class SupplierModel implements SupplierRepositoryInterface
         return $supplier->get();
     }
 
+    public function getWhere($array)
+    {
+        if (count($array) === 2) {
+            $supplier = Supplier::where($array[0], $array[1])->with('subCategories:id,name');
+            return $supplier->get();
+        } elseif (count($array) === 3) {
+            $supplier = Supplier::where($array[0], $array[1], $array[2])->with('subCategories:id,name');
+            return $supplier->get();
+        }
+        return [];
+    }
+
     public function findById($id)
     {
         $supplier = Supplier::findOrFail($this->decrypt(false, $id));

@@ -39,50 +39,53 @@
     <x-static-header>
         @slot('produk')
         <ul>
-            @foreach ($productCategories as $category)
-            @if (! $category->subcategories->isEmpty())
             <li class="drop-down">
-                <a href="#">{{$category->name}}</a>
-                @if (! $category->subcategories->isEmpty())
+                <a href="{{route('product.hvac.index')}}">HVAC</a>
                 <ul>
-                    @foreach ($category->subCategories as $sub)
-                    <li class="{{(! $sub->suppliers->isEmpty()) ? 'drop-down' : ''}}">
-                        <a href="{{route('product.subCategory.index',
-                             ['hvac', $sub->slug_name])}}">
-                            {{$sub->name}}
-                        </a>
+                    <li class="drop-down">
+                        <a href="{{route('product.hvac.subCategory.index', 'applied')}}">Applied</a>
                         <ul>
-                            @foreach ($sub->suppliers as $supplier)
                             <li>
-                                <a
-                                    href="{{route('product.vendor.index', [$category->slug_name, $sub->slug_name, $supplier->slug_name])}}">
-                                    {{$supplier->name}}
-                                </a>
+                                <a href="{{route('product.hvac.vendor.index', ['applied', 'daikin'])}}">
+                                    Daikin</a>
                             </li>
-                            @endforeach
+                            <li>
+                                <a href="{{route('product.hvac.vendor.index', ['applied', 'gree'])}}">
+                                    Gree</a>
+                            </li>
                         </ul>
                     </li>
-                    @endforeach
-                </ul>
-                @endif
-            </li>
-            @else
-            <li class="{{(! $category->suppliers->isEmpty()) ? 'drop-down' : ''}}">
-                <a href="#">{{$category->name}}</a>
-                @if (! $category->suppliers->isEmpty())
-                <ul class="py-1">
-                    @foreach ($category->suppliers as $supplier)
-                    <li class="m-0">
-                        <a href="{{route('product.filtration.supplier.index', $supplier->slug_name)}}">
-                            {{$supplier->name}}
-                        </a>
+                    <li class="drop-down">
+                        <a href="{{route('product.hvac.subCategory.index', 'unitary')}}">Unitary</a>
+                        <ul>
+                            <li>
+                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'daikin'])}}">
+                                    Daikin</a>
+                            </li>
+                            <li>
+                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'gree'])}}">
+                                    Gree</a>
+                            </li>
+                            <li>
+                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'mcquay'])}}">
+                                    McQuay</a>
+                            </li>
+                        </ul>
                     </li>
-                    @endforeach
                 </ul>
-                @endif
             </li>
-            @endif
-            @endforeach
+            <li>
+                <a href="{{route('product.index')}}">General Supplies</a>
+            </li>
+            <li class="drop-down">
+                <a href="{{route('product.filtration.index')}}">Filtration</a>
+                <ul>
+                    <li>
+                        <a href="{{route('product.filtration.supplier.index', 'japan-air-filter')}}">
+                            Japan Air Filter</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         @endslot
     </x-static-header>
