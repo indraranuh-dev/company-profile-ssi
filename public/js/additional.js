@@ -1,8 +1,8 @@
 $('input[name="search"]').keyup(function () {
     const res = $('.result');
     const nfe = $('#res-not-found');
-    const li = function (value) {
-        return `<li><a href="/ads">${value}</a></li>`;
+    const li = function (link, value) {
+        return `<li><a href="${link}">${value}</a></li>`;
     }
     $.ajax({
         url: `http://127.0.0.1:8000/api/search?k=${$(this).val()}`,
@@ -16,7 +16,7 @@ $('input[name="search"]').keyup(function () {
                 nfe.fadeOut();
                 let arr = [];
                 response.data.forEach(val => {
-                    arr.push(li(val))
+                    arr.push(li(val.link, val.suggestion))
                 });
                 res.html(arr)
             } else {
@@ -41,6 +41,10 @@ $('#reset-input').click(function () {
 
 $('.toggle-search').click(function () {
     $('#search').modal('show');
+})
+
+$('#search').on('shown.bs.modal', function (e) {
+    $('input[name="search"]').focus();
 })
 
 $('[title]').tooltip();

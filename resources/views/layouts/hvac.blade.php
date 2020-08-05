@@ -23,7 +23,7 @@
 
             <div class="logo mr-auto">
                 <h1 class="text-light">
-                    <a href="index.html">
+                    <a href="{{route('index')}}">
                         <svg class="start" height="100" viewBox="0 0 155 152" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0)">
