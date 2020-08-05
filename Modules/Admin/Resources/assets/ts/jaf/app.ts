@@ -44,15 +44,25 @@ async function fetchDetails(URL) {
         url: URL,
         method: "GET",
         success: function(data) {
+            let desc = [];
+            let tags = [];
             const content = function(name, series) {
                 return `<h3 class="card-title">${name}</h3>
                 <h5 class="text-muted">${series}</h5>
                 `;
             };
-            const arr = [];
+            const badge = function(val) {
+                return `<span class="badge badge-info mr-1"># ${val}</span>`;
+            };
+
             data.details.forEach(data => {
-                arr.push(`<li>${data.description}</li>`);
+                desc.push(`<li>${data.description}</li>`);
             });
+
+            data.tags.forEach(tag => {
+                tags.push(badge(tag.name));
+            });
+
             setTimeout(() => {
                 $(".centered").hide();
                 $("#detail-content")
@@ -65,11 +75,15 @@ async function fetchDetails(URL) {
                     .find(".col-7 > .header")
                     .html(content(data.name, data.series));
                 $("#detail-content")
-                    .find(".col-7 > .header")
-                    .html(content(data.name, data.series));
-                $("#detail-content")
                     .find(".col-7 > .list")
-                    .html(arr);
+                    .html(desc);
+                $("#detail-content")
+                    .find(".col-7 > .tags")
+                    .html(tags);
+                $("#detail-content")
+                    .find(".col-7 > .tags")
+                    .after()
+                    .append("<h4 class='my-2'>Deskripsi</h4>");
             }, 1000);
         },
         error: function(err) {
@@ -97,7 +111,9 @@ $("#detail-modal").on("hidden.bs.modal", function(e) {
     $("#detail-content")
         .find(".col-7 > .header")
         .html("");
-
+    $("#detail-content")
+        .find(".col-7 > .tags")
+        .html("");
     $("#detail-content")
         .find("img")
         .attr("src", "");

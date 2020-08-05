@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Http\Requests\JafRequest;
 use Modules\Admin\Repositories\JafProductRepositoryInterface as Jaf;
 use Modules\Admin\Repositories\JafCategoryRepositoryInterface as Category;
+use Modules\Admin\Repositories\TagRepositoryInterface as Tag;
 
 class JafController extends Controller
 {
@@ -16,13 +17,19 @@ class JafController extends Controller
 
     private $category;
 
+    private $tag;
+
     /**
      * Class constructor.
      */
-    public function __construct(Jaf $jafProductRepositoryInterface, Category $jafCategoryRepositoryInterface)
-    {
+    public function __construct(
+        Jaf $jafProductRepositoryInterface,
+        Category $jafCategoryRepositoryInterface,
+        Tag $tagRepositoryInterface
+    ) {
         $this->model = $jafProductRepositoryInterface;
         $this->category = $jafCategoryRepositoryInterface;
+        $this->tag = $tagRepositoryInterface;
     }
 
     /**
@@ -41,8 +48,9 @@ class JafController extends Controller
      */
     public function create()
     {
+        $tags = $this->tag->getAll();
         $categories = $this->category->getAll();
-        return view('admin::jaf.create', compact('categories'));
+        return view('admin::jaf.create', compact('categories', 'tags'));
     }
 
     /**
@@ -86,6 +94,8 @@ class JafController extends Controller
         if (request()->ajax()) {
             return $product = $this->model->findBySlug($slug);
         }
+        $product = $this->model->findBySlug($slug);
+        return $product;
     }
 
     /**
@@ -107,8 +117,9 @@ class JafController extends Controller
     public function edit($id)
     {
         $product = $this->model->findById($id);
-        $selects = ArrayCheck::notSelected($this->category->getAll(), $product->category);
-        return view('admin::jaf.edit', compact('product', 'selects'));
+        $SP = ArrayCheck::notSelected($this->category->getAll(), $product->category);
+        $ST = ArrayCheck::notSelected($this->tag->getAll(), $product->tags);
+        return view('admin::jaf.edit', compact('product', 'SP', 'ST'));
     }
 
     /**

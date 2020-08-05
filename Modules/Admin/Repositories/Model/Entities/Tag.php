@@ -21,4 +21,14 @@ class Tag extends Model
             'products_id'
         );
     }
+
+    public function jafs()
+    {
+        return $this->belongsToMany(
+            JafProduct::class,
+            'jaf_has_tags',
+            'tags_id',
+            'jafs_id',
+        );
+    }
 }

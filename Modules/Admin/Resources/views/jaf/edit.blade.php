@@ -88,19 +88,39 @@ use App\Utilities\Generator as G;
                                         <select name="category"
                                             class="form-control @error('category'){{'is-invalid'}}@enderror">
                                             <option value="" disabled
-                                                {{(count($selects['selected']) === 0) ? 'selected' : ''}}>Pilih kategori
+                                                {{(count($SP['selected']) === 0) ? 'selected' : ''}}>Pilih kategori
                                             </option>
-                                            @foreach ($selects['selected'] as $category)
+                                            @foreach ($SP['selected'] as $category)
                                             <option value="{{G::crypt($category['id'])}}" selected>
                                                 {{$category['name']}}
                                             </option>
                                             @endforeach
-                                            @foreach ($selects['notSelected'] as $category)
+                                            @foreach ($SP['notSelected'] as $category)
                                             <option value="{{G::crypt($category['id'])}}">{{$category['name']}}
                                             </option>
                                             @endforeach
                                         </select>
                                         @error('category')<small class="text-danger">{{$message}}</small>@enderror
+                                    </div>
+                                </fieldset>
+
+
+                                <fieldset class="form-group row">
+                                    <div class="col-12">
+                                        <label for="tags">{{__('Tag produk')}}</label>
+                                        <select name="tags[]" multiple
+                                            class="form-control @error('tags'){{'is-invalid'}}@enderror">
+                                            @foreach ($ST['selected'] as $category)
+                                            <option value="{{G::crypt($category['id'])}}" selected>
+                                                {{$category['name']}}
+                                            </option>
+                                            @endforeach
+                                            @foreach ($ST['notSelected'] as $category)
+                                            <option value="{{G::crypt($category['id'])}}">{{$category['name']}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('tags')<small class="text-danger">{{$message}}</small>@enderror
                                     </div>
                                 </fieldset>
 
@@ -180,6 +200,9 @@ use App\Utilities\Generator as G;
     })
     if($('select').hasClass('is-invalid')){
         $('.select2-selection-single').addClass('is-invalid');
+    }
+    if($('select').hasClass('is-invalid')){
+        $('.select2-selection-multiple').addClass('is-invalid');
     }
     $('[title]').tooltip();
     const $this = $(this);

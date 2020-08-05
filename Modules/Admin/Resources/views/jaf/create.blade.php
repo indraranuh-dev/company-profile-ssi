@@ -87,6 +87,21 @@ use App\Utilities\Generator as G;
                                     </div>
                                 </fieldset>
 
+                                <fieldset class="form-group row">
+                                    <div class="col-12">
+                                        <label for="tags">{{__('Tag produk')}}</label>
+                                        <select name="tags[]" multiple
+                                            class="form-control @error('tags'){{'is-invalid'}}@enderror">
+                                            @foreach ($tags as $tag)
+                                            <option value="{{G::crypt($tag->id, 'encrypt')}}">
+                                                {{$tag->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('tags')<small class="text-danger">{{$message}}</small>@enderror
+                                    </div>
+                                </fieldset>
+
                                 <fieldset class="form-group">
                                     <div class="row">
                                         <div class="col-lg-12">

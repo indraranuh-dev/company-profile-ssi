@@ -127,6 +127,7 @@ use App\Utilities\Generator as G;
                             </div>
                             <div class="col-7">
                                 <div class="header"></div>
+                                <div class="tags mb-2"></div>
                                 <ul class="list"></ul>
                             </div>
                         </div>

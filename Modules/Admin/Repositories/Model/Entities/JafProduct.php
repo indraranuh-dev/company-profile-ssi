@@ -26,6 +26,16 @@ class JafProduct extends Model
         );
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(
+            Tag::class,
+            'jaf_has_tags',
+            'jafs_id',
+            'tags_id',
+        );
+    }
+
     public function details()
     {
         return $this->hasMany(JafProductDetail::class, 'jaf_id', 'id');

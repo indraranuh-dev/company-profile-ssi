@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Modules\Admin\Repositories\Model\Entities\ProductCategory;
+use Illuminate\Http\Request;]
 use Modules\Admin\Repositories\ProdTypeRepositoryInterface as Type;
 use Modules\Admin\Repositories\ProductRepositoryInterface as Product;
 use Modules\Admin\Repositories\FeatureCategoryRepositoryInterface as FeatureCategory;

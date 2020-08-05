@@ -20,13 +20,15 @@ class JafProductModel implements JafProductRepositoryInterface
 
     public function findById($id)
     {
-        $jaf = JafProduct::where('id', $this->decrypt(false, $id))->with('category', 'details');
+        $jaf = JafProduct::where('id', $this->decrypt(false, $id))
+            ->with('category', 'details', 'tags');
         return $jaf->first();
     }
 
     public function findBySlug($slug)
     {
-        $jaf = JafProduct::where('slug_name', $slug)->with('details');
+        $jaf = JafProduct::where('slug_name', $slug)
+            ->with('category', 'details', 'tags');
         return $jaf->first();
     }
 
@@ -157,6 +159,7 @@ class JafProductModel implements JafProductRepositoryInterface
     protected function sync($request)
     {
         $type = JafProduct::where('name', $request->name)->first();
+        $type->tags()->sync($this->decrypt(true, '', $request->tags));
         return $type->category()->sync($this->decrypt(false, $request->category));
     }
 }
