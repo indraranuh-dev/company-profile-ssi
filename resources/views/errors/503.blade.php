@@ -1,9 +1,10 @@
-@extends('errors::minimal')
+@extends('errors::illustrated-layout')
 
-@section('title', __('Not Found'))
-@section('content')
-<h2>5<span class="emoji">&#x1F61E;</span>3</h2>
-<h3>{{__($exception->getMessage() ?: 'Servis tidak tersedia')}}</h3>
+@section('title', __('Service Unavailable'))
+@section('code')
+<h2>503</h2>
+@endsection
 
-<a href="{{route('index')}}">Kembali</a>
+@section('message')
+<h3 class="message">Upss, server saat ini tidak tersedia. </h3>
 @endsection

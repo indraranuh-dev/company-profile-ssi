@@ -1,9 +1,10 @@
-@extends('errors::minimal')
+@extends('errors::illustrated-layout')
 
-@section('title', __('Not Found'))
-@section('content')
+@section('title', __('Authentication Timeout'))
+@section('code')
 <h2>419</h2>
-<h3>Maaf, halaman kadaluarsa.</h3>
+@endsection
 
-<a href="{{route('index')}}">Kembali</a>
+@section('message')
+<h3 class="message">Maaf, otentikasi telah kedaluwarsa. &#x1F61E;</h3>
 @endsection

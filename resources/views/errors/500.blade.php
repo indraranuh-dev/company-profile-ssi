@@ -1,9 +1,10 @@
-@extends('errors::minimal')
+@extends('errors::illustrated-layout')
 
-@section('title', __('Not Found'))
-@section('content')
-<h2>5<span class="emoji">&#x1F61E;</span>0</h2>
-<h3>Upss, ada yang salah dengan server.</h3>
+@section('title', __('Internal Server Error'))
+@section('code')
+<h2>500</h2>
+@endsection
 
-<a href="{{route('index')}}">Kembali</a>
+@section('message')
+<h3 class="message">Upss, ada yang salah dengan server kami. &#x1F61E;</h3>
 @endsection

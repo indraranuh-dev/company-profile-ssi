@@ -1,9 +1,10 @@
-@extends('errors::minimal')
+@extends('errors::illustrated-layout')
 
-@section('title', __('Not Found'))
-@section('content')
+@section('title', __('Too Many Requests'))
+@section('code')
 <h2>429</h2>
-<h3>Maaf, terlalu banyak permintaan.</h3>
+@endsection
 
-<a href="{{route('index')}}">Kembali</a>
+@section('message')
+<h3 class="message">Maaf, terlalu banyak permintan. &#x1F61E;</h3>
 @endsection
