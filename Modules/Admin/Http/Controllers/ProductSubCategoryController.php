@@ -31,7 +31,7 @@ class ProductSubCategoryController extends Controller
     public function index()
     {
         $subCategories = $this->model->getAll();
-        return view('admin::produk.subkategori.index', compact('subCategories'));
+        return view('admin::kategori.subKategori.index', compact('subCategories'));
     }
 
     /**
@@ -41,7 +41,7 @@ class ProductSubCategoryController extends Controller
     public function create()
     {
         $categories = $this->category->getWhere(['name', '!=', 'Filtration']);
-        return view('admin::produk.subkategori.create', compact('categories'));
+        return view('admin::kategori.subKategori.create', compact('categories'));
     }
 
     /**
@@ -52,7 +52,7 @@ class ProductSubCategoryController extends Controller
     public function store(ProductSubCategoryRequest $request)
     {
         $this->model->create($request);
-        return redirect()->route('admin.prod.subcategory.index')->with('success', 'Sub kategori berhasil ditambahkan.');
+        return redirect()->route('admin.category.subcategory.index')->with('success', 'Sub kategori berhasil ditambahkan.');
     }
 
     /**
@@ -65,7 +65,7 @@ class ProductSubCategoryController extends Controller
         $subCategory = $this->model->findById($id);
         $category = $this->category->getAll();
         $selects = ArrayCheck::notSelected($category, $subCategory->categories);
-        return view('admin::produk.subkategori.edit', compact('subCategory', 'selects'));
+        return view('admin::kategori.subKategori.edit', compact('subCategory', 'selects'));
     }
 
     /**
@@ -77,7 +77,7 @@ class ProductSubCategoryController extends Controller
     public function update(ProductSubCategoryRequest $request, $id)
     {
         $this->model->update($request, $id);
-        return redirect()->route('admin.prod.subcategory.index')->with('success', 'Sub kategori berhasil diubah.');
+        return redirect()->route('admin.category.subcategory.index')->with('success', 'Sub kategori berhasil diubah.');
     }
 
     /**
@@ -88,6 +88,6 @@ class ProductSubCategoryController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route('admin.prod.subcategory.index')->with('success', 'Sub kategori berhasil dihapus.');
+        return redirect()->route('admin.category.subcategory.index')->with('success', 'Sub kategori berhasil dihapus.');
     }
 }

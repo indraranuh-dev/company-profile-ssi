@@ -11,9 +11,6 @@ use App\Utilities\Generator;
         <li class="breadcrumb-item">
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
         </li>
-        <li class="breadcrumb-item">
-            <a href="{{route('admin.product.index')}}">{{__('Produk')}}</a>
-        </li>
         <li class="breadcrumb-item active" aria-current="page">Kategori Produk</li>
     </ol>
 </x-breadcrumb>
@@ -35,7 +32,7 @@ use App\Utilities\Generator;
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Daftar kategori produk</h4>
-                    <a href="{{route('admin.prod.category.create')}}" class="btn btn-primary">
+                    <a href="{{route('admin.category.create')}}" class="btn btn-primary">
                         <i class="mdi mdi-plus mr-2"></i>Kategori produk
                     </a>
                 </div>
@@ -59,7 +56,7 @@ use App\Utilities\Generator;
                                     <td>{{Converter::convertDate($category->created_at)}}</td>
                                     <td>{{Converter::convertDate($category->updated_at)}}</td>
                                     <td class="d-flex justify-content-center">
-                                        <a href="{{route('admin.prod.category.edit', Generator::crypt($category->id, 'encrypt'))}}"
+                                        <a href="{{route('admin.category.edit', Generator::crypt($category->id, 'encrypt'))}}"
                                             class="btn btn-outline-light text-secondary btn-sm" title="Ubah data">
                                             <i class="fa fa-fw fa-edit"></i>
                                         </a>
@@ -118,5 +115,5 @@ use App\Utilities\Generator;
 <script src="{{asset('libs/datatables/buttons/jszip.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.html5.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.print.js')}}"></script>
-<script src="{{Module::asset('admin:ts/product/category/app.ts')}}"></script>
+<script src="{{Module::asset('admin:ts/category/app.ts')}}"></script>
 @endpush

@@ -26,7 +26,7 @@ class ProductCategoryController extends Controller
     public function index()
     {
         $categories = $this->model->getAll();
-        return view('admin::produk.kategori.index', compact('categories'));
+        return view('admin::kategori.index', compact('categories'));
     }
 
     /**
@@ -35,7 +35,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin::produk.kategori.create');
+        return view('admin::kategori.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class ProductCategoryController extends Controller
     public function store(ProductCategoryRequest $request)
     {
         $this->model->create($request);
-        return redirect()->route('admin.prod.category.index')->with('success', 'Kategori berhasil ditambahkan.');
+        return redirect()->route('admin.category.index')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
     /**
@@ -57,7 +57,7 @@ class ProductCategoryController extends Controller
     public function edit($id)
     {
         $category = $this->model->findById($id);
-        return view('admin::produk.kategori.edit', compact('category'));
+        return view('admin::kategori.edit', compact('category'));
     }
 
     /**
@@ -69,7 +69,7 @@ class ProductCategoryController extends Controller
     public function update(ProductCategoryRequest $request, $id)
     {
         $this->model->update($request, $id);
-        return redirect()->route('admin.prod.category.index')->with('success', 'Kategori berhasil diubah.');
+        return redirect()->route('admin.category.index')->with('success', 'Kategori berhasil diubah.');
     }
 
     /**
@@ -80,6 +80,6 @@ class ProductCategoryController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()->route('admin.prod.category.index')->with('success', 'Kategori berhasil dihapus.');
+        return redirect()->route('admin.category.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }

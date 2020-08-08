@@ -42,7 +42,7 @@ async function deleteConfirmation(id) {
     $("#confirm-modal").modal("show");
     $("#delete").attr(
         "action",
-        `http://127.0.0.1:8000/_admin/produk/sub-kategori/${id}`
+        `http://127.0.0.1:8000/_admin/kategori/sub-kategori/${id}`
     );
 }
 $("button").tooltip();

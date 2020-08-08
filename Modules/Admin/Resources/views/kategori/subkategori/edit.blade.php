@@ -11,12 +11,12 @@ use App\Utilities\Generator;
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{route('admin.product.index')}}">{{__('Produk')}}</a>
+            <a href="{{route('admin.category.index')}}">{{__('kategori')}}</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{route('admin.prod.subcategory.index')}}">{{__('Sub Kategori Produk')}}</a>
+            <a href="{{route('admin.category.subcategory.index')}}">{{__('Kategori Produk')}}</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Tambah</li>
+        <li class="breadcrumb-item active" aria-current="page">{{__('Ubah')}}</li>
     </ol>
 </x-breadcrumb>
 
@@ -26,22 +26,25 @@ use App\Utilities\Generator;
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Tambah sub kategori produk</h4>
-                    <a href="{{route('admin.prod.subcategory.index')}}" class="btn btn-primary">
+                    <h4 class="card-title">{{__('Ubah sub kategori Produk')}}</h4>
+                    <a href="{{route('admin.category.subcategory.index')}}" class="btn btn-primary">
                         <i class="mdi mdi-arrow-left mr-2"></i>Kembali
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-lg-6 col-md-8 col-sm-12">
-                            <form action="{{route('admin.prod.subcategory.store')}}" method="POST">
+                            <form
+                                action="{{route('admin.category.subcategory.update', Generator::crypt($subCategory->id, 'encrypt'))}}"
+                                method="POST">
                                 @csrf
+                                @method('put')
 
                                 <fieldset class="form-group row">
                                     <div class="col-12">
                                         <label for="name">{{__('Nama sub kategori produk')}}</label>
                                         <input type="text" class="form-control @error('name'){{'is-invalid'}}@enderror"
-                                            name="name" id="name" value="{{old('name')}}">
+                                            name="name" id="name" value="{{$subCategory->name}}">
                                         @error('name')<small class="text-danger">{{$message}}</small>@enderror
                                     </div>
                                 </fieldset>
@@ -51,9 +54,14 @@ use App\Utilities\Generator;
                                         <label for="category">{{__('Kategori produk')}}</label>
                                         <select name="category[]" multiple
                                             class="form-control @error('category'){{'is-invalid'}}@enderror">
-                                            @foreach ($categories as $category)
-                                            <option value="{{Generator::crypt($category->id, 'encrypt')}}">
-                                                {{$category->name}}
+                                            @foreach ($selects['selected'] as $category)
+                                            <option value="{{Generator::crypt($category['id'], 'encrypt')}}" selected>
+                                                {{$category['name']}}
+                                            </option>
+                                            @endforeach
+                                            @foreach ($selects['notSelected'] as $category)
+                                            <option value="{{Generator::crypt($category['id'], 'encrypt')}}">
+                                                {{$category['name']}}
                                             </option>
                                             @endforeach
                                         </select>
@@ -90,8 +98,5 @@ use App\Utilities\Generator;
     $('select').select2({
         theme: 'bootstrap'
     })
-    if($('select').hasClass('is-invalid')){
-        $('.select2-selection--multiple').addClass('is-invalid');
-    }
 </script>
 @endpush

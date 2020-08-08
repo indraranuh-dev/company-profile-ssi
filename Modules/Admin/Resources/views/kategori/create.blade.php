@@ -7,10 +7,7 @@
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{route('admin.product.index')}}">{{__('Produk')}}</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a href="{{route('admin.prod.category.index')}}">{{__('Kategori Produk')}}</a>
+            <a href="{{route('admin.category.index')}}">{{__('Kategori Produk')}}</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Tambah</li>
     </ol>
@@ -23,14 +20,14 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Tambah kategori produk</h4>
-                    <a href="{{route('admin.prod.category.index')}}" class="btn btn-primary">
+                    <a href="{{route('admin.category.index')}}" class="btn btn-primary">
                         <i class="mdi mdi-arrow-left mr-2"></i>Kembali
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-lg-6 col-md-8 col-sm-12">
-                            <form action="{{route('admin.prod.category.store')}}" method="POST">
+                            <form action="{{route('admin.category.store')}}" method="POST">
                                 @csrf
 
                                 <fieldset class="form-group row">

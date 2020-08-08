@@ -54,8 +54,8 @@ Route::group([
 
     # Route kategori produk
     Route::group([
-        'prefix' => 'produk/kategori',
-        'as' => 'prod.category.'
+        'prefix' => 'kategori',
+        'as' => 'category.'
     ], function () {
         Route::get('/', 'ProductCategoryController@index')->name('index');
         Route::get('/tambah', 'ProductCategoryController@create')->name('create');
@@ -65,10 +65,10 @@ Route::group([
         Route::delete('/{id}', 'ProductCategoryController@destroy')->name('destroy');
     });
 
-    # Route sub kategori produk
+    # Route sub kategori
     Route::group([
-        'prefix' => 'produk/sub-kategori',
-        'as' => 'prod.subcategory.'
+        'prefix' => 'kategori/sub-kategori',
+        'as' => 'category.subcategory.'
     ], function () {
         Route::get('/', 'ProductSubCategoryController@index')->name('index');
         Route::get('/tambah', 'ProductSubCategoryController@create')->name('create');
@@ -143,6 +143,37 @@ Route::group([
         Route::get('/{id}/ubah', 'TagController@edit')->name('edit');
         Route::put('/{id}', 'TagController@update')->name('update');
         Route::delete('/{id}', 'TagController@destroy')->name('destroy');
+    });
+
+    # Route General Supplies
+    Route::group([
+        'prefix' => 'general-supplies',
+        'as' => 'gs.'
+    ], function () {
+        Route::get('/', 'GeneralSuppliesController@index')->name('index');
+        Route::get('/tambah', 'GeneralSuppliesController@create')->name('create');
+        Route::get('/{slug}/detail', 'GeneralSuppliesController@show')->name('show');
+        Route::post('/', 'GeneralSuppliesController@store')->name('store');
+        Route::get('/{id}/ubah', 'GeneralSuppliesController@edit')->name('edit');
+        Route::put('/{id}', 'GeneralSuppliesController@update')->name('update');
+        Route::delete('/{id}', 'GeneralSuppliesController@destroy')->name('destroy');
+        Route::get('/{id}/deskripsi/tambah', 'GeneralSuppliesController@createDescription')->name('createDescription');
+        Route::get('/{id}/deskripsi', 'GeneralSuppliesController@showDescription')->name('showDescription');
+        Route::post('/{id}/deskripsi', 'GeneralSuppliesController@storeDescription')->name('storeDescription');
+        Route::put('/{id}/deskripsi', 'GeneralSuppliesController@updateDescription')->name('updateDescription');
+        Route::delete('/{id}/deskripsi', 'GeneralSuppliesController@destroyDescription')->name('destroyDescription');
+    });
+
+    Route::group([
+        'prefix' => 'general-supplies/kategori',
+        'as' => 'gs-category.'
+    ], function () {
+        Route::get('/', 'GeneralSuppliesCategoryController@index')->name('index');
+        Route::get('/tambah', 'GeneralSuppliesCategoryController@create')->name('create');
+        Route::post('/', 'GeneralSuppliesCategoryController@store')->name('store');
+        Route::get('/{id}/ubah', 'GeneralSuppliesCategoryController@edit')->name('edit');
+        Route::put('/{id}', 'GeneralSuppliesCategoryController@update')->name('update');
+        Route::delete('/{id}', 'GeneralSuppliesCategoryController@destroy')->name('destroy');
     });
 
     # Route Japan air filter

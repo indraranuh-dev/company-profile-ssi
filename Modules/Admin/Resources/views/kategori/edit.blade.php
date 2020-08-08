@@ -11,10 +11,7 @@ use App\Utilities\Generator;
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{route('admin.product.index')}}">{{__('Produk')}}</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a href="{{route('admin.prod.category.index')}}">{{__('Kategori Produk')}}</a>
+            <a href="{{route('admin.category.index')}}">{{__('Kategori Produk')}}</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Ubah</li>
     </ol>
@@ -27,7 +24,7 @@ use App\Utilities\Generator;
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Ubah kategori produk</h4>
-                    <a href="{{route('admin.prod.category.index')}}" class="btn btn-primary">
+                    <a href="{{route('admin.category.index')}}" class="btn btn-primary">
                         <i class="mdi mdi-arrow-left mr-2"></i>Kembali
                     </a>
                 </div>
@@ -35,7 +32,7 @@ use App\Utilities\Generator;
                     <div class="row justify-content-center">
                         <div class="col-lg-6 col-md-8 col-sm-12">
                             <form
-                                action="{{route('admin.prod.category.update', Generator::crypt($category->id, 'encrypt'))}}"
+                                action="{{route('admin.category.update', Generator::crypt($category->id, 'encrypt'))}}"
                                 method="POST">
                                 @csrf
                                 @method('put')

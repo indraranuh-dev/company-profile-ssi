@@ -12,7 +12,7 @@ use App\Utilities\Generator;
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{route('admin.product.index')}}">{{__('Produk')}}</a>
+            <a href="{{route('admin.category.index')}}">{{__('Kategori')}}</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">{{__('Sub Kategori Produk')}}</li>
     </ol>
@@ -35,7 +35,7 @@ use App\Utilities\Generator;
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Daftar sub kategori produk</h4>
-                    <a href="{{route('admin.prod.subcategory.create')}}" class="btn btn-primary">
+                    <a href="{{route('admin.category.subcategory.create')}}" class="btn btn-primary">
                         <i class="mdi mdi-plus mr-2"></i>Sub kategori produk
                     </a>
                 </div>
@@ -64,7 +64,7 @@ use App\Utilities\Generator;
                                 <td>{{Converter::convertDate($subCategory->created_at)}}</td>
                                 <td>{{Converter::convertDate($subCategory->updated_at)}}</td>
                                 <td class="text-center">
-                                    <a href="{{route('admin.prod.subcategory.edit', Generator::crypt($subCategory->id, 'encrypt'))}}"
+                                    <a href="{{route('admin.category.subcategory.edit', Generator::crypt($subCategory->id, 'encrypt'))}}"
                                         class="btn btn-outline-light text-secondary btn-sm" title="Ubah data">
                                         <i class="fa fa-fw fa-edit"></i>
                                     </a>
@@ -123,5 +123,5 @@ use App\Utilities\Generator;
 <script src="{{asset('libs/datatables/buttons/jszip.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.html5.js')}}"></script>
 <script src="{{asset('libs/datatables/buttons/buttons.print.js')}}"></script>
-<script src="{{Module::asset('admin:ts/product/subcategory/app.ts')}}"></script>
+<script src="{{Module::asset('admin:ts/category/subcategory/app.ts')}}"></script>
 @endpush
