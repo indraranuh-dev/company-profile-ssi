@@ -40,6 +40,8 @@ use App\Utilities\Generator as G;
                         @method('put')
                         @csrf
 
+                        {{-- @dump($product) --}}
+
                         <div class="row justify-content-center">
 
                             <div class="col-lg-3 col-md-4 col-sm-12">
@@ -76,7 +78,7 @@ use App\Utilities\Generator as G;
                                             <label for="series">{{__('Series produk')}}</label>
                                             <input type="text"
                                                 class="form-control @error('series'){{'is-invalid'}}@enderror"
-                                                name="series" id="series" value="{{$product->name}}">
+                                                name="series" id="series" value="{{$product->series}}">
                                             @error('series')<small class="text-danger">{{$message}}</small>@enderror
                                         </div>
                                     </div>

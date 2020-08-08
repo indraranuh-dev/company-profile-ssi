@@ -1,4 +1,4 @@
-@extends('layouts/hvac')
+@extends('layouts/static')
 
 @section('title', 'Hubungi Kami')
 

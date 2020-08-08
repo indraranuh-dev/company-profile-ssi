@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true, 'register' => false]);
 
 Route::get('/', 'CompanyProfileController@index')->middleware('VisitorCounter')->name('index');
+Route::get('/servis', 'CompanyProfileController@services')->middleware('VisitorCounter')->name('services');
+Route::get('/tentang-kami', 'CompanyProfileController@aboutUs')->middleware('VisitorCounter')->name('about');
 Route::get('/hubungi-kami', 'CompanyProfileController@contactUs')->middleware('VisitorCounter')->name('contact');
 Route::post('/hubungi-kami', 'CompanyProfileController@sendEmail')->name('sendMail');
 Route::post('/harga', 'CompanyProfileController@pricing')->name('pricing');
@@ -56,7 +58,7 @@ Route::group([
         'as' => 'filtration.'
     ], function () {
         Route::get('/', 'JafController@index')->name('index');
-        Route::get('/{supplier}', 'JafController@showProduct')->name('supplier.index');
+        Route::get('/{supplier}', 'JafController@products')->name('supplier.index');
         Route::get('/{supplier}/{product}', 'JafController@showProduct')->name('show');
     });
 });

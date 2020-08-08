@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sinar Sejahtera Inti company profile">
+    <meta name="description" content="Sinar Sejahtera Inti">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @stack('meta')
 
     <title>{{config('app.name')}} | @yield('title')</title>
 
@@ -49,84 +50,11 @@
                             Sinar Sejahtera Inti
                         </span>
                     </a>
-                    {{-- <a href="index.html"><img src="{{asset('img/logo.png')}}" alt="" class="img-fluid"></a> --}}
                 </h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
+
             </div>
 
-            <nav class="nav-menu d-none d-lg-block">
-                <ul>
-                    <li>
-                        <a href="{{route('index')}}">Beranda</a>
-                    </li>
-                    <li>
-                        <a href="{{route('index')}}">Tentang Kami</a>
-                    </li>
-                    <li class="drop-down">
-                        <a href="{{route('product.index')}}">Produk</a>
-                        <ul>
-                            <li class="drop-down">
-                                <a href="{{route('product.hvac.index')}}">HVAC</a>
-                                <ul>
-                                    <li class="drop-down">
-                                        <a href="{{route('product.hvac.subCategory.index', 'applied')}}">Applied</a>
-                                        <ul>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['applied', 'daikin'])}}">
-                                                    Daikin</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['applied', 'gree'])}}">
-                                                    Gree</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="drop-down">
-                                        <a href="{{route('product.hvac.subCategory.index', 'unitary')}}">Unitary</a>
-                                        <ul>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'daikin'])}}">
-                                                    Daikin</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'gree'])}}">
-                                                    Gree</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'mcquay'])}}">
-                                                    McQuay</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="{{route('product.index')}}">General Supplies</a>
-                            </li>
-                            <li class="drop-down">
-                                <a href="{{route('product.filtration.index')}}">Filtration</a>
-                                <ul>
-                                    <li>
-                                        <a href="{{route('product.filtration.supplier.index', 'japan-air-filter')}}">
-                                            Japan Air Filter</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{{route('index')}}">Servis</a>
-                    </li>
-                    <li class="{{request()->routeIs('contact*')? 'active' : ''}}">
-                        <a href="{{route('contact')}}">Hubungi Kami</a>
-                    </li>
-                    <li>
-                        <label for="" class="toggle-search">
-                            <i class="bx bx-search"></i>
-                        </label>
-                    </li>
-                </ul>
-            </nav>
+            <x-static-navbar />
 
         </div>
     </header>

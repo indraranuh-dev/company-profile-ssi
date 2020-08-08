@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Repositories\Model\Entities;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class JafProduct extends Model
@@ -11,7 +12,7 @@ class JafProduct extends Model
     public $table = 'jaf_products';
 
     protected $fillable = [
-        'id', 'name', 'slug_name', 'series', 'image'
+        'id', 'name', 'slug_name', 'series', 'image',
     ];
 
     protected $hidden = ['pivot'];
@@ -38,6 +39,10 @@ class JafProduct extends Model
 
     public function details()
     {
-        return $this->hasMany(JafProductDetail::class, 'jaf_id', 'id');
+        return $this->hasMany(
+            JafProductDetail::class,
+            'jaf_id',
+            'id'
+        );
     }
 }

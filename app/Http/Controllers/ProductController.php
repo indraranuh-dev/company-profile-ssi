@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\ProductModel;
 use Illuminate\Http\Request;
 use Modules\Admin\Repositories\ProdTypeRepositoryInterface as Type;
-use Modules\Admin\Repositories\ProductRepositoryInterface as Product;
 use Modules\Admin\Repositories\FeatureCategoryRepositoryInterface as FeatureCategory;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response as Res;
@@ -28,12 +28,12 @@ class ProductController extends Controller
      * @param FeatureCategory $featureCategoryRepositoryInterface
      */
     public function __construct(
-        Product $productRepositoryInterface,
+        ProductModel $productModel,
         Type $prodTypeRepositoryInterface,
         FeatureCategory $featureCategoryRepositoryInterface,
         Supplier $supplierRepositoryInterface
     ) {
-        $this->model = $productRepositoryInterface;
+        $this->model = $productModel;
         $this->type = $prodTypeRepositoryInterface;
         $this->featureCategory = $featureCategoryRepositoryInterface;
         $this->supplier = $supplierRepositoryInterface;
@@ -69,7 +69,8 @@ class ProductController extends Controller
         $subCategory,
         Request $request
     ) {
-        $suppliers = $this->supplier->getWhere(['name', '!=', 'japan air filter']);
+        // $suppliers = $this->supplier->getWhere(['name', '!=', 'japan air filter']);
+        $suppliers = $this->model->getSupplier($subCategory);
         $products = $this->model->findBySubCategory($subCategory, $request);
         return view('pages.hvac.sub-category', compact(
             'suppliers',

@@ -1,20 +1,16 @@
-@php
-use App\Utilities\Generator as G;
-@endphp
-
-@extends('layouts/hvac')
+@extends('layouts/static')
 
 @section('title', 'Produk')
 
 @section('content')
+{{-- Breadcrumb --}}
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">
-        {{request()->segment(1)}}
+        Produk
     </a>
-    <a class="breadcrumb-item" style="text-transform: uppercase;"
-        href="{{route('product.'.request()->segment(2).'.index')}}">
-        {{request()->segment(2)}}
+    <a class="breadcrumb-item" style="text-transform: uppercase;" href="{{route('product.hvac.index')}}">
+        HVAC
     </a>
     <span class="breadcrumb-item active" style="text-transform: capitalize;">
         {{request()->segment(3)}}
@@ -24,7 +20,7 @@ use App\Utilities\Generator as G;
 <section class="portfolio product">
     <div class="container">
 
-        @if(count($products) !== 0)
+        {{-- Header --}}
         <div class="row justify-content-center">
             <div class="col-12 col-lg-7 col-md-7">
                 <div class="section-title" data-aos="fade-up">
@@ -40,11 +36,10 @@ use App\Utilities\Generator as G;
                 </div>
             </div>
         </div>
-        @endif
 
         <div class="row mt-3" style="min-height: 400px">
 
-            @if(count($products) !== 0)
+            {{-- Filter --}}
             <div class="col-12 col-lg-3 col-md-3 mb-3 mb-lg-0">
                 <p class="text-left" style="font-weight: 700; text-transform:uppercase; font-size:15px">
                     Merek
@@ -52,26 +47,28 @@ use App\Utilities\Generator as G;
                 <ul class="list-group">
                     @foreach ($suppliers as $supplier)
                     <li class="list-group-item border-0 pl-0 py-2" style="background:none">
-                        <a
-                            href="{{route('product.'.request()->segment(2).'.vendor.index', [request()->segment(3), $supplier->slug_name])}}">
+                        <a href="{{route('product.hvac.vendor.index', [request()->segment(3), $supplier->slug_name])}}">
                             <i class='bx bxs-chevron-right mr-2'></i>{{$supplier->name}}
                         </a>
                     </li>
                     @endforeach
                 </ul>
             </div>
-            @endif
 
-            <div class="col-12 {{(count($products) === 0) ? 'align-self-center' : 'col-lg-9 col-md-9 '}}">
+            {{-- Content --}}
+            <div class="col-12 col-lg-9 col-md-9">
 
+                {{-- Produk --}}
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
 
+                    {{-- Jika produk ada --}}
                     @forelse ($products as $product)
-                    <div class="col-lg-4 col-md-6 portfolio-item pb-5 text-center">
-                        <h4 class="text-left" style="font-weight: 700;">
+                    {{-- Gambar produk --}}
+                    <div class="col-6 col-lg-4 portfolio-item pb-5 text-center">
+                        <h4 class="text-left text-med" style="font-weight: 700;">
                             {{$product->name}}
                         </h4>
-                        <h6 class="text-left text-muted" style="text-transform:uppercase; font-weight:600;">
+                        <h6 class="text-left text-muted text-small" style="text-transform:uppercase; font-weight:600;">
                             <strong>{{$product->suppliers[0]->name}}</strong> -
                             {{$product->series}}
                         </h6>
@@ -87,34 +84,49 @@ use App\Utilities\Generator as G;
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Button --}}
                         <div class="d-flex align-items-center justify-content-center mt-3">
-                            <a href="{{route('product.'.request()->segment(2).'.show',[
+
+                            <a href="{{route('product.hvac.show',[
                                 request()->segment(3),
                                 $product->suppliers[0]->slug_name,
                                 $product->slug_name]
                                 )}}" class="btn btn-detail-primary mr-2">
                                 Lihat detail
                             </a>
+
                             <form action="{{route('pricing')}}" method="post">
                                 @csrf
-                                <input type="hidden" name="_link" value="{{route('product.'.request()->segment(2).'.show',[
+                                <input type="hidden" name="_link" value="{{route('product.hvac.show',[
                                     request()->segment(3),
                                     $product->suppliers[0]->slug_name,
                                     $product->slug_name]
                                     )}}">
                                 <button class="btn btn-detail-primary rounded" title="Harga">
-                                    <i class='bx bx-dollar'></i>
+                                    <i class="icofont-money"></i>
                                 </button>
                             </form>
+
                         </div>
                     </div>
+
+                    {{-- Jika produk tidak ditemukan --}}
                     @empty
-                    <div class="col-12 text-center">
-                        <h4>Maaf, produk yang kamu cari tidak kita temukan &#x1F61E;</h4>
+                    <div class="col-12 text-center mt4">
+                        <h4 class="mt-5">Maaf, produk yang kamu cari tidak kita temukan &#x1F61E;</h4>
                     </div>
                     @endforelse
 
                 </div>
+
+                {{-- Pagination --}}
+                <div class="row">
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="400">
+                        {{$products->links()}}
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -125,57 +137,8 @@ use App\Utilities\Generator as G;
 
 @push('styles')
 <style>
-    .rounded {
-        height: 40px !important;
-        width: 40px !important;
-        border-radius: 50% !important;
-    }
-
-    .rounded i {
-        transform: translateY(0)
-    }
-
     section {
         padding: 20px 0 60px;
-    }
-
-    .filter-container {
-        background: #e9ecef;
-        padding: 10px 20px;
-        width: 100%;
-        box-sizing: border-box;
-        border-radius: 5px;
-        margin-bottom: 30px
-    }
-
-    .filter-container h4 {
-        font-size: 15px;
-        text-transform: uppercase;
-        font-weight: 700;
-        letter-spacing: 2px
-    }
-
-    .collapse.show {
-        animation: try .5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
-        height: 100%;
-    }
-
-    .collapse {
-        animation: try .5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
-        height: 0;
-        overflow: hidden;
-    }
-
-    @keyframes try {
-        form {
-            height: 0;
-            opacity: 1;
-        }
-
-        to {
-            height: 100%;
-            opacity: 1;
-        }
     }
 </style>
 @endpush

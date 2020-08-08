@@ -18,16 +18,16 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|' . Rule::unique('products', 'name')
                 ->ignore(Generator::crypt($this->id, 'decrypt')),
-            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'image' => 'nullable|image|mimes:png,webp,jpg,jpeg|max:2048',
             'subCategory' => 'required',
-            'series' => 'nullable',
+            'series' => 'nullable|max:255',
             'supplier' => 'required',
             'inverter' => 'nullable',
             'type' => 'required',
             'tags' => 'required',
             'features' => 'nullable',
-            'description' => 'required|min:10',
-            'spesification' => 'nullable'
+            'description' => 'required|min:10|max:255',
+            'spesification' => 'nullable|image|mimes:png,webp,jpg,jpeg|max:2048'
         ];
     }
 

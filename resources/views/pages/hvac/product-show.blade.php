@@ -1,36 +1,31 @@
-@php
-use App\Utilities\Generator as G;
-@endphp
-
-@extends('layouts/hvac')
+@extends('layouts/static')
 
 @section('title', 'Produk')
 
 @section('content')
+
+{{-- Breadcrumb --}}
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
-    <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">
-        {{request()->segment(1)}}
-    </a>
-    <a class="breadcrumb-item" style="text-transform: uppercase;"
-        href="{{route('product.'.request()->segment(2).'.index')}}">
-        {{request()->segment(2)}}
-    </a>
+    <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">Produk</a>
+    <a class="breadcrumb-item" style="text-transform: uppercase;" href="{{route('product.hvac.index')}}">HVAC</a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.'.request()->segment(2).'.subCategory.index', [request()->segment(3)])}}">
+        href="{{route('product.hvac.subCategory.index', [request()->segment(3)])}}">
         {{request()->segment(3)}}
     </a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.'.request()->segment(2).'.vendor.index', [request()->segment(3), request()->segment(4)])}}">
+        href="{{route('product.hvac.vendor.index', [request()->segment(3), request()->segment(4)])}}">
         {{request()->segment(4)}}
     </a>
     <span class="breadcrumb-item active" style="text-transform: capitalize;">
         {{str_replace('-', ' ', request()->segment(5))}}
     </span>
 </nav>
+
 <section class="portfolio product">
     <div class="container" style="{{($products->isEmpty()) ? 'transform: translateY(250px);' : ''}}">
 
+        {{-- Header --}}
         @if (!$products->isEmpty())
         <div class="row justify-content-center">
             <div class="col-12 col-lg-7 col-md-7">
@@ -41,11 +36,13 @@ use App\Utilities\Generator as G;
         </div>
         @endif
 
+        {{-- Content --}}
         <div class="row mt-3">
             <div class="col-12 align-self-center">
 
                 <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="400">
 
+                    {{-- Deskripsi dan dambar produk --}}
                     @forelse ($products as $product)
                     <div class="col-12 col-lg-5 col-md-6 mb-3 text-center">
                         <div class="img-container">
@@ -64,6 +61,7 @@ use App\Utilities\Generator as G;
                         <p class="text-justify">{{$product->description}}</p>
                     </div>
 
+                    {{-- Fitur produk --}}
                     @if(!$product->features->isEmpty())
                     @foreach ($featureCategories as $category)
                     <div class="col-12 col-lg-6 col-md-6 mb-3">
@@ -92,6 +90,7 @@ use App\Utilities\Generator as G;
                     @endforeach
                     @endif
 
+                    {{-- Spesifikasi produk --}}
                     @if ($product->spesification !== '' && $product->spesification !== null)
                     <div class="col-12 col-lg-8 col-md-8 my-3">
                         <h5 class="text-center"
@@ -124,30 +123,6 @@ use App\Utilities\Generator as G;
             </div>
         </div>
 
-    </div>
-    <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body px-5">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <div class="spinner-border spinner" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text row text-justify">
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 

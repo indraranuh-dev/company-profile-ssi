@@ -4,6 +4,7 @@ namespace Modules\Admin\Repositories\Model;
 
 use Illuminate\Support\Str;
 use App\Utilities\Generator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Modules\Admin\Repositories\Model\Entities\JafProduct;
 use Modules\Admin\Repositories\JafProductRepositoryInterface;
@@ -14,14 +15,13 @@ class JafProductModel implements JafProductRepositoryInterface
 
     public function getAll($request)
     {
-        $jaf = JafProduct::orderBy('created_at', 'desc')->with('details:id,jaf_id,description', 'category:id,name');
+        $jaf = JafProduct::orderBy('created_at', 'desc');
         return $jaf->get();
     }
 
     public function findById($id)
     {
-        $jaf = JafProduct::where('id', $this->decrypt(false, $id))
-            ->with('category', 'details', 'tags');
+        $jaf = JafProduct::where('id', $this->decrypt(false, $id));
         return $jaf->first();
     }
 
@@ -91,14 +91,14 @@ class JafProductModel implements JafProductRepositoryInterface
     public function delete($id)
     {
         $jaf = JafProduct::findOrFail($this->decrypt(false, $id));
-        return $jaf->delete();
+        $jaf->delete();
+        return $this->deleteImage($jaf->image);
     }
 
     public function deleteDescription($id)
     {
         $detail = JafProductDetail::findOrFail($this->decrypt(false, $id));
         $detail->delete();
-        return $this->deleteImage($detail->image);
     }
 
     /**
@@ -159,7 +159,7 @@ class JafProductModel implements JafProductRepositoryInterface
     protected function sync($request)
     {
         $type = JafProduct::where('name', $request->name)->first();
-        $type->tags()->sync($this->decrypt(true, '', $request->tags));
-        return $type->category()->sync($this->decrypt(false, $request->category));
+        if ($request->tags) $type->tags()->sync($this->decrypt(true, '', $request->tags));
+        if ($request->category) return $type->category()->sync($this->decrypt(false, $request->category));
     }
 }

@@ -39,10 +39,12 @@ use App\Utilities\Generator;
                         <div class="col-lg-5 col-md-5 col-sm-12 py-3">
                             <div class="d-flex flex-column h-100">
                                 <h3 class="card-title mt-3">
-                                    <span class="text-info">{{$product->suppliers[0]->name}}</span> -
                                     {{$product->name}}
                                 </h3>
-                                <h5 class="text-muted">{{$product->series}}</h5>
+                                <h5 class="text-muted">
+                                    <strong class="text-info">{{$product->suppliers[0]->name}}</strong>
+                                    {{($product->series !== '' && $product->series !== null) ?' - '.$product->series : ''}}
+                                </h5>
                                 <h5 class="text-muted">
                                     @foreach ($product->tags as $tag)
                                     <span class="badge badge-primary"># {{$tag->name}}</span>
@@ -79,6 +81,7 @@ use App\Utilities\Generator;
                         </div>
                         @endforeach
                     </div>
+                    @if($product->spesification !== '' && $product->spesification !== null)
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-8 col-md-8 text-center">
                             <h3 class="card-title">Spesifikasi</h3>
@@ -86,6 +89,7 @@ use App\Utilities\Generator;
                                 alt="{{$product->spesification}}" width="100%">
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -44,15 +44,17 @@ use App\Utilities\Generator;
                                 <div class="col-12">
                                     <figure>
                                         <figcaption>
-                                            <h3 class="card-title">
-                                                <span class="text-info">{{$product->suppliers[0]->name}}</span>
+                                            <h3 style="font-size: 17px" class="card-title">
                                                 {{$product->name}}
                                             </h3>
-                                            <h5 class="text-muted">{{$product->series}}</h5>
+                                            <h5 style="font-size: 14px;" class="text-muted">
+                                                <strong class="text-info">{{$product->suppliers[0]->name}}</strong>
+                                                {{($product->series !== '' && $product->series !== null) ?' - '.$product->series : ''}}
+                                            </h5>
                                         </figcaption>
                                         <a href="{{route('admin.product.show', $product->slug_name)}}">
                                             <div class="img-wrapper">
-                                                <img class="img-thumbnail img-fluid"
+                                                <img class="img-fluid" style="height: 100%"
                                                     src="{{route('admin.product.image', $product->product_image)}}"
                                                     alt="product-image">
                                             </div>
@@ -113,8 +115,7 @@ use App\Utilities\Generator;
 @push('styles')
 <style>
     .img-wrapper {
-        max-height: 160px;
-        width: 100%;
+        height: 160px;
         display: flex;
         align-items: center;
         justify-content: center;

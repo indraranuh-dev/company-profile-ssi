@@ -1,12 +1,9 @@
-@php
-use App\Utilities\Generator as G;
-@endphp
-
-@extends('layouts/hvac')
+@extends('layouts/static')
 
 @section('title', 'Produk')
 
 @section('content')
+{{-- Breadcrumb --}}
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
     <span class="breadcrumb-item active" style="text-transform: capitalize;">{{request()->segment(1)}}</span>
@@ -15,6 +12,7 @@ use App\Utilities\Generator as G;
 <section class="product more-services">
     <div class="container">
 
+        {{-- Header Produk--}}
         <div class="row justify-content-center">
             <div class="col-12 col-lg-7 col-md-7" data-aos="fade-up">
                 <div class="section-title">
@@ -29,70 +27,65 @@ use App\Utilities\Generator as G;
             </div>
         </div>
 
+        {{-- Kategori produk --}}
         <div class="row">
 
-            <div class="col-12 col-lg-4 col-md-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-stretch" data-aos="fade-right"
-                data-oas-delay="300" data-aos-duration="800">
-                <div class="card p-0">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <strong style="text-transform: uppercase; letter-spacing:2px;">HVAC</strong>
-                        </h5>
-                        <p class="card-text text-justify">
+            {{-- HVAC --}}
+            <div class="col-12 col-lg-6 col-md-6 mb-4" data-aos="fade-right" data-aos-duration="800">
+                <div class="awesome-card">
+                    <div class="awesome-header">
+                        <h5 class="awesome-title">HVAC</h5>
+                    </div>
+                    <div class="awesome-body">
+                        <p class="content">
                             HVAC adalah Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime dolores
                             reiciendis voluptatum facilis, laborum sint dicta rerum perspiciatis architecto similique.
                         </p>
-                        <div class="read-more">
-                            <a href="{{route('product.hvac.index')}}">
-                                <i class="icofont-arrow-right"></i> Baca selengkapnya
-                            </a>
-                        </div>
+                        <a href="{{route('product.hvac.index')}}">
+                            <i class="icofont-arrow-right"></i> Baca selengkapnya
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-lg-4 col-md-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-stretch" data-aos="fade-up"
-                ata-oas-delay="300" data-aos-duration="800">
-                <div class="card p-0">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <strong style="text-transform: uppercase; letter-spacing:2px;">General Supplies</strong>
-                        </h5>
-                        <p class="card-text text-justify">
+            {{-- General Supplies --}}
+            <div class="col-12 col-lg-6 col-md-6 mb-4" data-aos="fade-left" data-aos-duration="800">
+                <div class="awesome-card">
+                    <div class="awesome-header">
+                        <h5 class="awesome-title">General Supplies</h5>
+                    </div>
+                    <div class="awesome-body">
+                        <p class="content">
                             General Supplies adalah Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
                             beatae hic fugit cupiditate sequi exercitationem saepe commodi quam similique sint.
                         </p>
-                        <div class="read-more">
-                            <a href="{{route('product.hvac.index')}}">
-                                <i class="icofont-arrow-right"></i> Baca selengkapnya
-                            </a>
-                        </div>
+                        <a href="{{route('product.hvac.index')}}">
+                            <i class="icofont-arrow-right"></i> Baca selengkapnya
+                        </a>
                     </div>
                 </div>
-
             </div>
+        </div>
 
-            <div class="col-12 col-lg-4 col-md-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-stretch" data-aos="fade-left"
-                data-oas-delay="300" data-aos-duration="800">
-                <div class="card p-0">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <strong style="text-transform: uppercase; letter-spacing:2px;">Filtration</strong>
-                        </h5>
-                        <p class="card-text text-justify">
+        {{-- Kategori Produk Filtration --}}
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-duration="800">
+                <div class="awesome-card">
+                    <div class="awesome-header">
+                        <h5 class="awesome-title">Filtration</h5>
+                    </div>
+                    <div class="awesome-body">
+                        <p class="content">
                             Filtration adalah Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad iusto
                             laboriosam quisquam. Cum modi fuga ducimus eligendi id commodi porro.
                         </p>
-                        <div class="read-more">
-                            <a href="{{route('product.hvac.index')}}">
-                                <i class="icofont-arrow-right"></i> Baca selengkapnya
-                            </a>
-                        </div>
+                        <a href="{{route('product.hvac.index')}}">
+                            <i class="icofont-arrow-right"></i> Baca selengkapnya
+                        </a>
                     </div>
                 </div>
 
             </div>
-
         </div>
 
     </div>
@@ -105,38 +98,27 @@ use App\Utilities\Generator as G;
     section {
         padding: 20px 0 60px;
     }
-
-    @keyframes try {
-        form {
-            height: 0;
-            opacity: 1;
-        }
-
-        to {
-            height: 100%;
-            opacity: 1;
-        }
-    }
 </style>
 @endpush
 
 @push('scripts')
 <script>
-    $('[title]').tooltip();
-    $(window).scroll(function (e) {
-        if(window.scrollY > 5){
-            $('#header').addClass('header-scrolled');
-        }
-        $('#header').find('li:nth-child(1)').removeClass('active');
-        $('#header').find('ul:nth-child(1) > li:nth-child(3)').addClass('active');
+    $(function (){
+        $('[title]').tooltip();
+        $(window).scroll(function (e) {
+            if(window.scrollY > 5){
+                $('#header').addClass('header-scrolled');
+            }
+            $('#header').find('li:nth-child(1)').removeClass('active');
+            $('#header').find('ul:nth-child(1) > li:nth-child(3)').addClass('active');
+        })
+        $(document).ready(function () {
+            $('.portfolio-item').css('top', '20px !important');
+        })
+        $('#accordion .btn-link').click(function(){
+            const target = $(this).data('target');
+            $(target).toggleClass('show');
+        })
     })
-    $(document).ready(function () {
-        $('.portfolio-item').css('top', '20px !important');
-    })
-    $('#accordion .btn-link').click(function(){
-        const target = $(this).data('target');
-        $(target).toggleClass('show');
-    })
-
 </script>
 @endpush

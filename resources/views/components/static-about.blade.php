@@ -36,7 +36,7 @@
                     nihil
                     maxime perspiciatis nostrum veniam iure necessitatibus! Quos, quisquam?
                 </p>
-                <a href="#" class="btn-learn-more">Learn More</a>
+                <a href="{{route('about')}}" class="btn-learn-more">Learn More</a>
             </div>
             {{-- <div class="col-lg-8 pt-4 pt-lg-0 text-center" data-aos="fade-up" data-aos-delay="300">
                 <p>

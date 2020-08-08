@@ -13,31 +13,6 @@ interface ProductRepositoryInterface
     public function getAll($request);
 
     /**
-     * Find product by passing suppliers slug and subcategories slug
-     *
-     * @param string $subCategory
-     * @return void
-     */
-    public function findBySubCategory($subCategory, $request);
-
-    /**
-     * Find product by passing suppliers slug and subcategories slug
-     *
-     * @param string $supplier
-     * @param string $subCategory
-     * @return void
-     */
-    public function findBySupplierNSubCategory($supplier, $subCategory, $request);
-
-    /**
-     * Find product with keywords
-     *
-     * @param string $keyword
-     * @return void
-     */
-    public function searchProduct($keyword);
-
-    /**
      * Find product by passing id
      *
      * @param string $id

@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Sinar Sejahtera Inti company profile">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @stack('meta')
 
-    <title>{{config('app.name')}} | @yield('title')</title>
+    <title>{{config('app.name')}} {{(request()->segment(1) !== '') ? '|' : ''}} @yield('title')</title>
 
     <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet' " href="{{mix('css/app.css')}}">
     <link rel="stylesheet" href=" {{mix('css/vendor.css')}}">
@@ -21,6 +22,7 @@
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center">
 
+            {{-- Logo --}}
             <div class="logo mr-auto">
                 <h1 class="text-light">
                     <a href="{{route('index')}}">
@@ -49,88 +51,16 @@
                             Sinar Sejahtera Inti
                         </span>
                     </a>
-                    {{-- <a href="index.html"><img src="{{asset('img/logo.png')}}" alt="" class="img-fluid"></a> --}}
                 </h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
             </div>
 
-            <nav class="nav-menu d-none d-lg-block">
-                <ul>
-                    <li>
-                        <a href="{{route('index')}}">Beranda</a>
-                    </li>
-                    <li>
-                        <a href="{{route('index')}}">Tentang Kami</a>
-                    </li>
-                    <li class="drop-down">
-                        <a href="{{route('product.index')}}">Produk</a>
-                        <ul>
-                            <li class="drop-down">
-                                <a href="{{route('product.hvac.index')}}">HVAC</a>
-                                <ul>
-                                    <li class="drop-down">
-                                        <a href="{{route('product.hvac.subCategory.index', 'applied')}}">Applied</a>
-                                        <ul>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['applied', 'daikin'])}}">
-                                                    Daikin</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['applied', 'gree'])}}">
-                                                    Gree</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="drop-down">
-                                        <a href="{{route('product.hvac.subCategory.index', 'unitary')}}">Unitary</a>
-                                        <ul>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'daikin'])}}">
-                                                    Daikin</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'gree'])}}">
-                                                    Gree</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('product.hvac.vendor.index', ['unitary', 'mcquay'])}}">
-                                                    McQuay</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="{{route('product.index')}}">General Supplies</a>
-                            </li>
-                            <li class="drop-down">
-                                <a href="{{route('product.filtration.index')}}">Filtration</a>
-                                <ul>
-                                    <li>
-                                        <a href="{{route('product.filtration.supplier.index', 'japan-air-filter')}}">
-                                            Japan Air Filter</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{{route('index')}}">Servis</a>
-                    </li>
-                    <li class="{{request()->routeIs('contact*')? 'active' : ''}}">
-                        <a href="{{route('contact')}}">Hubungi Kami</a>
-                    </li>
-                    <li>
-                        <label for="" class="toggle-search">
-                            <i class="bx bx-search"></i>
-                        </label>
-                    </li>
-                </ul>
-            </nav>
+            {{-- Navbar --}}
+            <x-static-navbar />
 
         </div>
     </header>
 
+    {{-- Search modal --}}
     <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

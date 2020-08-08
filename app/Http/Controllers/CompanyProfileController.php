@@ -23,6 +23,11 @@ class CompanyProfileController extends Controller
         return view('welcome');
     }
 
+    public function aboutUs()
+    {
+        return view('pages.about-us');
+    }
+
     public function contactUs()
     {
         return view('pages.contact');

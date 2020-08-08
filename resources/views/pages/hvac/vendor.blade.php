@@ -1,23 +1,19 @@
-@php
-use App\Utilities\Generator;
-@endphp
-
-@extends('layouts/hvac')
+@extends('layouts/static')
 
 @section('title', 'Produk')
 
 @section('content')
+{{-- Breadcrumb --}}
 <nav class="breadcrumb container">
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('index')}}">Home</a>
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">
-        {{request()->segment(1)}}
+        Produk
     </a>
-    <a class="breadcrumb-item" style="text-transform: uppercase;"
-        href="{{route('product.'.request()->segment(2).'.index')}}">
-        {{request()->segment(2)}}
+    <a class="breadcrumb-item" style="text-transform: uppercase;" href="{{route('product.hvac.index')}}">
+        HVAC
     </a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.'.request()->segment(2).'.subCategory.index', [request()->segment(3)])}}">
+        href="{{route('product.hvac.subCategory.index', [request()->segment(3)])}}">
         {{request()->segment(3)}}
     </a>
     <span class="breadcrumb-item active" style="text-transform: capitalize;">{{request()->segment(4)}}</span>
@@ -26,6 +22,7 @@ use App\Utilities\Generator;
 <section class="portfolio product">
     <div class="container">
 
+        {{-- Header --}}
         <div class="row justify-content-center">
             <div class="col-12 col-lg-7 col-md-7">
                 <div class="section-title" data-aos="fade-up">
@@ -41,11 +38,16 @@ use App\Utilities\Generator;
             </div>
         </div>
 
+        {{-- Content --}}
         <div class="row mt-3">
+
+            {{-- Filter --}}
             <div class="col-12 col-lg-3 col-md-3 mb-3 mb-lg-0">
                 <p class="text-left" style="font-weight: 700; text-transform:uppercase; font-size:15px">Filter</p>
                 <form action="" method="get">
                     <div id="accordion">
+
+                        {{-- Kategori --}}
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
@@ -60,17 +62,17 @@ use App\Utilities\Generator;
                                 <div class="card-body">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="kategori" value="all"
-                                                {{(request()->kategori === 'all') ? 'checked' : ''}}>
+                                            <input type="radio" class="form-check-input" name="c" value="all"
+                                                {{(request()->c === 'all') ? 'checked' : ''}}>
                                             Semua kategori
                                         </label>
                                     </div>
                                     @foreach ($filters as $category)
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="kategori"
+                                            <input type="radio" class="form-check-input" name="c"
                                                 value="{{$category->slug_name}}"
-                                                {{(request()->kategori === $category->slug_name) ? 'checked' : ''}}>
+                                                {{(request()->c === $category->slug_name) ? 'checked' : ''}}>
                                             {{$category->name}}
                                         </label>
                                     </div>
@@ -78,6 +80,8 @@ use App\Utilities\Generator;
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Jenis --}}
                         <div class="card">
                             <div class="card-header" id="headingTwo">
                                 <h5 class="mb-0">
@@ -91,8 +95,8 @@ use App\Utilities\Generator;
                                 <div class="card-body">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="jenis" value="all"
-                                                {{(request()->jenis === 'all') ? 'checked' : ''}}>
+                                            <input type="radio" class="form-check-input" name="t" value="all"
+                                                {{(request()->t === 'all') ? 'checked' : ''}}>
                                             Semua jenis
                                         </label>
                                     </div>
@@ -100,9 +104,9 @@ use App\Utilities\Generator;
                                     @foreach ($category->subTypes as $subType)
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="jenis"
+                                            <input type="radio" class="form-check-input" name="t"
                                                 value="{{$subType->slug_name}}"
-                                                {{(request()->jenis === $subType->slug_name) ? 'checked' : ''}}>
+                                                {{(request()->t === $subType->slug_name) ? 'checked' : ''}}>
                                             {{$subType->name}}
                                         </label>
                                     </div>
@@ -111,6 +115,8 @@ use App\Utilities\Generator;
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Inverter --}}
                         <div class="card">
                             <div class="card-header" id="headingThree">
                                 <h5 class="mb-0">
@@ -124,24 +130,22 @@ use App\Utilities\Generator;
                                 <div class="card-body">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="inverter" value="all"
-                                                {{(request()->inverter === 'all') ? 'checked' : ''}}>
+                                            <input type="radio" class="form-check-input" name="i" value="all"
+                                                {{(request()->i === 'all') ? 'checked' : ''}}>
                                             Semua
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="inverter"
-                                                value="inverter"
-                                                {{(request()->inverter === 'inverter') ? 'checked' : ''}}>
+                                            <input type="radio" class="form-check-input" name="i" value="inverter"
+                                                {{(request()->i === 'inverter') ? 'checked' : ''}}>
                                             Inverter
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="inverter"
-                                                value="non-inverter"
-                                                {{(request()->inverter === 'non-inverter') ? 'checked' : ''}}>
+                                            <input type="radio" class="form-check-input" name="i" value="non-inverter"
+                                                {{(request()->i === 'non-inverter') ? 'checked' : ''}}>
                                             Non-Inverter
                                         </label>
                                     </div>
@@ -156,19 +160,24 @@ use App\Utilities\Generator;
                     </div>
                 </form>
             </div>
+
+            {{-- Produk --}}
             <div class="col-12 col-lg-9 col-md-9 {{(count($products) === 0) ? 'align-self-center' : ''}}">
 
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
 
+                    {{-- Jika produk ada --}}
                     @forelse ($products as $product)
-                    <div class="col-lg-4 col-md-6 portfolio-item pb-5 text-center">
-                        <h4 class="text-left" style="font-weight: 700;">{{$product->name}}</h4>
-                        <h6 class="text-left text-muted" style="text-transform:uppercase; font-weight:600;">
+
+                    {{-- Gambar produk --}}
+                    <div class="col-6 col-lg-4 col-md-6 portfolio-item pb-5 text-center">
+                        <h4 class="text-left text-med" style="font-weight: 700;">{{$product->name}}</h4>
+                        <h6 class="text-left text-muted text-small" style="text-transform:uppercase; font-weight:600;">
                             {{$product->series}}
                         </h6>
                         <div class="portfolio-wrap text-center" style="background: none;">
-                            <img class="img-fluid" src="{{route('productImage', $product->product_image)}}"
-                                alt="product-image" style="height: 150px">
+                            <img class="img-fluid product-image"
+                                src="{{route('productImage', $product->product_image)}}" alt="product-image">
                             <div class="portfolio-info">
                                 <div class="portfolio-links">
                                     <a href="{{route('productImage', $product->product_image)}}"
@@ -179,23 +188,35 @@ use App\Utilities\Generator;
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Button --}}
                         <div class="d-flex align-items-center justify-content-center mt-3">
-                            <a href="{{request()->url().'/'.$product->slug_name}}"
-                                class="btn btn-detail-primary mr-3">Lihat
-                                detail</a>
+
+                            <a href="{{route('product.hvac.show', [
+                                $product->subCategories[0]->slug_name,
+                                $product->suppliers[0]->slug_name, $product->slug_name]
+                                )}}" class="btn btn-detail-primary mr-3">
+                                Lihat detail
+                            </a>
+
                             <form action="{{route('pricing')}}" method="post">
                                 @csrf
-                                <input type="hidden" name="_link" value="{{route('product.'.request()->segment(2).'.show',[
-                                        request()->segment(3),
+
+                                <input type="hidden" name="_link" value="{{route('product.hvac.show',[
+                                        $product->subCategories[0]->slug_name,
                                         $product->suppliers[0]->slug_name,
                                         $product->slug_name]
                                         )}}">
+
                                 <button class="btn btn-detail-primary rounded" title="Harga">
-                                    <i class='bx bx-dollar'></i>
+                                    <i class="icofont-money"></i>
                                 </button>
                             </form>
+
                         </div>
                     </div>
+
+                    {{-- Jika produk kosong --}}
                     @empty
                     <div class="col-12 text-center">
                         <h4>Maaf, produk yang kamu cari tidak kita temukan &#x1F61E;</h4>
@@ -203,6 +224,14 @@ use App\Utilities\Generator;
                     @endforelse
 
                 </div>
+
+                {{-- Pagination --}}
+                <div class="row">
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="400">
+                        {{$products->links()}}
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -213,57 +242,8 @@ use App\Utilities\Generator;
 
 @push('styles')
 <style>
-    .rounded {
-        height: 40px !important;
-        width: 40px !important;
-        border-radius: 50% !important;
-    }
-
-    .rounded i {
-        transform: translateY(0)
-    }
-
     section {
         padding: 20px 0 60px;
-    }
-
-    .filter-container {
-        background: #e9ecef;
-        padding: 10px 20px;
-        width: 100%;
-        box-sizing: border-box;
-        border-radius: 5px;
-        margin-bottom: 30px
-    }
-
-    .filter-container h4 {
-        font-size: 15px;
-        text-transform: uppercase;
-        font-weight: 700;
-        letter-spacing: 2px
-    }
-
-    .collapse.show {
-        animation: try .5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
-        height: 100%;
-    }
-
-    .collapse {
-        animation: try .5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
-        height: 0;
-        overflow: hidden;
-    }
-
-    @keyframes try {
-        form {
-            height: 0;
-            opacity: 1;
-        }
-
-        to {
-            height: 100%;
-            opacity: 1;
-        }
     }
 </style>
 @endpush

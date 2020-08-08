@@ -25,73 +25,6 @@ class ProductModel implements ProductRepositoryInterface
         return $product->paginate(10);
     }
 
-    public function findBySubCategory($subCategory, $request)
-    {
-        $products = Product::orderBy('name', 'asc')->with(
-            'suppliers',
-            'subCategories',
-            'tags',
-            'type'
-        );
-
-        $subCategories = $this->findSubCategory($subCategory);
-
-        if ($subCategories) {
-            $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
-                $query->where('subcategories_id', $subCategories->id);
-            });
-        } else {
-            return [];
-        }
-
-        return $products->paginate(10);
-    }
-
-    public function findBySupplierNSubCategory($supplier, $subCategory, $request)
-    {
-        $products = Product::orderBy('name', 'asc')->with(
-            'suppliers',
-            'subCategories',
-            'tags',
-            'type'
-        );
-
-        $subCategories = $this->findSubCategory($subCategory);
-        $suppliers = $this->findSupplier($supplier);
-
-        if ($subCategories) {
-            $products->whereHas('subCategories', function (Builder $query) use ($subCategories) {
-                $query->where('subcategories_id', $subCategories->id);
-            });
-        } else {
-            return [];
-        }
-
-        if ($suppliers) {
-            $products->whereHas('suppliers', function (Builder $query) use ($suppliers) {
-                $query->where('suppliers_id', $suppliers->id);
-            });
-        } else {
-            return [];
-        }
-
-        $this->filter($products, $request);
-
-        return $products->paginate(10);
-    }
-
-    public function searchProduct($keyword)
-    {
-        $products = Product::whereRaw('name like "%' . $keyword . '%"');
-        $tag = $this->findTag($keyword);
-        if ($tag) {
-            $products->orWhereHas('tags', function (Builder $query) use ($tag) {
-                $query->where('tags_id', $tag->id);
-            });
-        }
-        return $products->with('tags:id,name')->limit(10)->get(['id', 'name', 'slug_name']);
-    }
-
     public function findById($id)
     {
         $product = Product::where('id', $this->decrypt(false, $id))
@@ -173,30 +106,6 @@ class ProductModel implements ProductRepositoryInterface
         return $product->delete();
     }
 
-
-    protected function filter($products, $request)
-    {
-        $category = $this->findType($request->kategori);
-        $type = $this->findTag($request->jenis);
-        $inverter = $this->findTag($request->inverter);
-
-        if ($request->kategori !== 'all' && $request->kategori && $category) {
-            $products->where('product_type_id', $category->id);
-        }
-
-        if ($request->jenis !== 'all' && $request->jenis && $type) {
-            $products->whereHas('tags', function (Builder $query) use ($type) {
-                $query->whereRaw("tags_id = $type->id");
-            });
-        }
-
-        if ($request->inverter !== 'all' && $request->inverter && $inverter) {
-            $products->whereHas('tags', function (Builder $query) use ($inverter) {
-                $query->whereRaw("tags_id = $inverter->id");
-            });
-        }
-    }
-
     protected function decrypt($isArray = false, $id = '', $arr = [])
     {
         if ($isArray === false) {
@@ -210,33 +119,13 @@ class ProductModel implements ProductRepositoryInterface
         }
     }
 
-    protected function findTag($k)
-    {
-        return Tag::whereRaw('slug_name LIKE "%' . $k . '%"')->orWhereRaw('name LIKE "%' . $k . '%"')->first();
-    }
-
-    protected function findType($slug)
-    {
-        return ProductType::where('slug_name', $slug)->first();
-    }
-
-    protected function findSupplier($slug)
-    {
-        return Supplier::where('slug_name', $slug)->first();
-    }
-
-    protected function findSubCategory($slug)
-    {
-        return ProductSubCategory::where('slug_name', $slug)->first();
-    }
-
     protected function sync($request)
     {
         $findSub = Product::where('name', $request->name)->first();
-        $findSub->subCategories()->sync($this->decrypt(false, $request->subCategory));
-        $findSub->suppliers()->sync($this->decrypt(false, $request->supplier));
+        if ($request->subCategory) $findSub->subCategories()->sync($this->decrypt(false, $request->subCategory));
+        if ($request->supplier) $findSub->suppliers()->sync($this->decrypt(false, $request->supplier));
         $findSub->tags()->sync($this->decrypt(true, '', $request->tags));
-        return $findSub->features()->sync($this->decrypt(true, '', $request->features));
+        if ($request->features) return $findSub->features()->sync($this->decrypt(true, '', $request->features));
     }
 
     /**
@@ -290,9 +179,11 @@ class ProductModel implements ProductRepositoryInterface
      */
     protected function uploadSpesification($request, $product)
     {
-        $name = time() . '_' . random_int(100, 999) . '.' . $request->spesification->getClientOriginalExtension();
-        $request->spesification->move(storage_path('app/public/image'), $name);
-        return $product->spesification = $name;
+        if ($request->spesification) {
+            $name = time() . '_' . random_int(100, 999) . '.' . $request->spesification->getClientOriginalExtension();
+            $request->spesification->move(storage_path('app/public/image'), $name);
+            return $product->spesification = $name;
+        }
     }
 
     /**
@@ -304,10 +195,12 @@ class ProductModel implements ProductRepositoryInterface
      */
     protected function updateSpesification($request, $product)
     {
-        $this->deleteSpesification($product->spesification);
-        $name = time() . '_' . random_int(100, 999) . '.' . $request->spesification->getClientOriginalExtension();
-        $request->spesification->move(storage_path('app/public/image'), $name);
-        return $product->spesification = $name;
+        if ($request->spesification) {
+            $this->deleteSpesification($product->spesification);
+            $name = time() . '_' . random_int(100, 999) . '.' . $request->spesification->getClientOriginalExtension();
+            $request->spesification->move(storage_path('app/public/image'), $name);
+            return $product->spesification = $name;
+        }
     }
 
     /**
