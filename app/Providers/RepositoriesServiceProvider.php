@@ -25,7 +25,9 @@ use Modules\Admin\Repositories\Model\ProductSubCategoryModel;
 use Modules\Admin\Repositories\JafCategoryRepositoryInterface;
 use Modules\Admin\Repositories\ProdSubTypeRepositoryInterface;
 use Modules\Admin\Repositories\FeatureCategoryRepositoryInterface;
+use Modules\Admin\Repositories\GeneralSuppliesRepositoryInterface;
 use Modules\Admin\Repositories\Model\GeneralSuppliesCategoryModel;
+use Modules\Admin\Repositories\Model\GeneralSuppliesModel;
 use Modules\Admin\Repositories\ProdSubCategoryRepositoryInterface;
 
 class RepositoriesServiceProvider extends ServiceProvider
@@ -60,5 +62,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(JafCategoryRepositoryInterface::class, JafCategoryModel::class);
         $this->app->bind(JafProductRepositoryInterface::class, JafProductModel::class);
         $this->app->bind(GSCategoryRepositoryInterface::class, GeneralSuppliesCategoryModel::class);
+        $this->app->bind(GeneralSuppliesRepositoryInterface::class, GeneralSuppliesModel::class);
     }
 }

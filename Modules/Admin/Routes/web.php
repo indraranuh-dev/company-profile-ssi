@@ -162,6 +162,11 @@ Route::group([
         Route::post('/{id}/deskripsi', 'GeneralSuppliesController@storeDescription')->name('storeDescription');
         Route::put('/{id}/deskripsi', 'GeneralSuppliesController@updateDescription')->name('updateDescription');
         Route::delete('/{id}/deskripsi', 'GeneralSuppliesController@destroyDescription')->name('destroyDescription');
+        Route::get('/{id}/gambar/tambah', 'GeneralSuppliesController@createImage')->name('createImage');
+        Route::get('/{id}/gambar', 'GeneralSuppliesController@showImage')->name('showImage');
+        Route::post('/{id}/gambar', 'GeneralSuppliesController@storeImage')->name('storeImage');
+        Route::put('/{id}/gambar', 'GeneralSuppliesController@updateImage')->name('updateImage');
+        Route::delete('/{id}/gambar', 'GeneralSuppliesController@destroyImage')->name('destroyImage');
     });
 
     Route::group([

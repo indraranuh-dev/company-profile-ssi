@@ -31,4 +31,14 @@ class Tag extends Model
             'jafs_id',
         );
     }
+
+    public function generalSupplies()
+    {
+        return $this->belongsToMany(
+            GeneralSupplies::class,
+            'general_supplies_has_tags',
+            'tags_id',
+            'general_supplies_id',
+        );
+    }
 }
