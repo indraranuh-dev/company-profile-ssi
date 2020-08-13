@@ -80,7 +80,7 @@ class ProductApiController extends Controller
     }
 
     /**
-     * Undocumented function
+     * Generate product link
      *
      * @param string $slug_name
      * @param string $productCategory

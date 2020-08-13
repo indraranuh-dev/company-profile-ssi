@@ -1,16 +1,16 @@
-<section id="testimonials" class="testimonials section-bg">
+<section id="testimonials" class="has-owl section-bg">
     <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-            <h2>Testimonials</h2>
+            <h2>Has-owl</h2>
             <p>Magnam dolores commodi suscipit eum quidem consectetur velit</p>
         </div>
 
-        <div class="owl-carousel testimonials-carousel" data-aos="fade-up" data-aos-delay="200">
+        <div class="owl-carousel has-owl-carousel" data-aos="fade-up" data-aos-delay="200">
 
-            <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                    {{-- <img src="{{asset('img/testimonials/testimonials-1.jpg')}}" class="testimonial-img"
+            <div class="owl-wrapper">
+                <div class="owl-items">
+                    {{-- <img src="{{asset('img/has-owl/has-owl-1.jpg')}}" class="owl-img"
                     alt=""> --}}
                     <svg width="100%" height="100%" viewBox="0 0 1404 762" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -31,9 +31,9 @@
                 </div>
             </div>
 
-            <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                    {{-- <img src="{{asset('img/testimonials/testimonials-2.jpg')}}" class="testimonial-img"
+            <div class="owl-wrapper">
+                <div class="owl-items">
+                    {{-- <img src="{{asset('img/has-owl/has-owl-2.jpg')}}" class="owl-img"
                     alt=""> --}}
                     <svg width="100%" height="100%" viewBox="0 0 1404 762" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -54,9 +54,9 @@
                 </div>
             </div>
 
-            <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                    {{-- <img src="{{asset('img/testimonials/testimonials-3.jpg')}}" class="testimonial-img"
+            <div class="owl-wrapper">
+                <div class="owl-items">
+                    {{-- <img src="{{asset('img/has-owl/has-owl-3.jpg')}}" class="owl-img"
                     alt=""> --}}
                     <svg width="100%" height="100%" viewBox="0 0 1404 762" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -76,9 +76,9 @@
                 </div>
             </div>
 
-            <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                    {{-- <img src="{{asset('img/testimonials/testimonials-4.jpg')}}" class="testimonial-img"
+            <div class="owl-wrapper">
+                <div class="owl-items">
+                    {{-- <img src="{{asset('img/has-owl/has-owl-4.jpg')}}" class="owl-img"
                     alt=""> --}}
                     <svg width="100%" height="100%" viewBox="0 0 1404 762" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -100,9 +100,9 @@
                 </div>
             </div>
 
-            <div class="testimonial-wrap">
-                <div class="testimonial-item">
-                    {{-- <img src="{{asset('img/testimonials/testimonials-5.jpg')}}" class="testimonial-img"
+            <div class="owl-wrapper">
+                <div class="owl-items">
+                    {{-- <img src="{{asset('img/has-owl/has-owl-5.jpg')}}" class="owl-img"
                     alt=""> --}}
                     <svg width="100%" height="100%" viewBox="0 0 1404 762" fill="none"
                         xmlns="http://www.w3.org/2000/svg">

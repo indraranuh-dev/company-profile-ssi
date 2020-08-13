@@ -69,8 +69,8 @@
                             {{$product->name}}
                         </h4>
                         <h6 class="text-left text-muted text-small" style="text-transform:uppercase; font-weight:600;">
-                            <strong>{{$product->suppliers[0]->name}}</strong> -
-                            {{$product->series}}
+                            <strong>{{$product->suppliers[0]->name}}</strong>
+                            {{($product->series !== '' && $product->series !== null) ?' - '.$product->series : ''}}
                         </h6>
                         <div class="portfolio-wrap text-center" style="background: none;">
                             <img class="img-fluid" src="{{route('productImage', $product->product_image)}}"
@@ -144,22 +144,5 @@
 @endpush
 
 @push('scripts')
-<script>
-    $('[title]').tooltip();
-    $(window).scroll(function (e) {
-        if(window.scrollY > 5){
-            $('#header').addClass('header-scrolled');
-        }
-        $('#header').find('li:nth-child(1)').removeClass('active');
-        $('#header').find('ul:nth-child(1) > li:nth-child(3)').addClass('active');
-    })
-    $(document).ready(function () {
-        $('.portfolio-item').css('top', '20px !important');
-    })
-    $('#accordion .btn-link').click(function(){
-        const target = $(this).data('target');
-        $(target).toggleClass('show');
-    })
-
-</script>
+<script src="{{asset('ext/general.js')}}"></script>
 @endpush

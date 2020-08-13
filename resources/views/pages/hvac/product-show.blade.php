@@ -75,8 +75,7 @@
                                     @foreach ($product->features as $feature)
                                     @if ($category->id === $feature->category->id)
                                     <div class="col-4 text-center py-3">
-                                        <a href="javascript:void(0)"
-                                            onclick="fetchDescription('{{$feature->slug_name}}')">
+                                        <a href="javascript:void(0)" data-slug="{{$feature->slug_name}}" detail-button>
                                             <img src="{{route('icon', $feature->icon)}}" alt="icon" height="60px">
                                         </a>
                                         <h6 class="my-2 text-muted">{{$feature->name}}</h6>
@@ -126,6 +125,25 @@
     </div>
 </section>
 
+<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+            <div class="modal-header border-0">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body border-0 text-center">
+                <div class="spinner-border spinner text-dark mb-3" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <div class="text text-justify"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('styles')
@@ -149,40 +167,5 @@
 @endpush
 
 @push('scripts')
-<script>
-    $('[title]').tooltip();
-    $(window).scroll(function (e) {
-        if(window.scrollY > 5){
-            $('#header').addClass('header-scrolled');
-        }
-        $('#header').find('li:nth-child(1)').removeClass('active');
-        $('#header').find('ul:nth-child(1) > li:nth-child(3)').addClass('active');
-    })
-    async function fetchDescription(slug){
-        $('#detail').modal('show');
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: `http://127.0.0.1:8000/_admin/fitur/${slug}/detail`,
-            method: 'GET',
-            success: async function (data){
-                const icon = function (icon){
-                    return `<img src="http://127.0.0.1:8000/_admin/fitur/icon/${icon}" alt="" width="90%">`;
-                }
-                const render = function (imgTag, desc){
-                    return `<div class="row"><div class="col-4">${imgTag}</div><div class="col-8">${desc}</div></div>`;
-                }
-                await $('#detail').find('.spinner').hide();
-                await $('#detail').find('.modal-title').html(data.name);
-                await $('#detail').find('.text').html(render(icon(data.icon), data.description)).fadeIn();
-            }
-        });
-    }
-    $('#detail').on('hidden.bs.modal', function (e) {
-        $('#detail').find('.spinner').show();
-        $('#detail').find('.modal-title').html('');
-        $('#detail').find('.text').html('');
-    })
-</script>
+<script src="{{asset('ext/general.js')}}"></script>
 @endpush

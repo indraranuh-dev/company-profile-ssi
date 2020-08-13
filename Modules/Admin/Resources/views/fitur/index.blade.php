@@ -95,18 +95,6 @@ use Illuminate\Support\Facades\Storage;
                         </tbody>
                     </table>
                 </div>
-                <div class="row px-5">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-12 col-lg-6 col-md-6">
-                                Showing 1 - {{$features->count()}} of {{$features->total()}}
-                            </div>
-                            <div class="col-12 col-lg-6 col-md-6 text-center text-lg-center">
-                                {{$features->links()}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

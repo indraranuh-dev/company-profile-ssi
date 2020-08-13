@@ -4,13 +4,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sinar Sejahtera Inti company profile">
+    <meta name="description" content="Sinar Sejahtera Inti">
+    <meta name="author" content="">
 
-    <title>{{config('app.name')}}</title>
+    <title>Sinar Sejahtera Inti</title>
 
+    <link rel="icon" href="{{asset('image/ssi.svg')}}" type="image/svg">
     <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet' " href="{{mix('css/app.css')}}">
     <link rel="stylesheet" href="{{mix('css/preloader.css')}}">
-    <link rel="stylesheet" href=" {{mix('css/vendor.css')}}">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet' " href=" {{mix('css/vendor.css')}}">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet' "
+        href=" {{asset('libs/slick/slick.css')}}">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet' "
+        href=" {{asset('libs/slick/slick-theme.css')}}">
+
+    <style>
+
+    </style>
 </head>
 
 <body class="preloader-show">
@@ -75,7 +85,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{route('product.index')}}">General Supplies</a>
+                <a href="{{route('product.general-supplies.index')}}">General Supplies</a>
             </li>
             <li class="drop-down">
                 <a href="{{route('product.filtration.index')}}">Filtration</a>
@@ -101,14 +111,8 @@
         {{-- About us section --}}
         <x-static-about />
 
-        {{-- Counts section --}}
-        <x-static-counts />
-
         {{-- Services setion --}}
         <x-static-services />
-
-        {{-- More services section --}}
-        <x-static-more-services />
 
         {{-- testimonials section --}}
         <x-static-testimonials />
@@ -130,11 +134,51 @@
     <script src="{{mix('js/vendor.js')}}" `></script>
     <script src="{{mix('js/main.js')}}"></script>
     <script src="{{asset('js/additional.js')}}"></script>
+    <script src="{{asset('libs/slick/slick.min.js')}}"></script>
     <script>
-        setTimeout(() => {
-            $('body').removeClass('preloader-show').fadeIn();
-            $('.preloader').fadeOut();
-        }, 1500);
+        $(function (){
+            setTimeout(() => {
+                $('body').removeClass('preloader-show').fadeIn();
+                $('.preloader').fadeOut();
+            }, 1500);
+        })
+        $(document).ready(function(){
+            $('.single-item').slick({
+                dots: true,
+                infinite: true,
+                speed: 1000,
+                slidesToShow: 1,
+                autoplay: true,
+                autoplaySpeed: 4000,
+            });
+            $('.multiple-slide').slick({
+                dots: true,
+                infinite: true,
+                speed: 1000,
+                slidesToShow: 4,
+                // autoplay: true,
+                // autoplaySpeed: 4000,
+                responsive: [
+                    {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 3
+                    }
+                    },
+                    {
+                    breakpoint: 480,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 2
+                    }
+                }]
+            });
+        });
     </script>
 
 </body>

@@ -47,9 +47,8 @@ Route::group([
         'prefix' => 'general-supplies',
         'as' => 'general-supplies.'
     ], function () {
-        Route::get('/', 'ProductController@showProduct')->name('index');
-        Route::get('/{supplier}', 'ProductController@showProduct')->name('supplier.index');
-        Route::get('/{supplier}/{product}', 'ProductController@showProduct')->name('show');
+        Route::get('/', 'GeneralSuppliesController@index')->name('index');
+        Route::get('/{product}', 'GeneralSuppliesController@showProduct')->name('show');
     });
 
     # Route filtration
@@ -65,3 +64,4 @@ Route::group([
 
 Route::get('/image/{image}', 'ProductController@getProductImage')->name('productImage');
 Route::get('/icon/{icon}', 'ProductController@getFeatureIcon')->name('icon');
+Route::get('/fitur/{slug}/detail', 'Api\FeatureApiController@show')->name('feature');

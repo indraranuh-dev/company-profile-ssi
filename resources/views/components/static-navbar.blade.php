@@ -6,7 +6,7 @@
         <li class="{{request()->routeIs('about')? 'active' : ''}}">
             <a href="{{route('about')}}">Tentang Kami</a>
         </li>
-        <li class="drop-down">
+        <li class="drop-down {{request()->routeIs('product*')? 'active' : ''}}">
             <a href="{{route('product.index')}}">Produk</a>
             <ul>
                 <li class="drop-down">
@@ -45,7 +45,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{route('product.index')}}">General Supplies</a>
+                    <a href="{{route('product.general-supplies.index')}}">General Supplies</a>
                 </li>
                 <li class="drop-down">
                     <a href="{{route('product.filtration.index')}}">Filtration</a>

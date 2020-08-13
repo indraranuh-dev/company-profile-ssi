@@ -25,7 +25,7 @@ class FeatureModel implements FeatureRepositoryInterface
             });
         }
 
-        return $feature->paginate(10);
+        return $feature->get();
     }
 
     public function getOnly($column)

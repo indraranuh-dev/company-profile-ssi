@@ -16,7 +16,7 @@ use App\Utilities\Generator;
     </a>
     <a class="breadcrumb-item" style="text-transform: capitalize;"
         href="{{route('product.'.request()->segment(2).'.index')}}">
-        {{request()->segment(2)}}
+        General Supplies
     </a>
     <span class="breadcrumb-item active" style="text-transform: capitalize;">
         {{str_replace('-',' ',request()->segment(3))}}
@@ -58,7 +58,7 @@ use App\Utilities\Generator;
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <input type="radio" class="form-check-input" name="c" value="all"
-                                                {{(request()->kategori === 'all') ? 'checked' : ''}}>
+                                                {{(request()->c === 'all') ? 'checked' : ''}}>
                                             Semua kategori
                                         </label>
                                     </div>
@@ -97,26 +97,26 @@ use App\Utilities\Generator;
                             {{$product->series}}
                         </h6>
                         <div class="portfolio-wrap text-center" style="background: none;">
-                            <img class="img-fluid my-2" src="{{route('productImage', $product->image)}}"
+                            <img class="img-fluid my-2" src="{{route('productImage', $product->images[0]->image)}}"
                                 alt="product-image" style="height: 150px">
                             <div class="portfolio-info">
                                 <div class="portfolio-links">
-                                    <a href="{{route('productImage', $product->image)}}" data-gall="portfolioGallery"
-                                        class="venobox" title="Perbesar Gambar" data-placement="bottom">
+                                    <a href="{{route('productImage', $product->images[0]->image)}}"
+                                        data-gall="portfolioGallery" class="venobox" title="Perbesar Gambar"
+                                        data-placement="bottom">
                                         <i class="bx bx-zoom-in"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mt-3">
-                            <a href="{{route('product.filtration.show', ['japan-air-filter', $product->slug_name])}}"
+                            <a href="{{route('product.general-supplies.show', $product->slug_name)}}"
                                 class="btn btn-detail-primary mr-3">Lihat
                                 detail</a>
                             <form action="{{route('pricing')}}" method="post">
                                 @csrf
-                                <input type="hidden" name="_link" value="{{route('product.'.request()->segment(2).'.show',[
-                                        'japan-air-filter',
-                                        $product->slug_name]
+                                <input type="hidden" name="_link" value="{{route('product.'.request()->segment(2).'.show',
+                                        $product->slug_name
                                         )}}">
                                 <button class="btn btn-detail-primary rounded" title="Harga">
                                     <i class="icofont-money"></i>

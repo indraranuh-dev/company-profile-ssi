@@ -8,10 +8,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @stack('meta')
 
-    <title>{{config('app.name')}} {{(request()->segment(1) !== '') ? '|' : ''}} @yield('title')</title>
+    <title>Sinar Sejahtera Inti {{(request()->segment(1) !== '') ? '|' : ''}} @yield('title')</title>
 
-    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet' " href="{{mix('css/app.css')}}">
-    <link rel="stylesheet" href=" {{mix('css/vendor.css')}}">
+    <link rel="icon" href="{{asset('image/ssi.svg')}}" type="image/svg">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{mix('css/app.css')}}">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href=" {{mix('css/vendor.css')}}">
 
     @stack('styles')
 </head>

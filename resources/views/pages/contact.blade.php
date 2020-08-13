@@ -144,14 +144,5 @@
 @endsection
 
 @push('scripts')
-<script>
-    $('[title]').tooltip();
-    $(window).scroll(function (e) {
-        if(window.scrollY > 5){
-            $('#header').addClass('header-scrolled');
-        }
-        $('#header').find('li:nth-child(1)').removeClass('active');
-        $('#header').find('ul:nth-child(1) > li:nth-child(5)').addClass('active');
-    })
-</script>
+<script src="{{asset('ext/general.js')}}"></script>
 @endpush

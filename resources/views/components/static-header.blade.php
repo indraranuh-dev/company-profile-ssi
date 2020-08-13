@@ -33,13 +33,13 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li>
-                    <a href="{{route('index')}}{{request()->routeIs('index')? '#header' : ''}}">Beranda</a>
+                    <a href="{{route('index')}}{{request()->routeIs('index')? '#hero' : ''}}">Beranda</a>
                 </li>
                 <li>
                     <a href="{{route('index')}}{{request()->routeIs('index')? '#about' : ''}}">Tentang Kami</a>
                 </li>
                 <li class="drop-down {{request()->routeIs('product*')? 'active' : ''}}">
-                    <a href="javascript:void(0)">Produk</a>
+                    <a href="{{route('product.index')}}">Produk</a>
                     {{$produk}}
                 </li>
                 <li>
