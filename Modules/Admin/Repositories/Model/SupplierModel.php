@@ -4,6 +4,8 @@ namespace Modules\Admin\Repositories\Model;
 
 use Illuminate\Support\Str;
 use App\Utilities\Generator;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Admin\Repositories\Model\Entities\ProductCategory;
 use Modules\Admin\Repositories\Model\Entities\Supplier;
 use Modules\Admin\Repositories\SupplierRepositoryInterface;
 
@@ -37,6 +39,18 @@ class SupplierModel implements SupplierRepositoryInterface
     {
         $supplier = Supplier::where('slug_name', $slug);
         return $supplier->first();
+    }
+
+    public function findByCategory($categoryName)
+    {
+        $supplier = Supplier::orderBy('name', 'asc');
+        $category = $this->findCategory($categoryName);
+        if ($categoryName !== null && $categoryName !== '') {
+            $supplier->whereHas('categories', function (Builder $query) use ($category) {
+                $query->where('id', $category->id);
+            });
+        }
+        return $supplier->get(['id', 'name']);
     }
 
     public function create($request)
@@ -77,7 +91,6 @@ class SupplierModel implements SupplierRepositoryInterface
         }
     }
 
-
     protected function sync($request)
     {
         $find = Supplier::where('name', $request->name)->first();
@@ -85,5 +98,11 @@ class SupplierModel implements SupplierRepositoryInterface
         if ($request->subCategory) {
             return $find->subCategories()->sync($this->decrypt(true, '', $request->subCategory));
         }
+    }
+
+    protected function findCategory($name)
+    {
+        $category =  ProductCategory::where('name', $name);
+        return $category->first();
     }
 }

@@ -38,6 +38,14 @@ interface SupplierRepositoryInterface
     public function findBySlug(string $slug);
 
     /**
+     * Find supplier by passing categoryName
+     *
+     * @param string $categoryName
+     * @return void
+     */
+    public function findByCategory($categoryName);
+
+    /**
      * Add supplier to resource
      *
      * @param object $request

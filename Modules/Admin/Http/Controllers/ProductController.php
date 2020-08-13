@@ -88,7 +88,7 @@ class ProductController extends Controller
         $features = $this->feature->getOnly('');
         $featureCategories = $this->featureCategory->getAll();
         $types = $this->type->getAll();
-        $suppliers = $this->supplier->getAll($request);
+        $suppliers = $this->supplier->findByCategory('hvac');
         $tags = $this->tag->getAll();
         return view('admin::produk.create', compact(
             'subCategories',
