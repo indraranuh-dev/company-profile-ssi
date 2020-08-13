@@ -59,7 +59,7 @@
                             General Supplies adalah Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
                             beatae hic fugit cupiditate sequi exercitationem saepe commodi quam similique sint.
                         </p>
-                        <a href="{{route('product.hvac.index')}}">
+                        <a href="{{route('product.general-supplies.index')}}">
                             <i class="icofont-arrow-right"></i> Baca selengkapnya
                         </a>
                     </div>
@@ -79,7 +79,7 @@
                             Filtration adalah Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad iusto
                             laboriosam quisquam. Cum modi fuga ducimus eligendi id commodi porro.
                         </p>
-                        <a href="{{route('product.hvac.index')}}">
+                        <a href="{{route('product.filtration.index')}}">
                             <i class="icofont-arrow-right"></i> Baca selengkapnya
                         </a>
                     </div>
