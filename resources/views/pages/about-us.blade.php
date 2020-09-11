@@ -31,24 +31,37 @@
                     </div>
                     <div class="col-12 col-lg-6 col-md-6" data-aos="fade-left">
                         <p class="text-justify">
-                            CV. Sinar Sejahtera Inti merupakan perusahaan yang bergerak dibidang HVAC dan General
-                            Supplies. CV.
-                            Sinar Sejahtera Inti merupakan dealer dari PT. Daikin Applied Solutions Indonesia, PT.
-                            Daikin
-                            Airconditioning Indonesia, PT. Gree Electric Indonesia Appliances, PT. Mitsubishi Electric
-                            Indonesia
-                            dan PT. Japan Air Filter Indonesia. Kami menyediakan layanan berupa penyedia unit sistem,
-                            design dan
-                            perencaan, servis dan perawatan untuk kebutuhan Air Conditioning (AC) baik untuk customer
-                            perorangan
-                            maupun korporat, baik Applied Product, Unitary Product dan Filtration Product. Selain HVAC,
-                            kami
-                            juga melayani penjualan part General Supplies untuk berbagai jenis kebutuhan.
-                            Kami berkomitmen untuk memberikan layanan terbaik kepada seluruh partner/pelanggan baik
-                            dalam hal
-                            kecepatan, kualitas layanan, waktu respon tercepat, kendali mutu, dan after sales/ garansi
-                            dari
-                            layanan kami.
+                            CV. Sinar Sejahtera Inti merupakan perusahaan yang bergerak pada bidang Heating, Ventilation
+                            & Air Conditioning (HVAC), Filtration dan General Supplies.
+                        </p>
+                        <p>Kami merupakan authorized dealer dari :</p>
+
+                        <ul class="pl-2" style="list-style: none">
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                PT. Daikin Applied Solutions Indonesia
+                            </li>
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                PT. Daikin Air Conditioning Indonesia
+                            </li>
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                PT. Gree Electric Indonesia Appliances
+                            </li>
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                PT. Japan Air Filter Indonesia
+                            </li>
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                PT. Mitsubishi Electric Indonesia
+                            </li>
+                        </ul>
+                        <p class="text-justify">
+                            Kami menyediakan layanan berupa penyediaan unit system, design, perencaan, servis dan
+                            perawatan untuk kebutuhan HVAC baik untuk customer perorangan maupun korporat, baik Applied
+                            Product, Unitary Product dan Filtration Product.
                         </p>
                     </div>
                 </div>
@@ -65,27 +78,35 @@
                     <div class="col-12 col-lg-6 col-md-6" data-aos="fade-right" data-delay="0">
                         <p class="text-justify">
                             CV. Sinar Sejahtera Inti (d.h Purnama Jaya) sebelum berekspansi ke bidang HVAC, telah
-                            bergerak di
-                            bidang General Supplies sejak tahun 1989. Kami memiliki beberapa mesin produksi seperti :
-                            <ul class="pl-2" style="list-style: none">
-                                <li class="d-flex pt-2">
-                                    <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
-                                    Stamping (Punch Press Working)
-                                </li>
-                                <li class="d-flex pt-2">
-                                    <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
-                                    Injection Plastic (Nylon, PU Poly Urethane, PP, ABS, etc) - Lathe Machine
-                                </li>
-                                <li class="d-flex pt-2">
-                                    <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
-                                    Milling Machine
-                                </li>
-                            </ul>
-                            Selain HVAC, kami juga melayani pemesanan part General Supplies customized/khusus maupun
-                            produk
-                            umum/mass product. Kami telah melayani banyak perusahaan seperti pabrik sparepart mobil,
-                            furniture
-                            dan textile.
+                            bergerak di bidang General Supplies sejak tahun 1989. Kami melayani pemesanan part General
+                            Supplies customized maupun produk umum (mass product).
+                        </p>
+
+                        <p>
+                            Kami memiliki beberapa mesin produksi seperti :
+                        </p>
+                        <ul class="pl-2" style="list-style: none">
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                Stamping (Punch Press Working)
+                            </li>
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                Injection Plastic (Nylon, PU Poly Urethane, PP, ABS, etc)
+                            </li>
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                Lathe Machine
+                            </li>
+                            <li class="d-flex pt-2">
+                                <i style="line-height: unset" class='bx bx-check-square mr-2'></i>
+                                Milling Machine
+                            </li>
+                        </ul>
+                        <p class="text-justify">
+                            CV. Sinar Sejahtera Inti berkomitmen untuk memberikan layanan terbaik kepada seluruh mitra
+                            bisnis / partner / pelanggan baik dalam hal kecepatan, kualitas layanan, waktu respon,
+                            kendali mutu dan after sales / garansi layanan dari kami.
                         </p>
                     </div>
                     <div class="col-12 col-lg-6 col-md-6" data-aos="fade-left" data-delay="0">

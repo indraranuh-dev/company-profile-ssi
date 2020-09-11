@@ -60,6 +60,10 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated">
                         <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('admin.banner.index') }}">
+                            <i class="ti-settings px-3"></i>Banner
+                        </a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i class="ti-power-off px-3"></i>Logout

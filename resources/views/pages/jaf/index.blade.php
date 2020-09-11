@@ -24,8 +24,13 @@ use App\Utilities\Generator as G;
             <div class="col-12 col-lg-7 col-md-7">
                 <div class="section-title" data-aos="fade-up">
                     <h2>FIltration</h2>
-                    <p>Filtration adalah Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis suscipit,
-                        doloribus quos vitae reprehenderit ex nam nostrum porro asperiores culpa?</p>
+                    <p>
+                        Filtration merupakan sistem penyaring udara yang bertujuan untuk menghilangkan partikel-partikel
+                        tertentu dari udara seperti debu, serbuk, jamur, bau, uap air, dll.
+
+                        CV. Sinar Sejahtera Inti menyediakan berbagai macam produk Filtration dari brand Japan Air
+                        Filter.
+                    </p>
                 </div>
             </div>
         </div>

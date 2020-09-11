@@ -38,8 +38,10 @@
                     </div>
                     <div class="awesome-body">
                         <p class="content">
-                            HVAC adalah Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime dolores
-                            reiciendis voluptatum facilis, laborum sint dicta rerum perspiciatis architecto similique.
+                            HVAC (Heating, Ventilation & Air Conditioning dalam Bahasa Indonesia) berarti pemanasan,
+                            ventilasi, dan ac. Ketiga fungsi tersebut saling berhubungan untuk menentukan suatu suhu dan
+                            kelembaban udara dalam sebuah bangunan dan juga menyediakan kontrol asap, menjaga tekanan
+                            antar ruang, dan menyediakan udara segar bagi penempat
                         </p>
                         <a href="{{route('product.hvac.index')}}">
                             <i class="icofont-arrow-right"></i> Baca selengkapnya
@@ -76,8 +78,8 @@
                     </div>
                     <div class="awesome-body">
                         <p class="content">
-                            Filtration adalah Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad iusto
-                            laboriosam quisquam. Cum modi fuga ducimus eligendi id commodi porro.
+                            Filtration merupakan sistem penyaring udara yang bertujuan untuk menghilangkan
+                            partikel-partikel tertentu dari udara seperti debu, serbuk, jamur, bau, uap air, dll.
                         </p>
                         <a href="{{route('product.filtration.index')}}">
                             <i class="icofont-arrow-right"></i> Baca selengkapnya

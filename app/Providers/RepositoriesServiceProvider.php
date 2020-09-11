@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Admin\Repositories\BannerRepositoryInterface;
 use Modules\Admin\Repositories\Model\TagModel;
 use Modules\Admin\Repositories\Model\FeatureModel;
 use Modules\Admin\Repositories\Model\ProductModel;
@@ -26,6 +27,7 @@ use Modules\Admin\Repositories\JafCategoryRepositoryInterface;
 use Modules\Admin\Repositories\ProdSubTypeRepositoryInterface;
 use Modules\Admin\Repositories\FeatureCategoryRepositoryInterface;
 use Modules\Admin\Repositories\GeneralSuppliesRepositoryInterface;
+use Modules\Admin\Repositories\Model\BannerModel;
 use Modules\Admin\Repositories\Model\GeneralSuppliesCategoryModel;
 use Modules\Admin\Repositories\Model\GeneralSuppliesModel;
 use Modules\Admin\Repositories\ProdSubCategoryRepositoryInterface;
@@ -63,5 +65,6 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(JafProductRepositoryInterface::class, JafProductModel::class);
         $this->app->bind(GSCategoryRepositoryInterface::class, GeneralSuppliesCategoryModel::class);
         $this->app->bind(GeneralSuppliesRepositoryInterface::class, GeneralSuppliesModel::class);
+        $this->app->bind(BannerRepositoryInterface::class, BannerModel::class);
     }
 }

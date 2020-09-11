@@ -23,6 +23,17 @@ Route::group([
 
     Route::get('/', 'AdminController@index')->name('index');
 
+    Route::group([
+        'prefix' => 'banner',
+        'as' => 'banner.'
+    ], function () {
+        Route::get('/', 'HeroController@index')->name('index');
+        Route::get('/tambah', 'HeroController@create')->name('create');
+        Route::get('/image/{image}', 'HeroController@getBannerImage')->name('image');
+        Route::post('/', 'HeroController@store')->name('store');
+        Route::delete('/{id}', 'HeroController@destroy')->name('destroy');
+    });
+
     # Route supplier
     Route::group([
         'prefix' => 'supplier',

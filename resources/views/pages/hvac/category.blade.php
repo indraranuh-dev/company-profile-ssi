@@ -15,14 +15,18 @@
 
         {{-- Header kategori --}}
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-7 col-md-7" data-aos="fade-up">
+            <div class="col-12 col-lg-8 col-md-8" data-aos="fade-up">
                 <div class="section-title">
                     <h2>HVAC</h2>
                     <p>
-                        HVAC adalah singkatan dari Heating Ventilation dan Air-Conditioning, yang umumnya terkait dengan
-                        pemanasan dan pendinginan industri. HVAC adalah sistem atau mesin yang melakukan tiga fungsi
-                        utama dengan tiga saluran terpisah yaitu pemanasan, pendinginan dan ventilasi udara. HVAC
-                        umumnya digunakan dalam bangunan komersial atau industri.
+                        HVAC (Heating, Ventilation & Air Conditioning dalam Bahasa Indonesia) berarti pemanasan,
+                        ventilasi, dan ac. Ketiga fungsi tersebut saling berhubungan untuk menentukan suatu suhu dan
+                        kelembaban udara dalam sebuah bangunan dan juga menyediakan kontrol asap, menjaga tekanan antar
+                        ruang, dan menyediakan udara segar bagi penempat. HVAC pada dasarnya berfungsi untuk menjaga
+                        kondisi udara sekitar untuk melindungi alat-alat, dan kenyamanan personal dengan cara mengatur
+                        ventilasi dan pengkondisian udara. HVAC termasuk vital penggunaannya di beberapa industri,
+                        terutama di gedung-gedung, perkantoran yang perlu dijaga kelembaban udaranya, serta
+                        industri-industri besar yang memerlukan sistem ventilasi yang baik.
                     </p>
                 </div>
             </div>
@@ -40,12 +44,8 @@
                     </div>
                     <div class="awesome-body">
                         <p class="content">
-                            Banyak konsumen yang tidak terbiasa dengan konsep produk yang
-                            diterapkan.
-                            Itu karena sebagian besar produk yang bertanggung jawab untuk pembelian bukan produk yang
-                            diterapkan. Produk yang diterapkan tidak dapat digunakan sampai mereka dipasang ke suatu
-                            lingkungan dan karena instalasi dan lingkungan sebagian bertanggung jawab atas penggunaan
-                            dan kinerjanya, efektivitas produk akan sangat bervariasi.
+                            Applied HVAC merupakan sistem air dingin. Efek pendinginan dari refrigeran pertama-tama
+                            ditransfer ke air dingin yang kemudian digunakan untuk mendinginkan udara ruangan.
                         </p>
                         <a href="{{route('product.hvac.subCategory.index', 'applied')}}">
                             <i class="icofont-arrow-right"></i> Baca selengkapnya
@@ -63,14 +63,9 @@
                     </div>
                     <div class="awesome-body">
                         <p class="content">
-                            Banyak konsumen yang tidak terbiasa dengan konsep produk yang diterapkan. Itu karena
-                            sebagian
-                            besar produk yang bertanggung jawab untuk pembelian bukan produk yang diterapkan. Produk
-                            yang
-                            diterapkan tidak dapat digunakan sampai mereka dipasang ke suatu lingkungan dan karena
-                            instalasi
-                            dan lingkungan sebagian bertanggung jawab atas penggunaan dan kinerjanya, efektivitas produk
-                            akan sangat bervariasi.
+                            Unitary HVAC merupakan direct (DX) system. Udara yang digunakan untuk mendinginkan ruangan
+                            langsung didinginkan oleh refrigeran di koil pendingin unit penanganan udara tanpa perantara
+                            air.
                         </p>
                         <a href="{{route('product.hvac.subCategory.index', 'unitary')}}">
                             <i class="icofont-arrow-right"></i> Baca selengkapnya

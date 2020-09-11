@@ -26,12 +26,18 @@
                 <div class="section-title" data-aos="fade-up">
                     <h2>{{request()->segment(3)}}</h2>
                     @if(request()->segment(3) === 'applied')
-                    <p>Applied adalah</p>
+                    <p>
+                        Tipe <strong> Applied HVAC</strong> merupakan sistem air dingin. Efek pendinginan dari
+                        refrigeran pertama-tama ditransfer ke air dingin yang kemudian digunakan untuk mendinginkan
+                        udara ruangan.
+                    </p>
                     @elseif(request()->segment(3) === 'unitary')
-                    <p>Tipe <strong>Unitary</strong> adalah jenis ac dengan mesin yang didalamnya mengeluarkan udara
-                        dingin ke dalam ruangan yang diinginkan dan mengeluarkan
-                        udara panas dibagian luar ruangan. Biasanya AC Window mempunyai kapasitas dari 0,5 PK hingga 2,5
-                        PK.</p>
+                    <p>
+                        Tipe <strong>Unitary HVAC </strong>merupakan direct (DX) system. Udara yang digunakan untuk
+                        mendinginkan ruangan
+                        langsung didinginkan oleh refrigeran di koil pendingin unit penanganan udara tanpa perantara
+                        air.
+                    </p>
                     @endif
                 </div>
             </div>
@@ -74,7 +80,7 @@
                         </h6>
                         <div class="portfolio-wrap text-center" style="background: none;">
                             <img class="img-fluid" src="{{route('productImage', $product->product_image)}}"
-                                alt="product-image" style="height: 150px">
+                                alt="product-image" style="height: 150px" loading="lazy">
                             <div class="portfolio-info">
                                 <div class="portfolio-links">
                                     <a href="{{route('productImage', $product->product_image)}}" class="venobox"

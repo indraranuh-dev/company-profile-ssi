@@ -11,10 +11,9 @@
                     CV. Sinar Sejahtera Inti merupakan perusahaan yang bergerak dibidang HVAC dan General Supplies. CV.
                     Sinar Sejahtera Inti merupakan dealer dari PT. Daikin Applied Solutions Indonesia, PT. Daikin
                     Airconditioning Indonesia, PT. Gree Electric Indonesia Appliances, PT. Mitsubishi Electric Indonesia
-                    dan PT. Japan Air Filter Indonesia. Kami menyediakan layanan berupa penyedia unit sistem, design dan
-                    perencaan, servis dan perawatan untuk kebutuhan Air Conditioning (AC) baik untuk customer perorangan
-                    maupun korporat, baik Applied Product, Unitary Product dan Filtration Product. Selain HVAC, kami
-                    juga melayani penjualan part General Supplies untuk berbagai jenis kebutuhan.
+                    dan PT. Japan Air Filter Indonesia. Kami menyediakan layanan berupa penyediaan unit system, design,
+                    perencaan, servis dan perawatan untuk kebutuhan HVAC baik untuk customer perorangan maupun korporat,
+                    baik Applied Product, Unitary Product dan Filtration Product.
                 </p>
                 <a href="{{route('about')}}" class="btn-learn-more">Selengkapnya</a>
             </div>

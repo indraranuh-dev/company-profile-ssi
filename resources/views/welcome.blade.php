@@ -101,7 +101,15 @@
     </x-static-header>
 
     {{-- Hero --}}
-    <x-static-hero />
+    <x-static-hero>
+        @foreach ($banners as $banner)
+        <div class="owl-wrapper hero">
+            <div class="owl-items">
+                <img src="{{route('bannerImage', $banner->image)}}" alt="">
+            </div>
+        </div>
+        @endforeach
+    </x-static-hero>
 
     <main id="main">
 

@@ -62,6 +62,7 @@ Route::group([
     });
 });
 
+Route::get('/banner/{image}', 'CompanyProfileController@getBannerImage')->name('bannerImage');
 Route::get('/image/{image}', 'ProductController@getProductImage')->name('productImage');
 Route::get('/icon/{icon}', 'ProductController@getFeatureIcon')->name('icon');
 Route::get('/fitur/{slug}/detail', 'Api\FeatureApiController@show')->name('feature');
