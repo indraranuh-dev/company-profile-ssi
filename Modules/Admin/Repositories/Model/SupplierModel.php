@@ -50,7 +50,7 @@ class SupplierModel implements SupplierRepositoryInterface
                 $query->where('id', $category->id);
             });
         }
-        return $supplier->get(['id', 'name']);
+        return $supplier->get(['id', 'name', 'slug_name']);
     }
 
     public function create($request)

@@ -14,12 +14,8 @@ use App\Utilities\Generator;
     <a class="breadcrumb-item" style="text-transform: capitalize;" href="{{route('product.index')}}">
         {{request()->segment(1)}}
     </a>
-    <a class="breadcrumb-item" style="text-transform: capitalize;"
-        href="{{route('product.'.request()->segment(2).'.index')}}">
-        General Supplies
-    </a>
     <span class="breadcrumb-item active" style="text-transform: capitalize;">
-        {{str_replace('-',' ',request()->segment(3))}}
+        General Supplies
     </span>
 </nav>
 
@@ -46,13 +42,43 @@ use App\Utilities\Generator;
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-target="#brand">
+                                        Merek
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="brand" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="b" value="all"
+                                                {{(request()->b === 'all') ? 'checked' : ''}}>
+                                            Semua Merek
+                                        </label>
+                                    </div>
+                                    @foreach ($suppliers as $supplier)
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="b"
+                                                value="{{$supplier->slug_name}}"
+                                                {{(request()->b === $supplier->slug_name) ? 'checked' : ''}}>
+                                            {{$supplier->name}}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
                                     <button class="btn btn-link" type="button" data-target="#kategori">
                                         Kategori
                                     </button>
                                 </h5>
                             </div>
 
-                            <div id="kategori" class="collapse show" aria-labelledby="headingOne"
+                            <div id="kategori" class="collapse show" aria-labelledby="headingTwo"
                                 data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="form-check">
@@ -94,7 +120,7 @@ use App\Utilities\Generator;
                     <div class="col-6 col-lg-4 col-md-6 portfolio-item pb-5 text-center">
                         <h4 class="text-left text-med" style="font-weight: 700;">{{$product->name}}</h4>
                         <h6 class="text-left text-muted text-small" style="text-transform:uppercase; font-weight:600;">
-                            {{$product->series}}
+                            <strong>{{$product->supplier->name}}</strong> - {{$product->series}}
                         </h6>
                         <div class="portfolio-wrap text-center" style="background: none;">
                             <img class="img-fluid my-2" src="{{route('productImage', $product->images[0]->image)}}"

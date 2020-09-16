@@ -11,7 +11,7 @@ use App\Utilities\Generator as G;
             <a href="{{route('admin.index')}}"><i class="ti-home"></i></a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{route('admin.gs.index')}}">{{__('Genreal Supplies')}}</a>
+            <a href="{{route('admin.gs.index')}}">{{__('General Supplies')}}</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Ubah</li>
     </ol>
@@ -28,23 +28,22 @@ use App\Utilities\Generator as G;
                         <a href="{{route('admin.gs.index')}}" class="btn btn-primary">
                             <i class="mdi mdi-arrow-left mr-2"></i>Kembali
                         </a>
-                        <a href="{{route('admin.gs.showImage',G::crypt($product->id, 'encrypt'))}}"
-                            class="btn btn-danger" title="Ubah gambar">
+                        <a href="{{route('admin.gs.showImage',$product->slug_name)}}" class="btn btn-danger"
+                            title="Ubah gambar">
                             <i class="fa fa-edit mr-2"></i>Gambar
                         </a>
-                        <a href="{{route('admin.gs.showDescription',G::crypt($product->id, 'encrypt'))}}"
-                            class="btn btn-danger" title="Ubah deskripsi">
+                        <a href="{{route('admin.gs.showDescription',$product->slug_name)}}" class="btn btn-danger"
+                            title="Ubah deskripsi">
                             <i class="fa fa-edit mr-2"></i>Deskripsi
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.gs.update', G::crypt($product->id, 'encrypt'))}}" method="POST">
+                    <form action="{{route('admin.gs.update', $product->slug_name)}}" method="POST">
                         @method('put')
                         @csrf
 
-                        {{-- @dump($product) --}}
-
+                        <input type="hidden" name="_id" value="{{G::crypt($product->id, 'encrypt')}}">
                         <div class="row justify-content-center">
 
                             <div class="col-lg-6 col-md-8 col-sm-12 mb-3 mb-lg-0">
@@ -68,27 +67,51 @@ use App\Utilities\Generator as G;
                                     </div>
                                 </fieldset>
 
-                                <fieldset class="form-group row">
-                                    <div class="col-12">
-                                        <label for="category">{{__('Kategori produk')}}</label>
-                                        <select name="category"
-                                            class="form-control @error('category'){{'is-invalid'}}@enderror">
-                                            <option value="" disabled
-                                                {{(count($SC['selected']) === 0) ? 'selected' : ''}}>Pilih kategori
-                                            </option>
-                                            @foreach ($SC['selected'] as $category)
-                                            <option value="{{G::crypt($category['id'])}}" selected>
-                                                {{$category['name']}}
-                                            </option>
-                                            @endforeach
-                                            @foreach ($SC['notSelected'] as $category)
-                                            <option value="{{G::crypt($category['id'])}}">{{$category['name']}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                        @error('category')<small class="text-danger">{{$message}}</small>@enderror
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-6 mb-3 mb-lg-0">
+                                        <fieldset class="form-group">
+                                            <label for="supplier">{{__('Vendor')}}</label>
+                                            <select name="supplier"
+                                                class="form-control @error('supplier'){{'is-invalid'}}@enderror">
+                                                <option value="" disabled>Pilih vendor</option>
+                                                @foreach ($suppliers as $supplier)
+                                                @if ($supplier->id === $product->supplier_id)
+                                                <option value="{{G::crypt($supplier->id, 'encrypt')}}" selected>
+                                                    {{$supplier->name}}
+                                                </option>
+                                                @else
+                                                <option value="{{G::crypt($supplier->id, 'encrypt')}}">
+                                                    {{$supplier->name}}
+                                                </option>
+                                                @endif
+                                                @endforeach
+                                            </select>
+                                            @error('supplier')<small class="text-danger">{{$message}}</small>@enderror
+                                        </fieldset>
                                     </div>
-                                </fieldset>
+
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <fieldset>
+                                            <label for="category">{{__('Kategori produk')}}</label>
+                                            <select name="category"
+                                                class="form-control @error('category'){{'is-invalid'}}@enderror">
+                                                <option value="" disabled
+                                                    {{(count($SC['selected']) === 0) ? 'selected' : ''}}>Pilih kategori
+                                                </option>
+                                                @foreach ($SC['selected'] as $category)
+                                                <option value="{{G::crypt($category['id'])}}" selected>
+                                                    {{$category['name']}}
+                                                </option>
+                                                @endforeach
+                                                @foreach ($SC['notSelected'] as $category)
+                                                <option value="{{G::crypt($category['id'])}}">{{$category['name']}}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @error('category')<small class="text-danger">{{$message}}</small>@enderror
+                                        </fieldset>
+                                    </div>
+                                </div>
 
 
                                 <fieldset class="form-group row">

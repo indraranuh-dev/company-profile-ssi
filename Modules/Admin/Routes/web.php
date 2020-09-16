@@ -165,19 +165,19 @@ Route::group([
         Route::get('/tambah', 'GeneralSuppliesController@create')->name('create');
         Route::get('/{slug}/detail', 'GeneralSuppliesController@show')->name('show');
         Route::post('/', 'GeneralSuppliesController@store')->name('store');
-        Route::get('/{id}/ubah', 'GeneralSuppliesController@edit')->name('edit');
-        Route::put('/{id}', 'GeneralSuppliesController@update')->name('update');
+        Route::get('/{slug}/ubah', 'GeneralSuppliesController@edit')->name('edit');
+        Route::put('/{slug}', 'GeneralSuppliesController@update')->name('update');
         Route::delete('/{id}', 'GeneralSuppliesController@destroy')->name('destroy');
-        Route::get('/{id}/deskripsi/tambah', 'GeneralSuppliesController@createDescription')->name('createDescription');
-        Route::get('/{id}/deskripsi', 'GeneralSuppliesController@showDescription')->name('showDescription');
-        Route::post('/{id}/deskripsi', 'GeneralSuppliesController@storeDescription')->name('storeDescription');
-        Route::put('/{id}/deskripsi', 'GeneralSuppliesController@updateDescription')->name('updateDescription');
-        Route::delete('/{id}/deskripsi', 'GeneralSuppliesController@destroyDescription')->name('destroyDescription');
-        Route::get('/{id}/gambar/tambah', 'GeneralSuppliesController@createImage')->name('createImage');
-        Route::get('/{id}/gambar', 'GeneralSuppliesController@showImage')->name('showImage');
-        Route::post('/{id}/gambar', 'GeneralSuppliesController@storeImage')->name('storeImage');
-        Route::put('/{id}/gambar', 'GeneralSuppliesController@updateImage')->name('updateImage');
-        Route::delete('/{id}/gambar', 'GeneralSuppliesController@destroyImage')->name('destroyImage');
+        Route::get('/{slug}/deskripsi/tambah', 'GeneralSuppliesController@createDescription')->name('createDescription');
+        Route::get('/{slug}/deskripsi', 'GeneralSuppliesController@showDescription')->name('showDescription');
+        Route::post('/{slug}/deskripsi', 'GeneralSuppliesController@storeDescription')->name('storeDescription');
+        Route::put('/{slug}/deskripsi', 'GeneralSuppliesController@updateDescription')->name('updateDescription');
+        Route::delete('/{slug}/deskripsi', 'GeneralSuppliesController@destroyDescription')->name('destroyDescription');
+        Route::get('/{slug}/gambar/tambah', 'GeneralSuppliesController@createImage')->name('createImage');
+        Route::get('/{slug}/gambar', 'GeneralSuppliesController@showImage')->name('showImage');
+        Route::post('/{slug}/gambar', 'GeneralSuppliesController@storeImage')->name('storeImage');
+        Route::put('/{slug}/gambar', 'GeneralSuppliesController@updateImage')->name('updateImage');
+        Route::delete('/{slug}/gambar', 'GeneralSuppliesController@destroyImage')->name('destroyImage');
     });
 
     Route::group([

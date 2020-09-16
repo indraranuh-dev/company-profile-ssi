@@ -11,6 +11,7 @@ use Modules\Admin\Http\Requests\GSCategoryRequest;
 use Modules\Admin\Repositories\GeneralSuppliesRepositoryInterface as GeneralSupplies;
 use Modules\Admin\Repositories\GSCategoryRepositoryInterface as Category;
 use Modules\Admin\Repositories\TagRepositoryInterface as Tag;
+use Modules\Admin\Repositories\SupplierRepositoryInterface as Supplier;
 
 class GeneralSuppliesController extends Controller
 {
@@ -20,17 +21,21 @@ class GeneralSuppliesController extends Controller
 
     private $tag;
 
+    private $supplier;
+
     /**
      * Class constructor.
      */
     public function __construct(
         GeneralSupplies $generalSuppliesRepositoryInterface,
         Category $gSCategoryRepositoryInterface,
+        Supplier $supplierRepositoryInterface,
         Tag $tagRepositoryInterface
     ) {
         $this->model = $generalSuppliesRepositoryInterface;
         $this->category = $gSCategoryRepositoryInterface;
         $this->tag = $tagRepositoryInterface;
+        $this->supplier = $supplierRepositoryInterface;
     }
 
     /**
@@ -49,9 +54,10 @@ class GeneralSuppliesController extends Controller
      */
     public function create()
     {
+        $suppliers = $this->supplier->findByCategory(['general supplies']);
         $categories = $this->category->getAll();
         $tags = $this->tag->getAll();
-        return view('admin::general_supplies.create', compact('categories', 'tags'));
+        return view('admin::general_supplies.create', compact('categories', 'tags', 'suppliers'));
     }
 
     /**
@@ -123,9 +129,9 @@ class GeneralSuppliesController extends Controller
      * @param int $slug
      * @return Response
      */
-    public function showDescription($id)
+    public function showDescription($slug)
     {
-        $product = $this->model->findById($id);
+        $product = $this->model->findBySlug($slug);
         $details = $product->details;
         return view('admin::general_supplies.details', compact('details'));
     }
@@ -135,37 +141,38 @@ class GeneralSuppliesController extends Controller
      * @param int $slug
      * @return Response
      */
-    public function showImage($id)
+    public function showImage($slug)
     {
-        $product = $this->model->findById($id);
+        $product = $this->model->findBySlug($slug);
         $images = $product->images;
         return view('admin::general_supplies.image', compact('images'));
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     * @param int $slug
      * @return Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $product = $this->model->findById($id);
+        $product = $this->model->findBySlug($slug);
         $tags = $this->tag->getAll();
         $categories = $this->category->getAll();
         $ST = ArrayCheck::notSelected($tags, $product->tags);
         $SC = ArrayCheck::notSelected($categories, [$product->category]);
-        return view('admin::general_supplies.edit', compact('product', 'ST', 'SC'));
+        $suppliers = $this->supplier->findByCategory(['general supplies']);
+        return view('admin::general_supplies.edit', compact('product', 'ST', 'SC', 'suppliers'));
     }
 
     /**
      * Update the specified resource in storage.
      * @param Request $request
-     * @param int $id
+     * @param int $slug
      * @return Response
      */
-    public function update(GeneralSuppliesRequest $request, $id)
+    public function update(GeneralSuppliesRequest $request, $slug)
     {
-        $this->model->update($request, $id);
+        $this->model->update($request, $slug);
         return redirect()->route('admin.gs.index')->with('success', 'Kategori berhasil diubah.');
     }
 

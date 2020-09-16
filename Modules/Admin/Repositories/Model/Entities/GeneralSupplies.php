@@ -10,7 +10,7 @@ class GeneralSupplies extends Model
 
     public $table = 'general_supplies';
 
-    protected $fillable = ['id', 'name', 'slug_name', 'series', 'gs_category_id'];
+    protected $fillable = ['id', 'name', 'slug_name', 'supplier_id', 'series', 'gs_category_id'];
 
     public function category()
     {
@@ -36,7 +36,7 @@ class GeneralSupplies extends Model
         return $this->hasMany(
             GeneralSuppliesImage::class,
             'general_supplies_id',
-            'id'
+            'id',
         );
     }
 
@@ -46,6 +46,15 @@ class GeneralSupplies extends Model
             GeneralSuppliesDetail::class,
             'general_supplies_id',
             'id'
+        );
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(
+            Supplier::class,
+            'supplier_id',
+            'id',
         );
     }
 }

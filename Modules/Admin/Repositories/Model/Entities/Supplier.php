@@ -53,4 +53,14 @@ class Supplier extends Model
             'types_id'
         );
     }
+
+    public function generalSupplies()
+    {
+        return $this->belongsToMany(
+            GeneralSupplies::class,
+            'general_supplies_has_suppliers',
+            'general_supplies_id',
+            'supplier_id'
+        );
+    }
 }

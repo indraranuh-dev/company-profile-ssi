@@ -63,28 +63,28 @@ interface GeneralSuppliesRepositoryInterface
      * Update general supplies to resource
      *
      * @param object $request
-     * @param int $id
+     * @param string $slug
      * @return void
      */
-    public function update($request, $id);
+    public function update($request, $slug);
 
     /**
      * Update general supplies to resource
      *
      * @param object $request
-     * @param int $id
+     * @param string $slug
      * @return void
      */
-    public function updateDescription($request, $id);
+    public function updateDescription($request, $slug);
 
     /**
      * Update general supplies to resource
      *
      * @param object $request
-     * @param int $id
+     * @param string $slug
      * @return void
      */
-    public function updateProductImage($request, $id);
+    public function updateProductImage($request, $slug);
 
     /**
      * delete general supplies to resource

@@ -33,6 +33,7 @@ use App\Utilities\Generator as G;
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-4 col-md-4">
+                            @if (!$product->images->isEmpty())
                             <div class="slider-container mx-2">
                                 <div class="slider-preview" slide-preview>
                                     <div style="background-image: url({{route('admin.product.image', $product->images[0]->image)}})"
@@ -46,16 +47,22 @@ use App\Utilities\Generator as G;
                                     @endforeach
                                 </div>
                             </div>
+                            @endif
                         </div>
                         <div class="col-12 col-lg-6 col-md-6">
                             <h3 class="card-title mt-3">{{$product->name}}</h3>
-                            <h5 class="text-muted">{{$product->series}}</h5>
+                            <h5 class="text-muted">
+                                <strong class="text-info">{{$product->supplier->name}}</strong> -
+                                {{$product->series}}
+                            </h5>
                             <h5 class="text-muted mb-3">
-                                @foreach ($product->tags as $tag)
+                                @forelse ($product->tags as $tag)
                                 <span class="badge badge-info"># {{$tag->name}}</span>
-                                @endforeach
+                                @empty
+                                @endforelse
                             </h5>
                             <ul class="m-0 pl-2" style="list-style: none;">
+                                @if (!$product->details->isEmpty())
                                 @foreach ($product->details as $desc)
                                 <li class="d-flex" style="text-transform: capitalize">
                                     <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="18" viewBox="0 0 24 24">
@@ -67,6 +74,7 @@ use App\Utilities\Generator as G;
                                     {{$desc->description}}
                                 </li>
                                 @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>

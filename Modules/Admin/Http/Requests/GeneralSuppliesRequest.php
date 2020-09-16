@@ -2,7 +2,7 @@
 
 namespace Modules\Admin\Http\Requests;
 
-use App\Utilities\Generator;
+use App\Utilities\Generator as G;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -17,7 +17,8 @@ class GeneralSuppliesRequest extends FormRequest
     {
         return [
             'name' => 'required|' . Rule::unique('general_supplies', 'name')
-                ->ignore(Generator::crypt($this->id, 'decrypt')),
+                ->ignore(G::crypt($this->_id, 'decrypt')),
+            'supplier' => 'required',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'description' => 'nullable'
         ];

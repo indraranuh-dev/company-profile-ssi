@@ -73,21 +73,41 @@ use App\Utilities\Generator as G;
                                     </div>
                                 </fieldset>
 
-                                <fieldset class="form-group row">
-                                    <div class="col-12">
-                                        <label for="category">{{__('Kategori produk')}}</label>
-                                        <select name="category"
-                                            class="form-control @error('category'){{'is-invalid'}}@enderror">
-                                            <option value="" disabled selected>Pilih kategori</option>
-                                            @foreach ($categories as $category)
-                                            <option value="{{G::crypt($category->id, 'encrypt')}}">
-                                                {{$category->name}}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                        @error('category')<small class="text-danger">{{$message}}</small>@enderror
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-6 mb-3 mb-lg-0">
+                                        <fieldset class="form-group">
+                                            <label for="supplier">{{__('Vendor')}}</label>
+                                            <select name="supplier"
+                                                class="form-control @error('supplier'){{'is-invalid'}}@enderror">
+                                                <option value="" disabled selected>Pilih vendor</option>
+                                                @foreach ($suppliers as $supplier)
+                                                <option value="{{G::crypt($supplier->id, 'encrypt')}}">
+                                                    {{$supplier->name}}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @error('supplier')<small class="text-danger">{{$message}}</small>@enderror
+                                        </fieldset>
                                     </div>
-                                </fieldset>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <fieldset>
+                                            <fieldset class="form-group">
+                                                <label for="category">{{__('Kategori produk')}}</label>
+                                                <select name="category"
+                                                    class="form-control @error('category'){{'is-invalid'}}@enderror">
+                                                    <option value="" disabled selected>Pilih kategori</option>
+                                                    @foreach ($categories as $category)
+                                                    <option value="{{G::crypt($category->id, 'encrypt')}}">
+                                                        {{$category->name}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('category')<small
+                                                    class="text-danger">{{$message}}</small>@enderror
+                                            </fieldset>
+                                        </fieldset>
+                                    </div>
+                                </div>
 
                                 <fieldset class="form-group row">
                                     <div class="col-12">

@@ -21,14 +21,26 @@ class GeneralSuppliesModel implements GeneralSuppliesRepositoryInterface
     public function findById($id)
     {
         $gs = GeneralSupplies::findOrFail($this->decrypt(false, $id))
-            ->with('category:id,name', 'tags:id,name', 'details', 'images');
+            ->with(
+                'category:id,name',
+                'tags:id,name',
+                'details:id,general_supplies_id,description',
+                'images:id,general_supplies_id,image',
+                'supplier:id,name'
+            );
         return $gs->first();
     }
 
     public function findBySlug($slug)
     {
         $gs = GeneralSupplies::where('slug_name', $slug)
-            ->with('category:id,name', 'tags:id,name', 'details', 'images');
+            ->with(
+                'category:id,name',
+                'tags:id,name',
+                'details:id,general_supplies_id,description',
+                'images:id,general_supplies_id,image',
+                'supplier:id,name'
+            );
         return $gs->first();
     }
 
@@ -44,6 +56,7 @@ class GeneralSuppliesModel implements GeneralSuppliesRepositoryInterface
         $gs->name = $request->name;
         $gs->slug_name = Str::slug($request->name);
         $gs->series = $request->series;
+        $gs->supplier_id = $this->decrypt(false, $request->supplier);
         $gs->gs_category_id = $this->decrypt(false, $request->category);
         $gs->save();
 
@@ -60,10 +73,12 @@ class GeneralSuppliesModel implements GeneralSuppliesRepositoryInterface
 
         if ($request->description) {
             foreach ($request->description as $description) {
-                GeneralSuppliesDetail::create([
-                    'general_supplies_id' => $id,
-                    'description' => $description
-                ]);
+                if ($description !== null || $description !== '') {
+                    GeneralSuppliesDetail::create([
+                        'general_supplies_id' => $id,
+                        'description' => $description
+                    ]);
+                }
             }
         }
 
@@ -72,28 +87,31 @@ class GeneralSuppliesModel implements GeneralSuppliesRepositoryInterface
 
     public function createDescription($request)
     {
+        $gs = GeneralSupplies::where('slug_name', request()->segment(3))->first();
         $desc = new GeneralSuppliesDetail();
-        $desc->general_supplies_id = $this->decrypt(false, request()->segment(3));
+        $desc->general_supplies_id = $gs->id;
         $desc->description = $request->description;
         return $desc->save();
     }
 
     public function createProductImage($request)
     {
+        $gs = GeneralSupplies::where('slug_name', request()->segment(3))->first();
         $image = new GeneralSuppliesImage();
-        $image->general_supplies_id = $this->decrypt(false, request()->segment(3));
+        $image->general_supplies_id = $gs->id;
         if ($request->image) {
             $this->uploadImage($request, $image);
         }
         return $image->save();
     }
 
-    public function update($request, $id)
+    public function update($request, $slug)
     {
-        $gs = GeneralSupplies::findOrFail($this->decrypt(false, $id));
+        $gs = GeneralSupplies::where('slug_name', $slug)->first();
         $gs->name = $request->name;
         $gs->slug_name = Str::slug($request->name);
         $gs->series = $request->series;
+        $gs->supplier_id = $this->decrypt(false, $request->supplier);
         $gs->gs_category_id = $this->decrypt(false, $request->category);
         $gs->save();
         return $this->sync($request);
@@ -158,11 +176,12 @@ class GeneralSuppliesModel implements GeneralSuppliesRepositoryInterface
      * @param object $gs
      * @return void
      */
-    protected function updateImage($request, $gs)
+    protected function updateImage($request, $gsImage)
     {
-        $this->deleteImage($gs->image);
+        $this->deleteImage($gsImage->image);
         $name = time() . '_' . random_int(100, 999) . '.' . $request->image->getClientOriginalExtension();
         $request->image->move(storage_path('app/public/image'), $name);
+        return $gsImage->image = $name;
     }
 
     /**

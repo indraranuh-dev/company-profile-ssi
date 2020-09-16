@@ -59,15 +59,11 @@ use App\Utilities\Generator as G;
                                 <td>{{C::convertDate($product->created_at)}}</td>
                                 <td>{{C::convertDate($product->updated_at)}}</td>
                                 <td class="text-center d-flex justify-content-center">
-                                    {{-- <button type="button" class="btn btn-outline-light text-secondary btn-sm"
-                                        title="Detail data" onclick="showDetails('{{$product->slug_name}}')">
-                                    <i class="fa fa-fw fa-eye"></i>
-                                    </button> --}}
                                     <a class="btn btn-outline-light text-secondary btn-sm"
                                         href="{{route('admin.gs.show', $product->slug_name)}}">
                                         <i class="fa fa-fw fa-eye"></i>
                                     </a>
-                                    <a href="{{route('admin.gs.edit', G::crypt($product->id, 'encrypt'))}}"
+                                    <a href="{{route('admin.gs.edit', $product->slug_name)}}"
                                         class="btn btn-outline-light text-secondary btn-sm" title="Ubah data">
                                         <i class="fa fa-fw fa-edit"></i>
                                     </a>

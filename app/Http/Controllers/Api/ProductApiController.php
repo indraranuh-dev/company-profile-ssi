@@ -22,6 +22,7 @@ class ProductApiController extends Controller
     public function getProduct(Request $request)
     {
         $hvac = $this->search->searchProduct($request->k);
+        $gs = $this->search->searchGS($request->k);
         $jafs = $this->search->searchJaf($request->k);
         $all = [];
         if ($request->k && !empty($request->k)) {
@@ -48,6 +49,31 @@ class ProductApiController extends Controller
                 array_push($all, [
                     'suggestion' => $hvac->name . $x . implode(', ', $tags),
                     'link' => $this->productLink($hvac->slug_name, 'hvac', $hvac->subCategories[0]->slug_name, $hvac->suppliers[0]->slug_name)
+                ]);
+            }
+
+            // Process General Supplies data
+            foreach ($gs as $gs) {
+                $tags = [];
+                foreach ($gs->tags as $tag) {
+
+                    // Check similar characters form resource
+                    if (stristr($tag->name, $request->k)) {
+                        array_push($tags, $tag->name);
+                    }
+                }
+
+                // Check if $tags not null
+                if (array_count_values($tags) !== []) {
+                    $x = ': ';
+                } else {
+                    $x = '';
+                }
+
+                // add data to array All
+                array_push($all, [
+                    'suggestion' => $gs->name . $x . implode(', ', $tags),
+                    'link' => $this->productLink($gs->slug_name, 'general-supplies', '', '')
                 ]);
             }
 
@@ -93,6 +119,9 @@ class ProductApiController extends Controller
         switch ($productCategory) {
             case 'hvac':
                 return route('product.hvac.show', [$productSubCategory, $productVendor, $slug_name]);
+                break;
+            case 'general-supplies':
+                return route('product.general-supplies.show', $slug_name);
                 break;
             case 'filtration':
                 return route('product.filtration.show', [$productVendor, $slug_name]);

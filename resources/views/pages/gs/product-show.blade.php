@@ -50,8 +50,9 @@ use App\Utilities\Generator as G;
                             </div>
                             <div class="slider slider-nav" slider-nav>
                                 @foreach ($product->images as $image)
-                                <div>
-                                    <img class="img-fluid" src="{{route('admin.product.image', $image->image)}}">
+                                <div class="img"
+                                    style="background-image: url({{route('admin.product.image', $image->image)}});"
+                                    data-url="{{route('admin.product.image', $image->image)}}">
                                 </div>
                                 @endforeach
                             </div>
@@ -148,6 +149,13 @@ use App\Utilities\Generator as G;
         cursor: pointer;
     }
 
+    .img {
+        background-position: center center;
+        background-size: cover;
+        height: 60px;
+        border-radius: 5px;
+    }
+
     button {
         cursor: pointer;
         z-index: 99999;
@@ -184,8 +192,8 @@ use App\Utilities\Generator as G;
                 slidesToScroll: 4,
             });
 
-            $('[slider-nav]').find('img').click(function (e){
-                $('[slide-preview]').find('[image]').css('background-image', `url(${$(this).attr('src')})`);
+            $('[slider-nav]').find('.img').click(function (e){
+                $('[slide-preview]').find('[image]').css('background-image', `url(${$(this).data('url')})`);
             })
         }
 
