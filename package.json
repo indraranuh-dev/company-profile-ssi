@@ -27,7 +27,7 @@
         "aos": "^2.3.4",
         "isotope": "^1.0.0-alpha.3",
         "isotope-layout": "^3.0.6",
-        "moment": "^2.26.0",
+        "moment": "^2.29.2",
         "sparkline": "^0.2.0"
     }
 }
